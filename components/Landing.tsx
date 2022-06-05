@@ -1,6 +1,6 @@
 import React from "react";
 import type { ReactElement } from "react";
-import Header from "../components/Header";
+import Header from "./Header";
 
 const Landing = (): ReactElement => {
   return (

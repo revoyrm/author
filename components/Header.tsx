@@ -3,9 +3,9 @@ import type { ReactElement } from "react";
 
 const Header = (): ReactElement => {
   return (
-    <div className="w-full">
+    <div className="w-full bg-primary">
       <div>
-        <h1>Author</h1>
+        <h1 className="text-secondary">Author</h1>
       </div>
       <hr />
     </div>
