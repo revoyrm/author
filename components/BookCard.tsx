@@ -22,14 +22,16 @@ export function BookCard({
         p-2
         text-primary
         hover:border-4
-        hover:shadow-lg"
+        hover:border-primary-light
+        focus:border-4
+        focus:border-primary-light"
       role="button"
       tabIndex={0}
       onClick={(): void => {}}
       onKeyDown={(): void => {}}
     >
       <h2 className="mb-1 font-bold">{`${title} - ${author ?? ''}`}</h2>
-      <hr className="mb-1" />
+      <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
       <p>{summary}</p>
     </div>
   );
