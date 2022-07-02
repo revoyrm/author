@@ -1,15 +1,14 @@
-import React from "react";
-import type { ReactElement } from "react";
-import Header from "./Header";
-import BookResults from "./BookResults";
+import type { ReactElement } from 'react';
+import React from 'react';
 
-const Landing = (): ReactElement => {
+import { BookResults } from './BookResults';
+import { Header } from './Header';
+
+export function Landing(): ReactElement {
   return (
     <div>
       <Header />
       <BookResults />
     </div>
   );
-};
-
-export default Landing;
+}

@@ -1,13 +1,11 @@
-import { ReactElement } from "react";
-import { FaSearch } from "react-icons/fa";
+import type { ReactElement } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
-const Search = (): ReactElement => {
+export function Search(): ReactElement {
   return (
-    <div className="rounded-lg w-1/5 p-2 text-primary bg-[white] flex justify-between">
+    <div className="flex w-1/5 justify-between rounded-lg bg-[white] p-2 text-primary">
       <input className="w-5/6 focus:outline-none" placeholder="book" />
-      <FaSearch className="w-1/6 mt-1" />
+      <FaSearch className="mt-1 w-1/6" />
     </div>
   );
-};
-
-export default Search;
+}

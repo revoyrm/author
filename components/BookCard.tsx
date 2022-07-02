@@ -13,19 +13,20 @@ export function BookCard({
   return (
     <div
       className="
-        hover:border-3 
-        h-52 
-        w-60 
+        h-52
+        w-60
         rounded-lg 
-        border-2
-        border-primary
+        border-2 
+        border-primary 
         bg-secondary
         p-2
-        text-primary"
+        text-primary
+        hover:border-4
+        hover:shadow-lg"
       role="button"
       tabIndex={0}
-      onClick={() => {}}
-      onKeyDown={() => {}}
+      onClick={(): void => {}}
+      onKeyDown={(): void => {}}
     >
       <h2 className="mb-1 font-bold">{`${title} - ${author ?? ''}`}</h2>
       <hr className="mb-1" />
