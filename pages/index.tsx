@@ -1,11 +1,14 @@
 import type { ReactElement } from 'react';
 
 import { Landing } from '../components';
+import { AppProvider } from '../context/appProvider';
 
 export default function Home(): ReactElement {
   return (
-    <div className="bg-paper">
-      <Landing />
-    </div>
+    <AppProvider>
+      <div className="bg-paper">
+        <Landing />
+      </div>
+    </AppProvider>
   );
 }

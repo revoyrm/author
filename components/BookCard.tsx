@@ -1,6 +1,9 @@
+import Router from 'next/router';
 import type { ReactElement } from 'react';
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { Actions } from '../context/actions';
+import { AppContext } from '../context/appProvider';
 import type { Book } from './types';
 
 export function BookCard({
@@ -10,6 +13,15 @@ export function BookCard({
   summary,
   notes,
 }: Book): ReactElement {
+  const { dispatch } = useContext(AppContext);
+
+  const handleSelectBook = (): void => {
+    dispatch({
+      type: Actions.SelectBook,
+      payload: id,
+    });
+    Router.push('./book').catch(console.error);
+  };
   return (
     <div
       className="
@@ -27,8 +39,8 @@ export function BookCard({
         focus:border-primary-light"
       role="button"
       tabIndex={0}
-      onClick={(): void => {}}
-      onKeyDown={(): void => {}}
+      onClick={handleSelectBook}
+      onKeyDown={handleSelectBook}
     >
       <h2 className="mb-1 font-bold">{`${title} - ${author ?? ''}`}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
