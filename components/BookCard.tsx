@@ -1,30 +1,16 @@
 import Router from 'next/router';
 import type { ReactElement } from 'react';
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { Actions } from '../context/actions';
-import { AppContext } from '../context/appProvider';
 import { Card } from './Card';
+import { useBooks } from './hooks/useBooks';
 import type { Book } from './types';
 
-export function BookCard({
-  id,
-  title,
-  author,
-  summary,
-  notes,
-}: Book): ReactElement {
-  const { dispatch } = useContext(AppContext) ?? {};
-
-  if (!dispatch) {
-    return <div>Must be used within appprovider</div>;
-  }
+export function BookCard({ id, title, author, summary }: Book): ReactElement {
+  const { setSelectedBook } = useBooks();
 
   const handleSelectBook = (): void => {
-    dispatch({
-      type: Actions.SelectBook,
-      payload: id,
-    });
+    setSelectedBook(id);
     Router.push('./book').catch(console.error);
   };
   return (
