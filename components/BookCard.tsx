@@ -13,7 +13,11 @@ export function BookCard({
   summary,
   notes,
 }: Book): ReactElement {
-  const { dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext) ?? {};
+
+  if (!dispatch) {
+    return <div>Must be used within appprovider</div>;
+  }
 
   const handleSelectBook = (): void => {
     dispatch({

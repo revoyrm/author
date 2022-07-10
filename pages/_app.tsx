@@ -7,5 +7,9 @@ export default function MyApp({
   Component,
   pageProps,
 }: AppProps): ReactElement {
-  return <Component {...pageProps} />;
+  return (
+    <div className="h-full">
+      <Component {...pageProps} />
+    </div>
+  );
 }

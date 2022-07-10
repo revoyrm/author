@@ -6,7 +6,7 @@ import { Header } from './Header';
 
 export function Landing(): ReactElement {
   return (
-    <div>
+    <div className="h-full">
       <Header />
       <BookResults />
     </div>

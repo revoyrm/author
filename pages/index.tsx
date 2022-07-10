@@ -6,7 +6,7 @@ import { AppProvider } from '../context/appProvider';
 export default function Home(): ReactElement {
   return (
     <AppProvider>
-      <div className="bg-paper">
+      <div className="h-full bg-paper">
         <Landing />
       </div>
     </AppProvider>

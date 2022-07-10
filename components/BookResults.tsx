@@ -61,7 +61,7 @@ const books = [
 
 export function BookResults(): ReactElement {
   return (
-    <section className="flex h-3/4 justify-between p-20">
+    <section className="flex h-full max-w-6xl justify-between p-20">
       {books.map((book) => (
         <BookCard key={book.id} {...book} />
       ))}
