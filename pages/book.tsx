@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react';
 
 import { Header } from '../components/Header';
-import { NavigationBar } from '../components/navigation/NavigationBar';
+import { SideBar } from '../components/navigation/SideBar';
 
 export default function Book(): ReactElement {
   return (
     <div className="h-full">
-      <Header />
-      <NavigationBar />
+      <Header searchType="notes" title="Book Name" />
+      <SideBar />
     </div>
   );
 }
