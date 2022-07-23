@@ -13,6 +13,7 @@ export function BookCard({ id, title, author, summary }: Book): ReactElement {
     setSelectedBook(id);
     Router.push('./book').catch(console.error);
   };
+
   return (
     <Card onClick={handleSelectBook} onKeyDown={handleSelectBook}>
       <h2 className="mb-1 font-bold">{`${title} - ${author ?? ''}`}</h2>

@@ -1,6 +1,8 @@
 import type { ReactElement } from 'react';
+import { useEffect } from 'react';
 
 import { BookCard } from './BookCard';
+import { useBooks } from './hooks/useBooks';
 
 const labels = {
   setting: 'setting',
@@ -60,6 +62,11 @@ const books = [
 ];
 
 export function BookResults(): ReactElement {
+  const { updateBooks } = useBooks();
+  useEffect(() => {
+    updateBooks(books);
+  }, []);
+
   return (
     <section className=" m-4 mx-auto flex h-fit max-w-4xl flex-wrap justify-evenly">
       {books.map((book) => (

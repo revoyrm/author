@@ -5,7 +5,7 @@ import { AppContext } from '../../context/appProvider';
 import type { Book } from '../types';
 
 type UseBooksType = {
-  updateBooks: () => void;
+  updateBooks: (newBooks: Book[]) => void;
   setSelectedBook: (id: number) => void;
   getSelectedBook: () => void;
 };
