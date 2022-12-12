@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
-import { Book } from '../../types/library-types';
+import type { Book } from '../../types/library-types';
 
 type UseBooksType = {
   updateBooks: (newBooks: Book[]) => void;
