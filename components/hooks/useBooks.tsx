@@ -2,16 +2,17 @@ import { useContext } from 'react';
 
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
-import type { Book } from '../types';
+import { Book } from '../../types/library-types';
 
 type UseBooksType = {
   updateBooks: (newBooks: Book[]) => void;
+  getBooks: () => Book[];
   setSelectedBook: (id: number) => void;
   getSelectedBook: () => void;
 };
 
 export const useBooks = (): UseBooksType => {
-  const { dispatch } = useContext(AppContext) ?? {};
+  const { state, dispatch } = useContext(AppContext) ?? {};
 
   if (!dispatch) {
     throw new Error('useBooks must be used within an AppProvider');
@@ -24,6 +25,8 @@ export const useBooks = (): UseBooksType => {
     });
   };
 
+  const getBooks = (): Book[] => state?.books ?? [];
+
   const setSelectedBook = (id: number): void => {
     dispatch({
       type: Actions.SelectBook,
@@ -35,6 +38,7 @@ export const useBooks = (): UseBooksType => {
 
   return {
     updateBooks,
+    getBooks,
     setSelectedBook,
     getSelectedBook,
   };

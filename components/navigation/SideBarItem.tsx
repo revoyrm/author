@@ -5,7 +5,7 @@ type SideBarItemProps = {
 };
 
 export function SideBarItem({ label }: SideBarItemProps): ReactElement {
-  const onItemClick = (e: HTMLEvent): void => {};
+  const onItemClick = (): void => {};
   return (
     <div
       className="

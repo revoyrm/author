@@ -1,4 +1,4 @@
-import type { Book } from '../components/types';
+import type { Book } from '../types/library-types';
 import type { Actions } from './actions';
 
 export type State = {

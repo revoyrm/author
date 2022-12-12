@@ -7,7 +7,7 @@ import { Search } from './Search';
 type HeaderProps = {
   title: string;
   showIcon?: boolean;
-  searchType: string; //todo update when you know
+  searchType: string; // todo update when you know
 };
 
 export function Header({
