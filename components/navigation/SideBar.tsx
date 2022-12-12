@@ -2,7 +2,13 @@ import type { ReactElement } from 'react';
 
 import { SideBarItem } from './SideBarItem';
 
-const labels = ['Characters', 'Settings', 'Chapters', 'Notes'];
+const labels = [
+  'Search Results',
+  'Characters',
+  'Settings',
+  'Chapters',
+  'Notes',
+];
 
 export function SideBar(): ReactElement {
   return (

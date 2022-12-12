@@ -16,7 +16,7 @@ export function BookCard({
 
   const handleSelectBook = (): void => {
     setSelectedBook(id);
-    Router.push('./book').catch(console.error);
+    Router.push(`./book/${id}`).catch(console.error);
   };
 
   return (
