@@ -1,3 +1,4 @@
+import { NextPageContext } from 'next';
 import Router from 'next/router';
 import type { ReactElement } from 'react';
 
@@ -23,11 +24,11 @@ export default function Book({ currentBookId }: BookProps): ReactElement {
     },
     {
       label: 'Characters',
-      route: `book/${currentBookId}/characters`,
+      route: `/book/${currentBookId}/characters`,
     },
-    { label: 'Settings', route: `book/${currentBookId}/settings` },
-    { label: 'Chapters', route: `book/${currentBookId}/chapters` },
-    { label: 'Notes', route: `book/${currentBookId}/notes` },
+    { label: 'Settings', route: `/book/${currentBookId}/settings` },
+    { label: 'Chapters', route: `/book/${currentBookId}/chapters` },
+    { label: 'Notes', route: `/book/${currentBookId}/notes` },
   ];
 
   return (
@@ -38,13 +39,13 @@ export default function Book({ currentBookId }: BookProps): ReactElement {
   );
 }
 
-export function getServerSideProps(context: unknown): {
-  props: unknown;
+export function getServerSideProps(context: NextPageContext): {
+  props: BookProps;
 } {
   console.log({ context });
   return {
     props: {
-      //currentBookId: context.params.id,
+      currentBookId: context.query.id as string,
     }, // will be passed to the page component as props
   };
 }
