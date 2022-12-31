@@ -1,4 +1,3 @@
-import axios from 'axios';
 import type { ReactElement } from 'react';
 
 import { Landing } from '../components';

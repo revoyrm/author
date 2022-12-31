@@ -1,23 +1,21 @@
 import type { ReactElement } from 'react';
 
+import type { SideBarItemProps } from './SideBarItem';
 import { SideBarItem } from './SideBarItem';
 
-const labels = [
-  'Search Results',
-  'Characters',
-  'Settings',
-  'Chapters',
-  'Notes',
-];
+type SideBarProps = {
+  items: SideBarItemProps[];
+};
 
-export function SideBar(): ReactElement {
+export function SideBar({ items }: SideBarProps): ReactElement {
   return (
     <div
       className="border-1 h-full w-fit rounded-lg border-secondary 
     bg-primary-light"
     >
-      {labels.map((label) => (
-        <SideBarItem key={label} label={label} />
+      <SideBarItem key="Back" label="Back" />
+      {items.map(({ label, route }) => (
+        <SideBarItem key={label} label={label} route={route} />
       ))}
     </div>
   );

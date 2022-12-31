@@ -1,11 +1,18 @@
+import Router from 'next/router';
 import type { ReactElement } from 'react';
+import { useCallback } from 'react';
 
-type SideBarItemProps = {
+export type SideBarItemProps = {
   label: string;
+  route?: string;
 };
 
-export function SideBarItem({ label }: SideBarItemProps): ReactElement {
-  const onItemClick = (): void => {};
+export function SideBarItem({ label, route }: SideBarItemProps): ReactElement {
+  const onItemClick = useCallback(() => {
+    if (route) {
+      Router.push(route).catch(console.error);
+    }
+  }, [route]);
   return (
     <div
       className="

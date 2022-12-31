@@ -7,7 +7,7 @@ import { Header } from './Header';
 export function Landing(): ReactElement {
   return (
     <div className="h-full">
-      <Header searchType="book" title="Author" showIcon />
+      <Header searchType="books" title="Author" showIcon />
       <BookResults />
     </div>
   );
