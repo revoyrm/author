@@ -1,7 +1,8 @@
 export type Note = {
   id: number;
   labels: string[];
-  note: string;
+  note?: string;
+  title: string;
 };
 
 export type Chapter = {

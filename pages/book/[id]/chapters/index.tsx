@@ -2,7 +2,9 @@ import axios from 'axios';
 import type { ReactElement } from 'react';
 import React from 'react';
 
+import { BookItemCard } from '../../../../components/BookItemCard';
 import { Header } from '../../../../components/Header';
+import { Cards } from '../../../../components/layout/Cards';
 import type { Chapter } from '../../../../types/library-types';
 
 type ChaptersProps = {
@@ -13,7 +15,16 @@ export default function Chapters({ chapters }: ChaptersProps): ReactElement {
   return (
     <div className="h-full">
       <Header searchType="chapters" title="Chapters of book" showIcon />
-      <div />
+      <Cards>
+        {chapters.map((chapter) => (
+          <BookItemCard
+            key={`chapter_${chapter.id}`}
+            body={chapter.description}
+            header={chapter.name}
+            onClick={(): void => {}}
+          />
+        ))}
+      </Cards>
     </div>
   );
 }

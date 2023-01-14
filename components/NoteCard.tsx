@@ -3,10 +3,10 @@ import type { ReactElement } from 'react';
 import React from 'react';
 
 import type { Book } from '../types/library-types';
+import { Card } from './Card';
 import { useBooks } from './hooks/useBooks';
-import { Card } from './layout/Card';
 
-export function BookCard({
+export function NoteCard({
   id,
   title,
   author,

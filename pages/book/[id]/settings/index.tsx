@@ -2,7 +2,9 @@ import axios from 'axios';
 import type { ReactElement } from 'react';
 import React from 'react';
 
+import { BookItemCard } from '../../../../components/BookItemCard';
 import { Header } from '../../../../components/Header';
+import { Cards } from '../../../../components/layout/Cards';
 import type { Setting } from '../../../../types/library-types';
 
 type SettingsProps = {
@@ -12,7 +14,16 @@ export default function Settings({ settings }: SettingsProps): ReactElement {
   return (
     <div className="h-full">
       <Header searchType="chapters" title="Chapters of book" showIcon />
-      <div />
+      <Cards>
+        {settings.map((setting) => (
+          <BookItemCard
+            key={`setting_${setting.id}`}
+            body={setting.description}
+            header={setting.name}
+            onClick={(): void => {}}
+          />
+        ))}
+      </Cards>
     </div>
   );
 }
