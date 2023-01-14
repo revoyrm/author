@@ -1,4 +1,4 @@
-import { NextPageContext } from 'next';
+import type { NextPageContext } from 'next';
 import Router from 'next/router';
 import type { ReactElement } from 'react';
 

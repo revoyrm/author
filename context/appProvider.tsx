@@ -20,7 +20,7 @@ const useLoadInitialBooks = (dispatch: Dispatch<Action>): void => {
     };
 
     loadInitialBooks().catch(console.error);
-  }, []);
+  }, [dispatch]);
 };
 
 export function AppProvider({
