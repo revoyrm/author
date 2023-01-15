@@ -1,22 +1,30 @@
-import axios from 'axios';
+import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
 import React from 'react';
 
 import { BookItemCard } from '../../../../components/BookItemCard';
 import { Header } from '../../../../components/Header';
+import { BookLayout } from '../../../../components/layout/BookLayout';
 import { Cards } from '../../../../components/layout/Cards';
+import library from '../../../../mockLibrary/library.json';
 import type { Character } from '../../../../types/library-types';
+import { getBookWithId } from '../../../utilities/get-book-with-id';
 
 type CharactersProps = {
   characters: Character[];
+  currentBookId: string;
 };
 
 export default function Characters({
   characters,
+  currentBookId,
 }: CharactersProps): ReactElement {
   return (
-    <div className="h-full">
-      <Header searchType="characters" title="characters of book" showIcon />
+    <BookLayout
+      bookId={currentBookId}
+      heading="Book Name"
+      searchType="Characters"
+    >
       <Cards>
         {characters.map((character) => (
           <BookItemCard
@@ -27,19 +35,20 @@ export default function Characters({
           />
         ))}
       </Cards>
-    </div>
+    </BookLayout>
   );
 }
 
-export async function getServerSideProps(): Promise<{
+export function getServerSideProps(context: NextPageContext): {
   props: CharactersProps;
-}> {
-  await Promise.resolve(); // todo remove
-  console.log('GOT HERE');
-  //const res = await axios.get<Character[]>('/api/get-characters');
+} {
+  const bookId = context.query.bookId as string;
+  const book = getBookWithId(bookId, library.books);
+
   return {
     props: {
-      characters: [], //res.data,
+      characters: book?.characters ?? [],
+      currentBookId: context.query.bookId as string,
     },
   };
 }

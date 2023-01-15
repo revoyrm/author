@@ -10,7 +10,7 @@ type SideBarProps = {
 export function SideBar({ items }: SideBarProps): ReactElement {
   return (
     <div
-      className="border-1 h-full w-fit rounded-lg border-secondary 
+      className="border-1 inline-block h-full w-fit rounded-lg border-secondary 
     bg-primary-light"
     >
       <SideBarItem key="Back" label="Back" />
