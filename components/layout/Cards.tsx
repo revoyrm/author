@@ -1,12 +1,13 @@
-import type { ReactElement, RefObject } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type { ReactElement } from 'react';
 
 type CardsProps = { children: ReactElement[] };
 
 export function Cards({ children }: CardsProps): ReactElement {
   return (
-    <section className="m-4 grid h-fit w-fit justify-evenly bg-[red] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {children}
+    <section className="m-4 h-fit w-full @container/cards ">
+      <div className="mx-auto grid h-full w-fit justify-evenly @lg/cards:grid-cols-2 @3xl/cards:grid-cols-3 @5xl/cards:grid-cols-4 @7xl/cards:grid-cols-5">
+        {children}
+      </div>
     </section>
   );
 }
