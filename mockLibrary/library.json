@@ -34,6 +34,48 @@
           "labels": ["Dexon", "Finley"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 3,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 4,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 5,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 6,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 7,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 8,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         }
       ],
       "notes": [
