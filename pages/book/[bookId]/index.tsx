@@ -1,21 +1,21 @@
 import type { NextPageContext } from 'next';
-import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
 
 import { BookLayout } from '../../../components/layout/BookLayout';
+import { SidebarLabels } from '../../utilities/sidebar-labels';
 
 type BookProps = {
   currentBookId: string;
 };
 
 export default function Book({ currentBookId }: BookProps): ReactElement {
-  const Router = useRouter();
-  const onBack = (): void => {
-    Router.push('/').catch(console.error);
-  };
-
   return (
-    <BookLayout bookId={currentBookId} heading="Book Name" searchType="book" />
+    <BookLayout
+      activeNav={SidebarLabels.Book}
+      bookId={currentBookId}
+      heading="Book Name"
+      searchType="book"
+    />
   );
 }
 

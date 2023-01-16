@@ -14,7 +14,6 @@ export function SideBar({ items, activeLabel }: SideBarProps): ReactElement {
       className="border-1 inline-block h-full w-fit rounded-lg border-secondary 
     bg-primary-light"
     >
-      <SideBarItem key="Back" isActive={false} label="Back" />
       {items.map(({ label, route }) => (
         <SideBarItem
           key={label}
