@@ -3,12 +3,12 @@ import type { ReactElement } from 'react';
 import React from 'react';
 
 import { BookItemCard } from '../../../../components/BookItemCard';
-import { Header } from '../../../../components/Header';
 import { BookLayout } from '../../../../components/layout/BookLayout';
 import { Cards } from '../../../../components/layout/Cards';
 import library from '../../../../mockLibrary/library.json';
 import type { Note } from '../../../../types/library-types';
 import { getBookWithId } from '../../../utilities/get-book-with-id';
+import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type NotesProps = {
   notes: Note[];
@@ -21,6 +21,7 @@ export default function Notes({
 }: NotesProps): ReactElement {
   return (
     <BookLayout
+      activeNav={SidebarLabels.AllNotes}
       bookId={currentBookId}
       heading="Book Name"
       searchType="Characters"

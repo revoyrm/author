@@ -4,12 +4,12 @@ import type { ReactElement } from 'react';
 import React from 'react';
 
 import { BookItemCard } from '../../../../components/BookItemCard';
-import { Header } from '../../../../components/Header';
 import { BookLayout } from '../../../../components/layout/BookLayout';
 import { Cards } from '../../../../components/layout/Cards';
 import library from '../../../../mockLibrary/library.json';
 import type { Setting } from '../../../../types/library-types';
 import { getBookWithId } from '../../../utilities/get-book-with-id';
+import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type SettingsProps = {
   settings: Setting[];
@@ -21,6 +21,7 @@ export default function Settings({
 }: SettingsProps): ReactElement {
   return (
     <BookLayout
+      activeNav={SidebarLabels.Settings}
       bookId={currentBookId}
       heading="Book Name"
       searchType="Settings"

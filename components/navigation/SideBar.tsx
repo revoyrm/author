@@ -5,17 +5,23 @@ import { SideBarItem } from './SideBarItem';
 
 type SideBarProps = {
   items: SideBarItemProps[];
+  activeLabel?: string;
 };
 
-export function SideBar({ items }: SideBarProps): ReactElement {
+export function SideBar({ items, activeLabel }: SideBarProps): ReactElement {
   return (
     <div
       className="border-1 inline-block h-full w-fit rounded-lg border-secondary 
     bg-primary-light"
     >
-      <SideBarItem key="Back" label="Back" />
+      <SideBarItem key="Back" isActive={false} label="Back" />
       {items.map(({ label, route }) => (
-        <SideBarItem key={label} label={label} route={route} />
+        <SideBarItem
+          key={label}
+          isActive={label === activeLabel}
+          label={label}
+          route={route}
+        />
       ))}
     </div>
   );

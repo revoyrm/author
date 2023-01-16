@@ -1,17 +1,15 @@
 import type { NextPageContext } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
 
-import { Header } from '../../../components/Header';
 import { BookLayout } from '../../../components/layout/BookLayout';
-import { SideBar } from '../../../components/navigation/SideBar';
-import getSidebarItems from '../../utilities/get-side-bar-items';
 
 type BookProps = {
   currentBookId: string;
 };
 
 export default function Book({ currentBookId }: BookProps): ReactElement {
+  const Router = useRouter();
   const onBack = (): void => {
     Router.push('/').catch(console.error);
   };

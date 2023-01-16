@@ -1,18 +1,20 @@
+import { SidebarLabels } from './sidebar-labels';
+
 export default function getSidebarItems(currentBookId: string): {
   label: string;
   route?: string;
 }[] {
   return [
     {
-      label: 'Home',
+      label: SidebarLabels.Home,
       route: `/`,
     },
     {
-      label: 'Characters',
+      label: SidebarLabels.Characters,
       route: `/book/${currentBookId}/characters`,
     },
-    { label: 'Settings', route: `/book/${currentBookId}/settings` },
-    { label: 'Chapters', route: `/book/${currentBookId}/chapters` },
-    { label: 'All Notes', route: `/book/${currentBookId}/notes` },
+    { label: SidebarLabels.Settings, route: `/book/${currentBookId}/settings` },
+    { label: SidebarLabels.Chapters, route: `/book/${currentBookId}/chapters` },
+    { label: SidebarLabels.AllNotes, route: `/book/${currentBookId}/notes` },
   ];
 }
