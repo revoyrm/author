@@ -17,7 +17,7 @@ export function Header({
 }: HeaderProps): ReactElement {
   return (
     <div className="flex w-full justify-between bg-primary py-8 px-4">
-      <div className="w-1/2">
+      <div className="w-3/4 ">
         {showIcon && (
           <FaBook className="mr-4 mb-3 inline-block text-3xl text-secondary" />
         )}
