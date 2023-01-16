@@ -22,9 +22,9 @@ export function BookLayout({
   return (
     <div className="h-full">
       <Header searchType={searchType} title={heading} />
-      <div className="h-full w-full">
+      <div className="flex h-full w-full items-stretch">
         <SideBar items={getSidebarItems(bookId)} />
-        <div className="inline-block h-full">{children}</div>
+        <div className="inline-block h-full flex-grow">{children}</div>
       </div>
     </div>
   );

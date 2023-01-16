@@ -13,6 +13,6 @@ export default function getSidebarItems(currentBookId: string): {
     },
     { label: 'Settings', route: `/book/${currentBookId}/settings` },
     { label: 'Chapters', route: `/book/${currentBookId}/chapters` },
-    { label: 'Notes', route: `/book/${currentBookId}/notes` },
+    { label: 'All Notes', route: `/book/${currentBookId}/notes` },
   ];
 }
