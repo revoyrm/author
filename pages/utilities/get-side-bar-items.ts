@@ -6,10 +6,6 @@ export default function getSidebarItems(currentBookId: string): {
 }[] {
   return [
     {
-      label: SidebarLabels.Home,
-      route: `/`,
-    },
-    {
       label: SidebarLabels.Book,
       route: `/book/${currentBookId}`,
     },

@@ -12,7 +12,7 @@ export function SideBar({ items, activeLabel }: SideBarProps): ReactElement {
   return (
     <div
       className="border-1 inline-block h-full w-fit rounded-lg border-secondary 
-    bg-primary-light"
+    bg-primary"
     >
       {items.map(({ label, route }) => (
         <SideBarItem

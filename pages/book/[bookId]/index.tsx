@@ -1,6 +1,7 @@
 import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
+import { BookForm } from '../../../components/forms/BookForm';
 import { BookLayout } from '../../../components/layout/BookLayout';
 import { SidebarLabels } from '../../utilities/sidebar-labels';
 
@@ -15,7 +16,9 @@ export default function Book({ currentBookId }: BookProps): ReactElement {
       bookId={currentBookId}
       heading="Book Name"
       searchType="book"
-    />
+    >
+      <BookForm />
+    </BookLayout>
   );
 }
 

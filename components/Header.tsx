@@ -1,4 +1,5 @@
-import type { ReactElement } from 'react';
+import { useRouter } from 'next/router';
+import { ReactElement, useCallback } from 'react';
 import React from 'react';
 import { FaBook } from 'react-icons/fa';
 
@@ -15,9 +16,20 @@ export function Header({
   showIcon,
   searchType,
 }: HeaderProps): ReactElement {
+  const Router = useRouter();
+  const goHome = useCallback((): void => {
+    Router.push('/').catch(console.error);
+  }, [Router]);
+
   return (
     <div className="flex w-full justify-between bg-primary py-8 px-4">
-      <div className="w-3/4 ">
+      <div
+        className="w-3/4"
+        role="button"
+        tabIndex={0}
+        onClick={goHome}
+        onKeyDown={goHome}
+      >
         {showIcon && (
           <FaBook className="mr-4 mb-3 inline-block text-3xl text-secondary" />
         )}

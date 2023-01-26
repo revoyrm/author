@@ -23,7 +23,7 @@ export function SideBarItem({
     <div
       className={clsx(
         'h-fit w-full min-w-[200px] border-b border-b-2 border-b-secondary p-4 px-8 text-center text-secondary hover:bg-secondary hover:text-primary focus:bg-secondary focus:text-primary',
-        { 'bg-primary-lightest': isActive, 'bg-primary-light': !isActive }
+        { 'bg-primary-light': isActive, 'bg-primary': !isActive }
       )}
       role="button"
       tabIndex={0}
