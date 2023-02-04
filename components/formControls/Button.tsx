@@ -17,7 +17,7 @@ function ButtonComponent(
     <button
       ref={ref}
       className={clsx(
-        'w-fit rounded-2xl bg-primary px-8 py-4 text-lg font-bold text-secondary hover:bg-primary-light active:bg-primary-dark ',
+        'w-fit rounded-2xl bg-primary px-8 py-4 text-lg font-bold text-secondary hover:bg-primary-light active:bg-primary-dark active:text-secondary-light',
         className
       )}
       type={isSubmit ? 'submit' : 'button'}

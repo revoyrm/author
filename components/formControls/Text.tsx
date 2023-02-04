@@ -14,12 +14,12 @@ export function Text({ className, label, name }: TextProps): ReactElement {
   return (
     <fieldset
       className={clsx(
-        'w-160 h-20 rounded-lg border-2 border-primary bg-[white] focus-within:border-primary-light',
+        'w-160 h-16 rounded-lg border-2 border-primary bg-[white] focus-within:border-primary-light',
         className
       )}
     >
       <input
-        className="peer mt-2 w-full px-5 text-xl outline-none"
+        className="text-md peer my-auto w-full px-5 text-primary-dark outline-none"
         type="text"
         {...register(name)}
       />

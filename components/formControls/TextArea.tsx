@@ -19,7 +19,7 @@ export function TextArea({ className, label, name }: TextProps): ReactElement {
       )}
     >
       <textarea
-        className="peer mt-2 h-60 w-full px-5 text-xl outline-none "
+        className="text-md peer mt-2 h-60 w-full px-5 text-primary-dark outline-none "
         {...register(name)}
       />
       <legend className="ml-3 px-1 font-bold text-primary peer-focus:text-primary-light">
