@@ -1,17 +1,20 @@
 {
   "books": [
     {
+      "id": 1,
       "title": "Tarsier",
-      "Author": "Fay Avery",
+      "author": "Fay Avery",
       "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on.",
       "chapters": [
         {
-          "name:": "The Beginning",
+          "id": 1,
+          "name": "The Beginning",
           "labels": ["Crash planet", "Clark"]
         }
       ],
       "settings": [
         {
+          "id": 1,
           "name": "The Dawn",
           "labels": ["Alya", "Clark", "ship"],
           "description": "Ship Alya and Dexon are on"
@@ -19,12 +22,56 @@
       ],
       "characters": [
         {
+          "id": 1,
           "name": "Arya Clark",
           "labels": ["Alya", "Clark"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         },
         {
+          "id": 2,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 3,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 4,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 5,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 6,
+          "name": "Dexon Finley",
+          "labels": ["Dexon", "Finley"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 7,
+          "name": "Arya Clark",
+          "labels": ["Alya", "Clark"],
+          "age": 17,
+          "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
+        },
+        {
+          "id": 8,
           "name": "Dexon Finley",
           "labels": ["Dexon", "Finley"],
           "age": 17,
@@ -33,27 +80,34 @@
       ],
       "notes": [
         {
+          "id": 1,
           "labels": ["Alya", "Clark"],
-          "note": "A 17 yr old ship apprentice"
+          "note": "A 17 yr old ship apprentice",
+          "title": "Alya Clark"
         },
         {
-          "label": "Dexon",
-          "note": "A 17 yr old ship apprentice"
+          "id": 2,
+          "labels": ["Dexon"],
+          "note": "A 17 yr old ship apprentice",
+          "title": "Dexon"
         }
       ]
     },
     {
+      "id": 2,
       "title": "Thou Art",
-      "Author": "Fay Avery",
+      "author": "Fay Avery",
       "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on.",
       "chapters": [
         {
-          "name:": "The Beginning",
+          "id": 3,
+          "name": "The Beginning",
           "labels": ["Crash planet", "Clark"]
         }
       ],
       "settings": [
         {
+          "id": 3,
           "name": "The Dawn",
           "labels": ["Alya", "Clark", "ship"],
           "description": "Ship Alya and Dexon are on"
@@ -61,12 +115,14 @@
       ],
       "characters": [
         {
+          "id": 3,
           "name": "Arya Clark",
           "labels": ["Alya", "Clark"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         },
         {
+          "id": 4,
           "name": "Dexon Finley",
           "labels": ["Dexon", "Finley"],
           "age": 17,
@@ -75,27 +131,34 @@
       ],
       "notes": [
         {
+          "id": 3,
           "labels": ["Alya", "Clark"],
-          "note": "A 17 yr old ship apprentice"
+          "note": "A 17 yr old ship apprentice",
+          "title": "Alya Clark"
         },
         {
-          "label": "Dexon",
-          "note": "A 17 yr old ship apprentice"
+          "id": 4,
+          "labels": ["Dexon"],
+          "note": "A 17 yr old ship apprentice",
+          "title": "Dexon"
         }
       ]
     },
     {
+      "id": 3,
       "title": "Cartly",
-      "Author": "Fay Avery",
+      "author": "Fay Avery",
       "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on.",
       "chapters": [
         {
-          "name:": "The Beginning",
+          "id": 4,
+          "name": "The Beginning",
           "labels": ["Crash planet", "Clark"]
         }
       ],
       "settings": [
         {
+          "id": 4,
           "name": "The Dawn",
           "labels": ["Alya", "Clark", "ship"],
           "description": "Ship Alya and Dexon are on"
@@ -103,12 +166,14 @@
       ],
       "characters": [
         {
+          "id": 4,
           "name": "Arya Clark",
           "labels": ["Alya", "Clark"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         },
         {
+          "id": 5,
           "name": "Dexon Finley",
           "labels": ["Dexon", "Finley"],
           "age": 17,
@@ -117,27 +182,34 @@
       ],
       "notes": [
         {
+          "id": 4,
           "labels": ["Alya", "Clark"],
-          "note": "A 17 yr old ship apprentice"
+          "note": "A 17 yr old ship apprentice",
+          "title": "Alya Clark"
         },
         {
-          "label": "Dexon",
-          "note": "A 17 yr old ship apprentice"
+          "id": 5,
+          "labels": ["Dexon"],
+          "note": "A 17 yr old ship apprentice",
+          "title": "Dexon"
         }
       ]
     },
     {
+      "id": 4,
       "title": "Zeliare",
-      "Author": "Fay Avery",
+      "author": "Fay Avery",
       "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on.",
       "chapters": [
         {
-          "name:": "The Beginning",
+          "id": 5,
+          "name": "The Beginning",
           "labels": ["Crash planet", "Clark"]
         }
       ],
       "settings": [
         {
+          "id": 5,
           "name": "The Dawn",
           "labels": ["Alya", "Clark", "ship"],
           "description": "Ship Alya and Dexon are on"
@@ -145,12 +217,14 @@
       ],
       "characters": [
         {
+          "id": 5,
           "name": "Arya Clark",
           "labels": ["Alya", "Clark"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         },
         {
+          "id": 6,
           "name": "Dexon Finley",
           "labels": ["Dexon", "Finley"],
           "age": 17,
@@ -159,27 +233,34 @@
       ],
       "notes": [
         {
+          "id": 5,
           "labels": ["Alya", "Clark"],
-          "note": "A 17 yr old ship apprentice"
+          "note": "A 17 yr old ship apprentice",
+          "title": "Alya Clark"
         },
         {
-          "label": "Dexon",
-          "note": "A 17 yr old ship apprentice"
+          "id": 6,
+          "labels": ["Dexon"],
+          "note": "A 17 yr old ship apprentice",
+          "title": "Dexon"
         }
       ]
     },
     {
+      "id": 6,
       "title": "Hopper",
-      "Author": "Fay Avery",
+      "author": "Fay Avery",
       "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on.",
       "chapters": [
         {
-          "name:": "The Beginning",
+          "id": 6,
+          "name": "The Beginning",
           "labels": ["Crash planet", "Clark"]
         }
       ],
       "settings": [
         {
+          "id": 6,
           "name": "The Dawn",
           "labels": ["Alya", "Clark", "ship"],
           "description": "Ship Alya and Dexon are on"
@@ -187,12 +268,14 @@
       ],
       "characters": [
         {
+          "id": 6,
           "name": "Arya Clark",
           "labels": ["Alya", "Clark"],
           "age": 17,
           "description": "ALya Clark and Dexon Finley lead a ship to safety after their family is left behind on the planet their ship crashed on."
         },
         {
+          "id": 7,
           "name": "Dexon Finley",
           "labels": ["Dexon", "Finley"],
           "age": 17,
@@ -201,12 +284,16 @@
       ],
       "notes": [
         {
+          "id": 6,
           "labels": ["Alya", "Clark"],
-          "note": "A 17 yr old ship apprentice"
+          "note": "A 17 yr old ship apprentice",
+          "title": "Alya Clark"
         },
         {
-          "label": "Dexon",
-          "note": "A 17 yr old ship apprentice"
+          "id": 7,
+          "labels": ["Dexon"],
+          "note": "A 17 yr old ship apprentice",
+          "title": "Dexon"
         }
       ]
     }

@@ -1,17 +1,26 @@
 import type { ReactElement } from 'react';
 
+import type { SideBarItemProps } from './SideBarItem';
 import { SideBarItem } from './SideBarItem';
 
-const labels = ['Characters', 'Settings', 'Chapters', 'Notes'];
+type SideBarProps = {
+  items: SideBarItemProps[];
+  activeLabel?: string;
+};
 
-export function SideBar(): ReactElement {
+export function SideBar({ items, activeLabel }: SideBarProps): ReactElement {
   return (
     <div
-      className="border-1 h-full w-fit rounded-lg border-secondary 
-    bg-primary-light"
+      className="border-1 inline-block h-full w-fit rounded-lg border-secondary 
+    bg-primary"
     >
-      {labels.map((label) => (
-        <SideBarItem key={label} label={label} />
+      {items.map(({ label, route }) => (
+        <SideBarItem
+          key={label}
+          isActive={label === activeLabel}
+          label={label}
+          route={route}
+        />
       ))}
     </div>
   );

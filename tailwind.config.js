@@ -17,4 +17,7 @@ module.exports = {
       paper: '#ffffff',
     },
   },
+  plugins: [
+    require('@tailwindcss/container-queries'),
+  ],
 };
