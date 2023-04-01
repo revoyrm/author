@@ -2,7 +2,7 @@ import Router from 'next/router';
 import type { ReactElement } from 'react';
 import React from 'react';
 
-import type { Book } from '../types/library-types';
+import type { Book } from '../../types/library-types';
 import { useBooks } from './hooks/useBooks';
 import { Card } from './layout/Card';
 
