@@ -1,9 +1,10 @@
 import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
-import { BookForm } from '../../../components/forms/BookForm';
-import { BookLayout } from '../../../components/layout/BookLayout';
+import { BookForm } from '../../../src/components/forms/BookForm';
+import { BookLayout } from '../../../src/components/layout/BookLayout';
 import { SidebarLabels } from '../../utilities/sidebar-labels';
+import { getAllBooks } from '../../../src/services/get-books';
 
 type BookProps = {
   currentBookId: string;
@@ -25,6 +26,7 @@ export default function Book({ currentBookId }: BookProps): ReactElement {
 export function getServerSideProps(context: NextPageContext): {
   props: BookProps;
 } {
+
   return {
     props: {
       currentBookId: context.query.bookId as string,

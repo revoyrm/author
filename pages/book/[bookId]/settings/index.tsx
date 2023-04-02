@@ -3,9 +3,9 @@ import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
 import React from 'react';
 
-import { BookItemCard } from '../../../../components/BookItemCard';
-import { BookLayout } from '../../../../components/layout/BookLayout';
-import { Cards } from '../../../../components/layout/Cards';
+import { BookItemCard } from '../../../../src/components/BookItemCard';
+import { BookLayout } from '../../../../src/components/layout/BookLayout';
+import { Cards } from '../../../../src/components/layout/Cards';
 import library from '../../../../mockLibrary/library.json';
 import type { Setting } from '../../../../types/library-types';
 import { getBookWithId } from '../../../utilities/get-book-with-id';

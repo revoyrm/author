@@ -16,7 +16,7 @@ const useLoadInitialBooks = (dispatch: Dispatch<Action>): void => {
   useEffect(() => {
     const loadInitialBooks = async (): Promise<void> => {
       const response = await axios.get<Book[]>('/api/get-books');
-      dispatch({ type: Actions.UpdateBooks, payload: response.data });
+      dispatch({ type: Actions.SetBooks, payload: response.data });
     };
 
     loadInitialBooks().catch(console.error);

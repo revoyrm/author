@@ -1,4 +1,4 @@
 export enum Actions {
-  UpdateBooks = 'updateBooks',
+  SetBooks = 'setBooks',
   SelectBook = 'selectBook',
 }

@@ -11,6 +11,6 @@ export type Action =
       payload?: number;
     }
   | {
-      type: Actions.UpdateBooks;
+      type: Actions.SetBooks;
       payload: Book[];
     };

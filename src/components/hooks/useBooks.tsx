@@ -20,7 +20,7 @@ export const useBooks = (): UseBooksType => {
 
   const updateBooks = (newBooks: Book[]): void => {
     dispatch({
-      type: Actions.UpdateBooks,
+      type: Actions.SetBooks,
       payload: newBooks,
     });
   };
