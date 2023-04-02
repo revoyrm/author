@@ -3,7 +3,7 @@ import { libraryClient } from './library';
 import { Book } from '../types/services';
 
 const query = gql`
-  query GetAllBooks(t) {
+  query GetAllBooks {
     getBooks {
         title
         author
@@ -24,5 +24,5 @@ export async function getAllBooks(
   const { books } = await libraryClient.request<GetBooksRequest>(query);
   console.log(books)
 
-  return books;
+  return books ?? [];
 }

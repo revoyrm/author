@@ -6,7 +6,7 @@ import type {
 } from 'react';
 import React from 'react';
 
-import type { Book } from '../types/library-types';
+import type { Book } from '../types/services';
 import { Card } from './layout/Card';
 
 type BookItemCardProps = {

@@ -5,8 +5,9 @@ import { useBooks } from './hooks/useBooks';
 import { Cards } from './layout/Cards';
 
 export function BookResults(): ReactElement {
-  const { getBooks } = useBooks();
-  const books = getBooks();
+  const { books } = useBooks();
+
+  console.log('bookResults', books);
 
   return (
     <Cards>

@@ -1,4 +1,4 @@
-import type { Book } from '../../types/library-types';
+import type { Book } from '../../src/types/services';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getBookWithId = (

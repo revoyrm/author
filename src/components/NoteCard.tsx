@@ -2,8 +2,8 @@ import Router from 'next/router';
 import type { ReactElement } from 'react';
 import React from 'react';
 
-import type { Book } from '../types/library-types';
-import { Card } from './Card';
+import type { Book } from '../types/services';
+import { Card } from './layout/Card';
 import { useBooks } from './hooks/useBooks';
 
 export function NoteCard({
