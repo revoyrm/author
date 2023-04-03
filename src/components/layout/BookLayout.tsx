@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { Header } from '../Header';
-import { SideBar } from '../navigation/SideBar';
+import { SideBar } from '../navigation/Sidebar';
 import getSidebarItems from '../../../pages/utilities/getSidebarItems';
 
 type BookProps = {
