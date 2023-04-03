@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import { BookForm } from '../../../src/components/forms/BookForm';
 import { BookLayout } from '../../../src/components/layout/BookLayout';
 import { SidebarLabels } from '../../utilities/sidebar-labels';
-import { getAllBooks } from '../../../src/services/get-books';
+import { getAllBooks } from '../../../src/services/getBooks';
 
 type BookProps = {
   currentBookId: string;

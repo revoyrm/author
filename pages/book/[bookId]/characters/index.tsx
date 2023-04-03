@@ -7,7 +7,7 @@ import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import library from '../../../../mockLibrary/library.json';
 import type { Character } from '../../../../src/types/services';
-import { getBookWithId } from '../../../utilities/get-book-with-id';
+import { getBookWithId } from '../../../utilities/getBookWithId';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type CharactersProps = {

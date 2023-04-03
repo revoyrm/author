@@ -11,6 +11,7 @@ export function BookResults(): ReactElement {
 
   return (
     <Cards>
+      {books.length === 0 && <div>Add a book now</div>}
       {books.map((book) => (
         <BookCard key={book.id} {...book} />
       ))}

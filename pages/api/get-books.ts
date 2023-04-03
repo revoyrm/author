@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAllBooks } from '../../src/services/get-books';
+import { getAllBooks } from '../../src/services/getBooks';
 
 export default async function handler(
   req: NextApiRequest,

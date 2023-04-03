@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
-type CardsProps = { children: ReactElement[] };
+type CardsProps = { children: ReactNode };
 
 export function Cards({ children }: CardsProps): ReactElement {
   return (

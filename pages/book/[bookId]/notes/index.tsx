@@ -6,7 +6,7 @@ import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import library from '../../../../mockLibrary/library.json';
-import { getBookWithId } from '../../../utilities/get-book-with-id';
+import { getBookWithId } from '../../../utilities/getBookWithId';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 import { Note } from '../../../../src/types/services';
 
