@@ -1,8 +1,7 @@
 import type { ReactElement } from 'react';
-
-import getSidebarItems from '../../../pages/utilities/get-side-bar-items';
 import { Header } from '../Header';
 import { SideBar } from '../navigation/SideBar';
+import getSidebarItems from '../../../pages/utilities/getSidebarItems';
 
 type BookProps = {
   bookId: string;
