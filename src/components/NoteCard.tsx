@@ -6,12 +6,7 @@ import type { Book } from '../types/services';
 import { Card } from './layout/Card';
 import { useBooks } from './hooks/useBooks';
 
-export function NoteCard({
-  id,
-  title,
-  author,
-  description,
-}: Book): ReactElement {
+export function NoteCard({ id, title, author, summary }: Book): ReactElement {
   const { setSelectedBook } = useBooks();
 
   const handleSelectBook = (): void => {
@@ -23,7 +18,7 @@ export function NoteCard({
     <Card onClick={handleSelectBook} onKeyDown={handleSelectBook}>
       <h2 className="mb-1 font-bold">{`${title} - ${author}`}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
-      <p>{description}</p>
+      <p>{summary}</p>
     </Card>
   );
 }
