@@ -17,14 +17,13 @@ export function Form({
   children: ReactElement | ReactElement[];
 }): ReactElement {
   const methods = useForm();
-
+  const { handleSubmit } = methods;
+  const onSubmit2 = (data) => console.log('onSubmit2', data);
   return (
     <FormProvider {...methods}>
       <form
         ref={formRef}
-        onSubmit={methods.handleSubmit(async (data) => {
-          await onSubmit(data);
-        })}
+        onSubmit={handleSubmit(onSubmit2)}
         className="h-fit w-full rounded-xl bg-secondary px-8 py-4"
       >
         {children}

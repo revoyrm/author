@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import type { ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 type TextProps = {
   label: string;
@@ -9,7 +9,9 @@ type TextProps = {
 };
 
 export function TextArea({ className, label, name }: TextProps): ReactElement {
-  const { register } = useForm();
+  const { register } = useFormContext();
+
+  console.log('textarea ', name);
 
   return (
     <fieldset

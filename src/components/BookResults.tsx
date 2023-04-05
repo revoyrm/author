@@ -7,9 +7,6 @@ import { BookForm } from './forms/BookForm';
 
 export function BookResults(): ReactElement {
   const { books } = useBooks();
-
-  console.log('bookResults', books);
-
   return (
     <>
       {books.length === 0 && (

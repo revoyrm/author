@@ -6,7 +6,7 @@ import { FieldValues } from 'react-hook-form';
 
 export function BookForm(): ReactElement {
   const handleSubmit = useCallback(async (data: FieldValues) => {
-    console.log(data);
+    console.log('i am groot', data);
   }, []);
   return (
     <Form onSubmit={handleSubmit}>

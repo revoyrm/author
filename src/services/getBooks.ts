@@ -5,24 +5,22 @@ import { Book } from '../types/services';
 const query = gql`
   query GetAllBooks {
     getBooks {
-        title
-        author
-        label {
-          label
-        }
-        summary
+      title
+      author
+      label {
+        label
       }
+      summary
+    }
   }
 `;
 
 type GetBooksRequest = {
-    books: Book[];
-}
+  books: Book[];
+};
 
-export async function getAllBooks(
-): Promise<Book[]> {
+export async function getAllBooks(): Promise<Book[]> {
   const { books } = await libraryClient.request<GetBooksRequest>(query);
-  console.log(books)
 
   return books ?? [];
 }
