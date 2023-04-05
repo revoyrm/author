@@ -1,10 +1,8 @@
 import { ReactElement, useCallback } from 'react';
 
 import { Button, Text, TextArea } from '../formControls';
-import { Form } from './form';
+import { Form } from './Form';
 import { FieldValues } from 'react-hook-form';
-import axios from 'axios';
-import { ApiRoutes } from '../../ApiRoutes';
 import { useBooks } from '../hooks/useBooks';
 
 export function BookForm(): ReactElement {

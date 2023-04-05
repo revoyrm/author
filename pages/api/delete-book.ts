@@ -1,19 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { createBook } from '../../src/services/createBook';
+import { deleteBook } from '../../src/services/deleteBook';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<unknown>
 ): Promise<void> {
-  const { title, author, summary } = req.body;
+  const { id } = req.body;
   console.log({
-    title,
-    author,
-    summary,
+    id,
   });
   try {
-    const response = await createBook(title, author, summary);
+    const response = await deleteBook(id);
 
     res.status(200).json(response);
   } catch (e) {

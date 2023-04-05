@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
@@ -10,6 +10,7 @@ type UseBooksType = {
   updateBooks: (newBooks: Book[]) => void;
   books: Book[];
   createBook: (title: string, author: string, summary: string) => Promise<void>;
+  deleteBook: (id: string) => Promise<void>;
   getBooks: () => Book[];
   setSelectedBook: (id: number) => void;
   getSelectedBook: () => void;
@@ -29,29 +30,44 @@ export const useBooks = (): UseBooksType => {
     });
   };
 
-  const createBook = async (title: string, author: string, summary: string) => {
-    try {
-      const response = await axios.post(ApiRoutes.CreateBook, {
-        title,
-        author,
-        summary,
-      });
+  const createBook = useCallback(
+    async (title: string, author: string, summary: string) => {
+      try {
+        const response = await axios.post(ApiRoutes.CreateBook, {
+          title,
+          author,
+          summary,
+        });
 
-      console.log('createbook', response);
-      dispatch({ type: Actions.AddBook, payload: response.data });
+        console.log('createbook', response);
+        dispatch({ type: Actions.AddBook, payload: response.data });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    []
+  );
+
+  const deleteBook = useCallback(async (id: string): Promise<void> => {
+    try {
+      const response = await axios.post(ApiRoutes.DeleteBook, { id });
+
+      if (response.data) {
+        dispatch({ type: Actions.DeleteBook, payload: id });
+      }
     } catch (e) {
       console.error(e);
     }
-  };
+  }, []);
 
   const getBooks = (): Book[] => state?.books ?? [];
 
-  const setSelectedBook = (id: number): void => {
+  const setSelectedBook = useCallback((id: number): void => {
     dispatch({
       type: Actions.SelectBook,
       payload: id,
     });
-  };
+  }, []);
 
   const getSelectedBook = (): void => {};
 
@@ -59,6 +75,7 @@ export const useBooks = (): UseBooksType => {
     updateBooks,
     books: state?.books ?? [], //Todo initial state
     createBook,
+    deleteBook,
     getBooks,
     setSelectedBook,
     getSelectedBook,

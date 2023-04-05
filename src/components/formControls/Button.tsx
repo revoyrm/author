@@ -12,7 +12,6 @@ function ButtonComponent(
   { className, label, name, isSubmit, ...props }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
 ): ReactElement {
-  const x = 'dsdss';
   return (
     <button
       ref={ref}

@@ -1,4 +1,5 @@
 export const ApiRoutes = {
-  GetBooks: 'api/get-books',
   CreateBook: 'api/create-book',
+  DeleteBook: 'api/delete-book',
+  GetBooks: 'api/get-books',
 };

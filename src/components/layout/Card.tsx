@@ -18,8 +18,10 @@ export function Card({
     <div
       className="
         m-2
+        flex
         h-52
-        w-60 
+        w-60
+        flex-col 
         rounded-lg 
         border-2 
         border-primary
