@@ -3,11 +3,18 @@ import { ReactElement, useCallback } from 'react';
 import { Button, Text, TextArea } from '../formControls';
 import { Form } from './form';
 import { FieldValues } from 'react-hook-form';
+import axios from 'axios';
+import { ApiRoutes } from '../../ApiRoutes';
+import { useBooks } from '../hooks/useBooks';
 
 export function BookForm(): ReactElement {
+  const { createBook } = useBooks();
   const handleSubmit = useCallback(async (data: FieldValues) => {
     console.log('i am groot', data);
+    const { bookTitle, bookAuthor, bookSummary } = data;
+    await createBook(bookTitle, bookAuthor, bookSummary);
   }, []);
+
   return (
     <Form onSubmit={handleSubmit}>
       <Text label="Book Title" name="bookTitle" />

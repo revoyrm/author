@@ -4,7 +4,8 @@ import { Book } from '../types/services';
 
 const query = gql`
   query GetAllBooks {
-    getBooks {
+    books: getBooks {
+      id
       title
       author
       label {
@@ -21,6 +22,7 @@ type GetBooksRequest = {
 
 export async function getAllBooks(): Promise<Book[]> {
   const { books } = await libraryClient.request<GetBooksRequest>(query);
+  console.log(JSON.stringify(books, null, 2));
 
   return books ?? [];
 }

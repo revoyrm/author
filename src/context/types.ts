@@ -7,6 +7,10 @@ export type State = {
 };
 export type Action =
   | {
+      type: Actions.AddBook;
+      payload: Book;
+    }
+  | {
       type: Actions.SelectBook;
       payload?: number;
     }

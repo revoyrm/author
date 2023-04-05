@@ -1,4 +1,4 @@
-import type { FormEventHandler, ReactElement, RefObject } from 'react';
+import { FormEventHandler, ReactElement, RefObject, useCallback } from 'react';
 import type {
   FieldValues,
   SubmitHandler,
@@ -18,12 +18,17 @@ export function Form({
 }): ReactElement {
   const methods = useForm();
   const { handleSubmit } = methods;
-  const onSubmit2 = (data) => console.log('onSubmit2', data);
+
+  const submitForm = useCallback(
+    async (data: FieldValues): Promise<void> => await onSubmit(data),
+    []
+  );
+
   return (
     <FormProvider {...methods}>
       <form
         ref={formRef}
-        onSubmit={handleSubmit(onSubmit2)}
+        onSubmit={handleSubmit(submitForm)}
         className="h-fit w-full rounded-xl bg-secondary px-8 py-4"
       >
         {children}

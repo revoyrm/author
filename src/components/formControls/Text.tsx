@@ -10,7 +10,6 @@ type TextProps = {
 
 export function Text({ className, label, name }: TextProps): ReactElement {
   const { register } = useFormContext();
-  console.log('text ', name);
 
   return (
     <fieldset

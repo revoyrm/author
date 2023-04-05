@@ -11,8 +11,6 @@ type TextProps = {
 export function TextArea({ className, label, name }: TextProps): ReactElement {
   const { register } = useFormContext();
 
-  console.log('textarea ', name);
-
   return (
     <fieldset
       className={clsx(
