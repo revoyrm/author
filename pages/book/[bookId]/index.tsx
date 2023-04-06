@@ -2,31 +2,40 @@ import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
 import { BookForm } from '../../../src/components/forms/BookForm';
+import { useBooks } from '../../../src/components/hooks/useBooks';
 import { BookLayout } from '../../../src/components/layout/BookLayout';
+import { getBookWithId } from '../../utilities/getBookWithId';
 import { SidebarLabels } from '../../utilities/sidebar-labels';
-import { getAllBooks } from '../../../src/services/getBooks';
 
 type BookProps = {
   currentBookId: string;
 };
 
 export default function Book({ currentBookId }: BookProps): ReactElement {
-  return (
-    <BookLayout
-      activeNav={SidebarLabels.Book}
-      bookId={currentBookId}
-      heading="Book Name"
-      searchType="book"
-    >
-      <BookForm />
-    </BookLayout>
-  );
+  const { books } = useBooks();
+  // console.log(JSON.stringify({ currentBookId, books }, null, 2));
+  const book = undefined; //getBookWithId(currentBookId, books ?? []);
+
+  return <div>No Book Found</div>;
+  // if (!book || !book.id) {
+  //   return <div>No Book Found</div>;
+  // }
+
+  // return (
+  //   <BookLayout
+  //     activeNav={SidebarLabels.Book}
+  //     bookId={currentBookId}
+  //     heading="Book Name"
+  //     searchType="book"
+  //   >
+  //     <BookForm initialValues={book} />
+  //   </BookLayout>
+  // );
 }
 
 export function getServerSideProps(context: NextPageContext): {
   props: BookProps;
 } {
-
   return {
     props: {
       currentBookId: context.query.bookId as string,

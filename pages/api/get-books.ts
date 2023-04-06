@@ -9,7 +9,6 @@ export default async function handler(
   try {
     const books = await getAllBooks();
     res.status(200).json(books);
-    res.status(200).json(books);
   } catch (e) {
     console.error(e);
     res.status(500).json(e);

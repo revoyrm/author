@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request';
+
+import type { Book } from '../types/services';
 import { libraryClient } from './library';
-import { Book } from '../types/services';
 
 const query = gql`
   query GetAllBooks {
@@ -10,6 +11,7 @@ const query = gql`
       author
       label {
         label
+        id
       }
       summary
     }
@@ -24,5 +26,5 @@ export async function getAllBooks(): Promise<Book[]> {
   const { books } = await libraryClient.request<GetBooksRequest>(query);
   console.log(JSON.stringify(books, null, 2));
 
-  return books ?? [];
+  return books;
 }

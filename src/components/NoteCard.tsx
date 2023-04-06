@@ -3,8 +3,8 @@ import type { ReactElement } from 'react';
 import React from 'react';
 
 import type { Book } from '../types/services';
-import { Card } from './layout/Card';
 import { useBooks } from './hooks/useBooks';
+import { Card } from './layout/Card';
 
 export function NoteCard({ id, title, author, summary }: Book): ReactElement {
   const { setSelectedBook } = useBooks();

@@ -6,9 +6,15 @@ type TextProps = {
   label: string;
   name: string;
   className?: string;
+  required?: boolean;
 };
 
-export function TextArea({ className, label, name }: TextProps): ReactElement {
+export function TextArea({
+  className,
+  label,
+  name,
+  required,
+}: TextProps): ReactElement {
   const { register } = useFormContext();
 
   return (
@@ -20,7 +26,7 @@ export function TextArea({ className, label, name }: TextProps): ReactElement {
     >
       <textarea
         className="text-md peer mt-2 h-60 w-full px-5 text-primary-dark outline-none "
-        {...register(name)}
+        {...register(name, { required })}
       />
       <legend className="ml-3 px-1 font-bold text-primary peer-focus:text-primary-light">
         {label}

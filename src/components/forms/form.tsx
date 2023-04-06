@@ -1,22 +1,22 @@
-import { FormEventHandler, ReactElement, RefObject, useCallback } from 'react';
-import type {
-  FieldValues,
-  SubmitHandler,
-  UseFormGetValues,
-  UseFormReset,
-} from 'react-hook-form';
+import type { ReactElement, RefObject } from 'react';
+import { useCallback } from 'react';
+import type { FieldValues, SubmitHandler } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { FormProvider, useForm, useFormState } from 'react-hook-form';
 export function Form({
+  initialValues,
   onSubmit,
   formRef,
   children,
 }: {
+  initialValues: FieldValues;
   onSubmit: SubmitHandler<FieldValues>;
   formRef?: RefObject<HTMLFormElement> | null;
   children: ReactElement | ReactElement[];
 }): ReactElement {
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: initialValues,
+  });
   const { handleSubmit } = methods;
 
   const submitForm = useCallback(
@@ -28,8 +28,8 @@ export function Form({
     <FormProvider {...methods}>
       <form
         ref={formRef}
-        onSubmit={handleSubmit(submitForm)}
         className="h-fit w-full rounded-xl bg-secondary px-8 py-4"
+        onSubmit={handleSubmit(submitForm)}
       >
         {children}
       </form>

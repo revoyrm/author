@@ -1,5 +1,5 @@
 export type Label = {
-  id: string;
+  id: number;
   label: string;
 };
 
