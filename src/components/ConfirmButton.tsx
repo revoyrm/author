@@ -9,6 +9,7 @@ type ButtonProps = ComponentPropsWithRef<'button'> & {
   className?: string;
 };
 
+// Todo Make this button force the user to confirm before acting
 function ButtonComponent(
   { className, label, name, isSubmit, dataInfo, ...props }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
@@ -18,7 +19,7 @@ function ButtonComponent(
       data-info={dataInfo}
       ref={ref}
       className={clsx(
-        'w-fit bg-none px-8 py-4 text-lg font-bold text-primary hover:text-primary-light active:text-primary-dark',
+        'text-md w-fit bg-none p-1 font-bold text-primary hover:text-primary-light active:text-primary-dark',
         className
       )}
       type={isSubmit ? 'submit' : 'button'}

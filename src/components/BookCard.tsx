@@ -26,7 +26,7 @@ export function BookCard({ id, title, author, summary }: Book): ReactElement {
     <Card onClick={handleSelectBook} onKeyDown={handleSelectBook}>
       <h2 className="mb-1 font-bold">{`${title} - ${author}`}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
-      <p className="flext-grow">{summary}</p>
+      <p className="flex-grow">{summary}</p>
       <ConfirmButton
         dataInfo={String(id)}
         label="remove"
