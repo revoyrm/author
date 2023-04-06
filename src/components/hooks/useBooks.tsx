@@ -56,7 +56,7 @@ export const useBooks = (): UseBooksType => {
       if (books) {
         const updatedBooks = _cloneDeep(books);
         const idx = updatedBooks.findIndex((book) => book.id === oldBook.id);
-        if (idx) {
+        if (idx > -1) {
           updatedBooks[idx] = {
             ...oldBook,
             title: newBook.title,
@@ -94,7 +94,6 @@ export const useBooks = (): UseBooksType => {
           summary,
         });
 
-        console.log('createbook', response);
         if (isBook(response.data)) {
           dispatch({ type: Actions.AddBook, payload: response.data });
         }

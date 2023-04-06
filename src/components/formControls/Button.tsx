@@ -1,15 +1,17 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithRef, ForwardedRef, ReactElement } from 'react';
 import { forwardRef } from 'react';
+import CircleLoader from 'react-spinners/CircleLoader';
 
 type ButtonProps = ComponentPropsWithRef<'button'> & {
   label: string;
+  isLoading: boolean;
   isSubmit: boolean;
   className?: string;
 };
 
 function ButtonComponent(
-  { className, label, name, isSubmit, ...props }: ButtonProps,
+  { className, label, name, isLoading, isSubmit, ...props }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
 ): ReactElement {
   return (
@@ -22,7 +24,7 @@ function ButtonComponent(
       type={isSubmit ? 'submit' : 'button'}
       {...props}
     >
-      {label}
+      {isLoading ? <CircleLoader /> : label}
     </button>
   );
 }

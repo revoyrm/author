@@ -14,23 +14,22 @@ type BookProps = {
 export default function Book({ currentBookId }: BookProps): ReactElement {
   const { books } = useBooks();
   // console.log(JSON.stringify({ currentBookId, books }, null, 2));
-  const book = undefined; //getBookWithId(currentBookId, books ?? []);
+  const book = getBookWithId(currentBookId, books);
 
-  return <div>No Book Found</div>;
-  // if (!book || !book.id) {
-  //   return <div>No Book Found</div>;
-  // }
-
-  // return (
-  //   <BookLayout
-  //     activeNav={SidebarLabels.Book}
-  //     bookId={currentBookId}
-  //     heading="Book Name"
-  //     searchType="book"
-  //   >
-  //     <BookForm initialValues={book} />
-  //   </BookLayout>
-  // );
+  return (
+    <BookLayout
+      activeNav={SidebarLabels.Book}
+      bookId={currentBookId}
+      heading="Book Name"
+      searchType="book"
+    >
+      {book?.id ? (
+        <BookForm bookId={book.id} initialValues={book} />
+      ) : (
+        <div>No Book Found</div>
+      )}
+    </BookLayout>
+  );
 }
 
 export function getServerSideProps(context: NextPageContext): {
