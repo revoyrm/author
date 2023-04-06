@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 type ButtonProps = ComponentPropsWithRef<'button'> & {
   label: string;
   isSubmit: boolean;
-  dataInfo: string;
+  dataInfo?: string;
   className?: string;
 };
 
@@ -16,12 +16,12 @@ function ButtonComponent(
 ): ReactElement {
   return (
     <button
-      data-info={dataInfo}
       ref={ref}
       className={clsx(
         'text-md w-fit bg-none p-1 font-bold text-primary hover:text-primary-light active:text-primary-dark',
         className
       )}
+      data-info={dataInfo}
       type={isSubmit ? 'submit' : 'button'}
       {...props}
     >

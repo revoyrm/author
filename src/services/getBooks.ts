@@ -7,13 +7,46 @@ const query = gql`
   query GetAllBooks {
     books: getBooks {
       id
-      title
       author
       label {
         label
         id
       }
+      title
       summary
+      allLabels {
+        label
+      }
+      chapters {
+        name
+        description
+        id
+        number
+        label {
+          id
+          label
+        }
+      }
+      characters {
+        name
+        label {
+          id
+          label
+        }
+        id
+        description
+      }
+      settings {
+        name
+        label {
+          id
+        }
+        id
+        description
+        label {
+          label
+        }
+      }
     }
   }
 `;

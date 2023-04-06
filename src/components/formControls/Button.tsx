@@ -25,7 +25,7 @@ function ButtonComponent(
       type={isSubmit ? 'submit' : 'button'}
       {...props}
     >
-      {isLoading ? <PulseLoader color="#ffffff" size="8" /> : label}
+      {isLoading ? <PulseLoader color="#ffffff" size="8px" /> : label}
     </button>
   );
 }

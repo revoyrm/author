@@ -1,11 +1,11 @@
 import Router from 'next/router';
-import type { ReactElement, MouseEvent } from 'react';
-import React from 'react';
+import type { MouseEvent, ReactElement } from 'react';
+import React, { useCallback } from 'react';
 
 import type { Book } from '../types/services';
+import { ConfirmButton } from './ConfirmButton';
 import { useBooks } from './hooks/useBooks';
 import { Card } from './layout/Card';
-import { ConfirmButton } from './ConfirmButton';
 
 export function BookCard({ id, title, author, summary }: Book): ReactElement {
   const { setSelectedBook, deleteBook } = useBooks();
@@ -15,12 +15,13 @@ export function BookCard({ id, title, author, summary }: Book): ReactElement {
     Router.push(`./book/${id}`).catch(console.error);
   };
 
-  const handleRemoveBook = (e: MouseEvent<HTMLButtonElement>): void => {
-    e.stopPropagation();
-    const id = e.currentTarget.getAttribute('data-info');
-    deleteBook(id ?? '');
-    console.log(e.currentTarget.getAttribute('data-info'));
-  };
+  const handleRemoveBook = useCallback(
+    (e: MouseEvent<HTMLButtonElement>): void => {
+      e.stopPropagation();
+      deleteBook(String(id)).catch(console.error);
+    },
+    [deleteBook, id]
+  );
 
   return (
     <Card onClick={handleSelectBook} onKeyDown={handleSelectBook}>
@@ -28,10 +29,9 @@ export function BookCard({ id, title, author, summary }: Book): ReactElement {
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
       <p className="flex-grow">{summary}</p>
       <ConfirmButton
-        dataInfo={String(id)}
+        isSubmit={false}
         label="remove"
         onClick={handleRemoveBook}
-        isSubmit={false}
       />
     </Card>
   );
