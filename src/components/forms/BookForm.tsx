@@ -1,5 +1,5 @@
-import { ReactElement, useState } from 'react';
-import { useCallback } from 'react';
+import type { ReactElement } from 'react';
+import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
 import { getBookWithId } from '../../../pages/utilities/getBookWithId';
@@ -58,7 +58,7 @@ export function BookForm({
       <TextArea className="mt-4" label="Summary" name="bookSummary" required />
       <div className="flex w-full justify-end">
         <Button
-          className="mt-4"
+          className="mt-4 w-36"
           isLoading={isSubmitting}
           label="Submit"
           isSubmit

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithRef, ForwardedRef, ReactElement } from 'react';
 import { forwardRef } from 'react';
-import CircleLoader from 'react-spinners/CircleLoader';
+import PulseLoader from 'react-spinners/PulseLoader';
 
 type ButtonProps = ComponentPropsWithRef<'button'> & {
   label: string;
@@ -18,13 +18,14 @@ function ButtonComponent(
     <button
       ref={ref}
       className={clsx(
-        'w-fit rounded-2xl bg-primary px-8 py-4 text-lg font-bold text-secondary hover:bg-primary-light active:bg-primary-dark active:text-secondary-light',
+        'w-fit rounded-2xl bg-primary px-8 py-4 text-lg font-bold text-secondary hover:bg-primary-light active:bg-primary-dark active:text-secondary-light disabled:bg-primary-light',
         className
       )}
+      disabled={isLoading}
       type={isSubmit ? 'submit' : 'button'}
       {...props}
     >
-      {isLoading ? <CircleLoader /> : label}
+      {isLoading ? <PulseLoader color="#ffffff" size="8" /> : label}
     </button>
   );
 }

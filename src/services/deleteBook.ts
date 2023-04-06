@@ -1,21 +1,21 @@
 import { gql } from 'graphql-request';
+
 import { libraryClient } from './library';
-import { Book } from '../types/services';
 
 const query = gql`
   mutation Mutation($deleteBookId: String) {
-    deleteBook(id: $deleteBookId)
+    response: deleteBook(id: $deleteBookId)
   }
 `;
 
-type deleteBookRequest = {
-  deleteBook: boolean;
+type DeleteBookRequest = {
+  response: boolean;
 };
 
-export async function deleteBook(id: string): Promise<boolean> {
-  const { deleteBook } = await libraryClient.request<deleteBookRequest>(query, {
+export async function deleteBook(id: number): Promise<boolean> {
+  const { response } = await libraryClient.request<DeleteBookRequest>(query, {
     id,
   });
 
-  return deleteBook;
+  return response;
 }

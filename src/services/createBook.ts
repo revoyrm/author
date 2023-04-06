@@ -1,6 +1,7 @@
 import { gql } from 'graphql-request';
+
+import type { Book } from '../types/services';
 import { libraryClient } from './library';
-import { Book } from '../types/services';
 
 const query = gql`
   mutation createBook($title: String, $author: String, $summary: String) {
@@ -16,7 +17,7 @@ const query = gql`
   }
 `;
 
-type createBookRequest = {
+type CreateBookRequest = {
   book: Book;
 };
 
@@ -25,7 +26,7 @@ export async function createBook(
   author: string,
   summary: string
 ): Promise<Book> {
-  const { book } = await libraryClient.request<createBookRequest>(query, {
+  const { book } = await libraryClient.request<CreateBookRequest>(query, {
     title,
     author,
     summary,

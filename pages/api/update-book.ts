@@ -41,6 +41,7 @@ export default async function handler(
       console.error(e);
       res.status(500).json({ e });
     }
+  } else {
+    res.status(400).json({ message: 'BAD_REQUEST: Invalid req body' });
   }
-  res.status(400).json({ message: 'BAD_REQUEST: Invalid req body' });
 }
