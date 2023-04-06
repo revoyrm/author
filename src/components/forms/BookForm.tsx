@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
@@ -12,9 +13,13 @@ import { Form } from './Form';
 export function BookForm({
   bookId,
   initialValues,
+  onCancel,
+  onSubmit,
 }: {
   bookId?: number;
   initialValues?: Book;
+  onCancel?: () => void;
+  onSubmit?: () => void;
 }): ReactElement {
   const { books, createBook, updateBook } = useBooks();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,9 +43,10 @@ export function BookForm({
           await createBook(bookTitle, bookAuthor, bookSummary);
         }
         setIsSubmitting(false);
+        onSubmit?.();
       }
     },
-    [bookId, books, createBook, updateBook]
+    [bookId, books, createBook, onSubmit, updateBook]
   );
 
   const defaultValues = initialValues
@@ -56,7 +62,21 @@ export function BookForm({
       <Text label="Book Title" name="bookTitle" required />
       <Text className="mt-4" label="Author" name="bookAuthor" required />
       <TextArea className="mt-4" label="Summary" name="bookSummary" required />
-      <div className="flex w-full justify-end">
+      <div
+        className={clsx('flex w-full', {
+          'justify-between': onCancel,
+          'justify-end': !onCancel,
+        })}
+      >
+        {onCancel && (
+          <Button
+            className="mt-4 w-36"
+            isLoading={false}
+            isSubmit={false}
+            label="Cancel"
+            onClick={onCancel}
+          />
+        )}
         <Button
           className="mt-4 w-36"
           isLoading={isSubmitting}
