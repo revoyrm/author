@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { deleteChapter } from '../../src/services/deleteChapter';
+import { deleteCharacter } from '../../src/services/deleteCharacter';
 
-type DeleteChapterBody = {
+type DeleteCharacterBody = {
   id: number;
 };
 
-const isDeleteChapterBody = (
+const isDeleteCharacterBody = (
   maybeBody: unknown
-): maybeBody is DeleteChapterBody => {
+): maybeBody is DeleteCharacterBody => {
   if (
     maybeBody &&
     typeof maybeBody === 'object' &&
@@ -24,11 +24,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<unknown>
 ): Promise<void> {
-  if (isDeleteChapterBody(req.body)) {
+  if (isDeleteCharacterBody(req.body)) {
     const { id } = req.body;
 
     try {
-      const response = await deleteChapter(id);
+      const response = await deleteCharacter(id);
 
       res.status(200).json(response);
     } catch (e) {

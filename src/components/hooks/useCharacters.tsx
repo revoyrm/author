@@ -32,7 +32,6 @@ const isCharacter = (maybeCharacter: unknown): maybeCharacter is Character => {
     !Array.isArray(maybeCharacter) &&
     'id' in maybeCharacter &&
     'age' in maybeCharacter &&
-    'number' in maybeCharacter &&
     'description' in maybeCharacter
   ) {
     return true;
@@ -51,11 +50,16 @@ export const useCharacters = (): UseCharactersType => {
     (bookId: string): Character[] => {
       try {
         const { books } = state ?? {};
-        if (!books) throw new Error('The current book does not exist');
+        if (!books)
+          throw new Error(
+            'getClonedCharactersFromBook 1: The current book does not exist'
+          );
 
         const currentBookIdx = getBookIdxWithId(bookId, books);
         if (currentBookIdx === -1)
-          throw new Error('The current book does not exist');
+          throw new Error(
+            'getClonedCharactersFromBook 2: The current book does not exist'
+          );
 
         const { characters } = books[currentBookIdx];
 
@@ -72,11 +76,16 @@ export const useCharacters = (): UseCharactersType => {
     (bookId: string, newCharacters: Character[]): Book[] => {
       try {
         const { books } = state ?? {};
-        if (!books) throw new Error('The current book does not exist');
+        if (!books)
+          throw new Error(
+            'getBooksWithUpdatedCharacters 1: The current book does not exist'
+          );
 
         const currentBookIdx = getBookIdxWithId(bookId, books);
         if (currentBookIdx === -1)
-          throw new Error('The current book does not exist');
+          throw new Error(
+            'getBooksWithUpdatedCharacters 2: The current book does not exist'
+          );
 
         const updatedBooks = _cloneDeep(books);
         updatedBooks[currentBookIdx].characters = newCharacters;
@@ -146,6 +155,8 @@ export const useCharacters = (): UseCharactersType => {
 
         if (isCharacter(response.data)) {
           characters.push(response.data);
+
+          console.log(JSON.stringify({ characters }, null, 2));
 
           const updatedBooks = getBooksWithUpdatedCharacters(
             bookId,

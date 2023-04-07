@@ -30,7 +30,6 @@ export default function Characters({
     setIsCreating(false);
   }, []);
 
-  console.log(JSON.stringify(characters, null, 2));
   return (
     <BookLayout
       activeNav={SidebarLabels.Characters}
