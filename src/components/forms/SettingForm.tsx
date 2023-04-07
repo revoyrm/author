@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
 import { isSettingFormData } from '../../types/forms';
-import type { Book } from '../../types/services';
+import type { Book, Setting } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';
 import { useSettings } from '../hooks/useSettings';
 import { Form } from './Form';
@@ -17,8 +17,8 @@ export function SettingForm({
   onSubmit,
 }: {
   bookId: string;
-  settingId?: number;
-  initialValues?: Book;
+  settingId?: string;
+  initialValues?: Setting;
   onCancel?: () => void;
   onSubmit?: () => void;
 }): ReactElement {
@@ -34,7 +34,7 @@ export function SettingForm({
         const { settingName, settingDescription } = data;
         if (settingId) {
           const settingToUpdate = settings.find(
-            (setting) => setting.id === settingId
+            (setting) => String(setting.id) === settingId
           );
           if (settingToUpdate) {
             await updateSetting(bookId, settingToUpdate, {
@@ -54,9 +54,8 @@ export function SettingForm({
 
   const defaultValues = initialValues
     ? {
-        bookTitle: initialValues.title,
-        bookAuthor: initialValues.author,
-        bookSummary: initialValues.summary,
+        settingName: initialValues.name,
+        settingDescription: initialValues.description,
       }
     : undefined;
 

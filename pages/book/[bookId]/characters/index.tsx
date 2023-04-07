@@ -55,7 +55,7 @@ export default function Characters({
               bookId={currentBookId}
               header={character.name}
               id={character.id}
-              onClick={(): void => {}}
+              path="characters"
               onDelete={deleteCharacter}
             />
           ))}

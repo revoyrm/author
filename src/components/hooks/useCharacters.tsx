@@ -156,8 +156,6 @@ export const useCharacters = (): UseCharactersType => {
         if (isCharacter(response.data)) {
           characters.push(response.data);
 
-          console.log(JSON.stringify({ characters }, null, 2));
-
           const updatedBooks = getBooksWithUpdatedCharacters(
             bookId,
             characters

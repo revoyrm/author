@@ -55,7 +55,7 @@ export default function Chapters({
               bookId={currentBookId}
               header={chapter.name}
               id={chapter.id}
-              onClick={(): void => {}}
+              path="chapters"
               onDelete={deleteChapter}
             />
           ))}

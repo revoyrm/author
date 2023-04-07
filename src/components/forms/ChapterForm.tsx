@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
 import { isChapterFormData } from '../../types/forms';
-import type { Book } from '../../types/services';
+import type { Chapter } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';
 import { useChapters } from '../hooks/useChapters';
 import { Form } from './Form';
@@ -17,8 +17,8 @@ export function ChapterForm({
   onSubmit,
 }: {
   bookId: string;
-  chapterId?: number;
-  initialValues?: Book;
+  chapterId?: string;
+  initialValues?: Chapter;
   onCancel?: () => void;
   onSubmit?: () => void;
 }): ReactElement {
@@ -34,7 +34,7 @@ export function ChapterForm({
         const { chapterName, chapterNumber, chapterDescription } = data;
         if (chapterId) {
           const chapterToUpdate = chapters.find(
-            (chapter) => chapter.id === chapterId
+            (chapter) => String(chapter.id) === chapterId
           );
           if (chapterToUpdate) {
             await updateChapter(bookId, chapterToUpdate, {
@@ -60,9 +60,9 @@ export function ChapterForm({
 
   const defaultValues = initialValues
     ? {
-        bookTitle: initialValues.title,
-        bookAuthor: initialValues.author,
-        bookSummary: initialValues.summary,
+        chapterName: initialValues.name,
+        chapterNumber: initialValues.number,
+        chapterDescription: initialValues.description,
       }
     : undefined;
 

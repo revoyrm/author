@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import type {
   KeyboardEventHandler,
   MouseEvent,
@@ -14,7 +15,7 @@ type BookItemCardProps = {
   bookId: string;
   header: string;
   body?: string;
-  onClick: KeyboardEventHandler | MouseEventHandler;
+  path: string;
   onDelete: (bookId: string, id: number) => Promise<void>;
 };
 
@@ -23,10 +24,14 @@ export function BookItemCard({
   bookId,
   header,
   body,
-  onClick,
+  path,
   onDelete,
 }: BookItemCardProps): ReactElement {
+  const Router = useRouter();
   // todo fix event handler type
+  const handleSelectBookItem = (): void => {
+    Router.push(`/book/${bookId}/${path}/${id}`).catch(console.error);
+  };
 
   const handleRemoveBookItem = useCallback(
     (e: MouseEvent<HTMLButtonElement>): void => {
@@ -37,10 +42,7 @@ export function BookItemCard({
   );
 
   return (
-    <Card
-      onClick={onClick as MouseEventHandler}
-      onKeyDown={onClick as KeyboardEventHandler}
-    >
+    <Card onClick={handleSelectBookItem} onKeyDown={handleSelectBookItem}>
       <h2 className="mb-1 font-bold">{header}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
       <p className="flex-grow">{body}</p>

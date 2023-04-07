@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
 import { isCharacterFormData } from '../../types/forms';
-import type { Book } from '../../types/services';
+import type { Character } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';
 import { useCharacters } from '../hooks/useCharacters';
 import { Form } from './Form';
@@ -17,8 +17,8 @@ export function CharacterForm({
   onSubmit,
 }: {
   bookId: string;
-  characterId?: number;
-  initialValues?: Book;
+  characterId?: string;
+  initialValues?: Character;
   onCancel?: () => void;
   onSubmit?: () => void;
 }): ReactElement {
@@ -34,7 +34,7 @@ export function CharacterForm({
         const { characterName, characterAge, characterDescription } = data;
         if (characterId) {
           const characterToUpdate = characters.find(
-            (character) => character.id === characterId
+            (character) => String(character.id) === characterId
           );
           if (characterToUpdate) {
             await updateCharacter(bookId, characterToUpdate, {
@@ -67,9 +67,9 @@ export function CharacterForm({
 
   const defaultValues = initialValues
     ? {
-        bookTitle: initialValues.title,
-        bookAuthor: initialValues.author,
-        bookSummary: initialValues.summary,
+        characterName: initialValues.name,
+        characterAge: initialValues.age,
+        characterDescription: initialValues.description,
       }
     : undefined;
 

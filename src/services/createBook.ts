@@ -10,6 +10,7 @@ const query = gql`
       title
       author
       label {
+        id
         label
       }
       summary

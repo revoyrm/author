@@ -55,7 +55,7 @@ export default function Settings({
               bookId={currentBookId}
               header={setting.name}
               id={setting.id}
-              onClick={(): void => {}}
+              path="settings"
               onDelete={deleteSetting}
             />
           ))}
