@@ -3,4 +3,13 @@ export const ApiRoutes = {
   DeleteBook: '/api/delete-book',
   GetBooks: '/api/get-books',
   UpdateBook: '/api/update-book',
+  CreateChapter: '/api/create-chapter',
+  DeleteChapter: '/api/delete-chapter',
+  UpdateChapter: '/api/update-chapter',
+  CreateCharacter: '/api/create-chaacter',
+  DeleteCharacter: '/api/delete-chaacter',
+  UpdateCharacter: '/api/update-chaacter',
+  CreateSetting: '/api/create-setting',
+  DeleteSetting: '/api/delete-setting',
+  UpdateSetting: '/api/update-setting',
 };

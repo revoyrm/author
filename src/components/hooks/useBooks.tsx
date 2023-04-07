@@ -14,8 +14,6 @@ type UseBooksType = {
   createBook: (title: string, author: string, summary: string) => Promise<void>;
   deleteBook: (id: string) => Promise<void>;
   getBooks: () => Book[];
-  setSelectedBook: (id: number) => void;
-  getSelectedBook: () => Book | undefined;
 };
 
 const isBook = (maybeBook: unknown): maybeBook is Book => {
@@ -121,21 +119,6 @@ export const useBooks = (): UseBooksType => {
 
   const getBooks = (): Book[] => state?.books ?? [];
 
-  const setSelectedBook = useCallback(
-    (id: number): void => {
-      dispatch({
-        type: Actions.SelectBook,
-        payload: id,
-      });
-    },
-    [dispatch]
-  );
-
-  const getSelectedBook = useCallback((): Book | undefined => {
-    const { books, selectedBook } = state ?? {};
-    return books?.find((book) => book.id === selectedBook);
-  }, [state]);
-
   return {
     books: state?.books ?? [],
     updateBooks,
@@ -143,7 +126,5 @@ export const useBooks = (): UseBooksType => {
     createBook,
     deleteBook,
     getBooks,
-    setSelectedBook,
-    getSelectedBook,
   };
 };

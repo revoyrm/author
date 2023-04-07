@@ -21,4 +21,8 @@ export type Action =
   | {
       type: Actions.SetBooks;
       payload: Book[];
+    }
+  | {
+      type: Actions.UpdateBooks;
+      payload: Book[];
     };

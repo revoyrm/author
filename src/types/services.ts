@@ -13,6 +13,8 @@ export type Note = {
 export type Chapter = {
   id: number;
   name: string;
+  number: number;
+  label: Label;
   labels: string[];
   description?: string;
 };
@@ -20,6 +22,7 @@ export type Chapter = {
 export type Setting = {
   id: number;
   name: string;
+  label: Label;
   labels: string[];
   description?: string;
 };
@@ -27,6 +30,7 @@ export type Setting = {
 export type Character = {
   id: number;
   name: string;
+  label: Label;
   labels: string[];
   age: number;
   description?: string;

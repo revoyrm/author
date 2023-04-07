@@ -5,6 +5,11 @@ import type { Action, State } from './types';
 export const reducer = (state: State, action: Action): State => {
   const { books } = state;
   switch (action.type) {
+    case Actions.UpdateBooks:
+      return {
+        ...state,
+        books: action.payload,
+      };
     case Actions.AddBook:
       return {
         ...state,
