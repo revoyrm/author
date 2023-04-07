@@ -3,59 +3,66 @@ import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
-import { isChapterFormData } from '../../types/forms';
+import { isCharacterFormData } from '../../types/forms';
 import type { Book } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';
-import { useChapters } from '../hooks/useChapters';
+import { useCharacters } from '../hooks/useCharacters';
 import { Form } from './Form';
 
-export function ChapterForm({
+export function CharacterForm({
   bookId,
-  chapterId,
+  characterId,
   initialValues,
   onCancel,
   onSubmit,
 }: {
   bookId: number;
-  chapterId?: number;
+  characterId?: number;
   initialValues?: Book;
   onCancel?: () => void;
   onSubmit?: () => void;
 }): ReactElement {
-  const { getChapters, createChapter, updateChapter } = useChapters();
-  const chapters = getChapters(bookId);
+  const { getCharacters, createCharacter, updateCharacter } = useCharacters();
+  const characters = getCharacters(bookId);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: FieldValues) => {
-      if (isChapterFormData(data)) {
+      if (isCharacterFormData(data)) {
         setIsSubmitting(true);
-        const { chapterName, chapterNumber, chapterDescription } = data;
-        if (chapterId) {
-          const chapterToUpdate = chapters.find(
-            (chapter) => chapter.id === chapterId
+        const { characterName, characterAge, characterDescription } = data;
+        if (characterId) {
+          const characterToUpdate = characters.find(
+            (character) => character.id === characterId
           );
-          if (chapterToUpdate) {
-            await updateChapter(bookId, chapterToUpdate, {
-              name: chapterName,
-              number: chapterNumber,
-              description: chapterDescription,
+          if (characterToUpdate) {
+            await updateCharacter(bookId, characterToUpdate, {
+              name: characterName,
+              age: characterAge,
+              description: characterDescription,
             });
           }
         } else {
-          await createChapter(
+          await createCharacter(
             bookId,
-            chapterName,
-            chapterNumber as string,
-            chapterDescription
+            characterName,
+            characterAge,
+            characterDescription
           );
         }
         setIsSubmitting(false);
         onSubmit?.();
       }
     },
-    [chapterId, onSubmit, chapters, updateChapter, bookId, createChapter]
+    [
+      characterId,
+      onSubmit,
+      characters,
+      updateCharacter,
+      bookId,
+      createCharacter,
+    ]
   );
 
   const defaultValues = initialValues
@@ -68,17 +75,17 @@ export function ChapterForm({
 
   return (
     <Form initialValues={defaultValues as FieldValues} onSubmit={handleSubmit}>
-      <Text label="Chapter Title" name="chapterName" required />
+      <Text label="Character Name" name="characterName" required />
       <Text
         className="mt-4"
-        label="Chapter Number"
-        name="chapterNumber"
+        label="Character Age"
+        name="characterAge"
         required
       />
       <TextArea
         className="mt-4"
         label="Description"
-        name="chapterDescription"
+        name="characterDescription"
         required
       />
       <div

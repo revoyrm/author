@@ -7,18 +7,17 @@ import { getBookWithId } from '../../../pages/utilities/getBookWithId';
 import { ApiRoutes } from '../../ApiRoutes';
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
-import type { Book, Chapter, Character } from '../../types/services';
+import type { Book, Character } from '../../types/services';
 
 type UseCharactersType = {
   getCharacters: (bookId: number) => Character[];
   updateCharacter: (
     bookkId: number,
     oldCharacter: Character,
-    newCharacter: Character
+    newCharacter: Pick<Character, 'age' | 'description' | 'name'>
   ) => Promise<void>;
   createCharacter: (
     bookId: number,
-    id: number,
     name: string,
     age: string,
     description: string
@@ -95,7 +94,7 @@ export const useCharacters = (): UseCharactersType => {
     async (
       bookkId: number,
       oldCharacter: Character,
-      newCharacter: Character
+      newCharacter: Pick<Character, 'age' | 'description' | 'name'>
     ): Promise<void> => {
       const characters = getClonedCharactersFromBook(bookkId);
 
@@ -136,7 +135,6 @@ export const useCharacters = (): UseCharactersType => {
   const createCharacter = useCallback(
     async (
       bookId: number,
-      id: number,
       name: string,
       number: string,
       description: string

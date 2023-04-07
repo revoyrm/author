@@ -3,59 +3,53 @@ import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
-import { isChapterFormData } from '../../types/forms';
+import { isSettingFormData } from '../../types/forms';
 import type { Book } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';
-import { useChapters } from '../hooks/useChapters';
+import { useSettings } from '../hooks/useSettings';
 import { Form } from './Form';
 
-export function ChapterForm({
+export function SettingForm({
   bookId,
-  chapterId,
+  settingId,
   initialValues,
   onCancel,
   onSubmit,
 }: {
   bookId: number;
-  chapterId?: number;
+  settingId?: number;
   initialValues?: Book;
   onCancel?: () => void;
   onSubmit?: () => void;
 }): ReactElement {
-  const { getChapters, createChapter, updateChapter } = useChapters();
-  const chapters = getChapters(bookId);
+  const { getSettings, createSetting, updateSetting } = useSettings();
+  const settings = getSettings(bookId);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: FieldValues) => {
-      if (isChapterFormData(data)) {
+      if (isSettingFormData(data)) {
         setIsSubmitting(true);
-        const { chapterName, chapterNumber, chapterDescription } = data;
-        if (chapterId) {
-          const chapterToUpdate = chapters.find(
-            (chapter) => chapter.id === chapterId
+        const { settingName, settingDescription } = data;
+        if (settingId) {
+          const settingToUpdate = settings.find(
+            (setting) => setting.id === settingId
           );
-          if (chapterToUpdate) {
-            await updateChapter(bookId, chapterToUpdate, {
-              name: chapterName,
-              number: chapterNumber,
-              description: chapterDescription,
+          if (settingToUpdate) {
+            await updateSetting(bookId, settingToUpdate, {
+              name: settingName,
+              description: settingDescription,
             });
           }
         } else {
-          await createChapter(
-            bookId,
-            chapterName,
-            chapterNumber as string,
-            chapterDescription
-          );
+          await createSetting(bookId, settingName, settingDescription);
         }
         setIsSubmitting(false);
         onSubmit?.();
       }
     },
-    [chapterId, onSubmit, chapters, updateChapter, bookId, createChapter]
+    [settingId, onSubmit, settings, updateSetting, bookId, createSetting]
   );
 
   const defaultValues = initialValues
@@ -68,17 +62,11 @@ export function ChapterForm({
 
   return (
     <Form initialValues={defaultValues as FieldValues} onSubmit={handleSubmit}>
-      <Text label="Chapter Title" name="chapterName" required />
-      <Text
-        className="mt-4"
-        label="Chapter Number"
-        name="chapterNumber"
-        required
-      />
+      <Text label="Setting Title" name="settingName" required />
       <TextArea
         className="mt-4"
         label="Description"
-        name="chapterDescription"
+        name="settingDescription"
         required
       />
       <div

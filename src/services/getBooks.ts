@@ -31,7 +31,6 @@ const query = gql`
         name
         label {
           id
-          label
         }
         id
         description
@@ -43,9 +42,6 @@ const query = gql`
         }
         id
         description
-        label {
-          label
-        }
       }
     }
   }

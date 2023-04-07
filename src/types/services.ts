@@ -13,27 +13,24 @@ export type Note = {
 export type Chapter = {
   id: number;
   name: string;
-  number: number;
+  number: number | string;
+  description: string;
   label: Label;
-  labels: string[];
-  description?: string;
 };
 
 export type Setting = {
   id: number;
   name: string;
+  description: string;
   label: Label;
-  labels: string[];
-  description?: string;
 };
 
 export type Character = {
   id: number;
   name: string;
+  age: number | string;
+  description: string;
   label: Label;
-  labels: string[];
-  age: number;
-  description?: string;
 };
 
 export type Book = {

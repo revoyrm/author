@@ -14,11 +14,10 @@ type UseChaptersType = {
   updateChapter: (
     bookkId: number,
     oldChapter: Chapter,
-    newChapter: Chapter
+    newChapter: Pick<Chapter, 'description' | 'name' | 'number'>
   ) => Promise<void>;
   createChapter: (
     bookId: number,
-    id: number,
     name: string,
     number: string,
     description: string
@@ -95,7 +94,7 @@ export const useChapters = (): UseChaptersType => {
     async (
       bookkId: number,
       oldChapter: Chapter,
-      newChapter: Chapter
+      newChapter: Pick<Chapter, 'description' | 'name' | 'number'>
     ): Promise<void> => {
       const chapters = getClonedChaptersFromBook(bookkId);
 
@@ -134,7 +133,6 @@ export const useChapters = (): UseChaptersType => {
   const createChapter = useCallback(
     async (
       bookId: number,
-      id: number,
       name: string,
       number: string,
       description: string

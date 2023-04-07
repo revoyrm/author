@@ -14,13 +14,11 @@ type UseSettingsType = {
   updateSetting: (
     bookkId: number,
     oldSetting: Setting,
-    newSetting: Setting
+    newSetting: Pick<Setting, 'description' | 'name'>
   ) => Promise<void>;
   createSetting: (
     bookId: number,
-    id: number,
     name: string,
-    number: string,
     description: string
   ) => Promise<void>;
   deleteSetting: (bookId: number, id: number) => Promise<void>;
@@ -94,7 +92,7 @@ export const useSettings = (): UseSettingsType => {
     async (
       bookkId: number,
       oldSetting: Setting,
-      newSetting: Setting
+      newSetting: Pick<Setting, 'description' | 'name'>
     ): Promise<void> => {
       const settings = getClonedSettingsFromBook(bookkId);
 
@@ -129,19 +127,12 @@ export const useSettings = (): UseSettingsType => {
   );
 
   const createSetting = useCallback(
-    async (
-      bookId: number,
-      id: number,
-      name: string,
-      number: string,
-      description: string
-    ) => {
+    async (bookId: number, name: string, description: string) => {
       try {
         const settings = getClonedSettingsFromBook(bookId);
 
         const response = await axios.post(ApiRoutes.CreateSetting, {
           name,
-          number,
           description,
         });
 
