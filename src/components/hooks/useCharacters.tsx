@@ -10,19 +10,19 @@ import { AppContext } from '../../context/appProvider';
 import type { Book, Character } from '../../types/services';
 
 type UseCharactersType = {
-  getCharacters: (bookId: number) => Character[];
+  getCharacters: (bookId: string | string) => Character[];
   updateCharacter: (
-    bookkId: number,
+    bookId: string,
     oldCharacter: Character,
     newCharacter: Pick<Character, 'age' | 'description' | 'name'>
   ) => Promise<void>;
   createCharacter: (
-    bookId: number,
+    bookId: string,
     name: string,
     age: string,
     description: string
   ) => Promise<void>;
-  deleteCharacter: (bookId: number, id: number) => Promise<void>;
+  deleteCharacter: (bookId: string, id: number) => Promise<void>;
 };
 
 const isCharacter = (maybeCharacter: unknown): maybeCharacter is Character => {
@@ -48,7 +48,7 @@ export const useCharacters = (): UseCharactersType => {
   }
 
   const getClonedCharactersFromBook = useCallback(
-    (bookId: number): Character[] => {
+    (bookId: string): Character[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -69,7 +69,7 @@ export const useCharacters = (): UseCharactersType => {
   );
 
   const getBooksWithUpdatedCharacters = useCallback(
-    (bookId: number, newCharacters: Character[]): Book[] => {
+    (bookId: string, newCharacters: Character[]): Book[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -92,7 +92,7 @@ export const useCharacters = (): UseCharactersType => {
 
   const updateCharacter = useCallback(
     async (
-      bookkId: number,
+      bookkId: string,
       oldCharacter: Character,
       newCharacter: Pick<Character, 'age' | 'description' | 'name'>
     ): Promise<void> => {
@@ -134,7 +134,7 @@ export const useCharacters = (): UseCharactersType => {
 
   const createCharacter = useCallback(
     async (
-      bookId: number,
+      bookId: string,
       name: string,
       number: string,
       description: string
@@ -166,7 +166,7 @@ export const useCharacters = (): UseCharactersType => {
   );
 
   const deleteCharacter = useCallback(
-    async (bookId: number, id: number): Promise<void> => {
+    async (bookId: string, id: number): Promise<void> => {
       try {
         const characters = getClonedCharactersFromBook(bookId);
 
@@ -189,7 +189,7 @@ export const useCharacters = (): UseCharactersType => {
     [dispatch, getBooksWithUpdatedCharacters, getClonedCharactersFromBook]
   );
 
-  const getCharacters = (bookId: number): Character[] => {
+  const getCharacters = (bookId: number | string): Character[] => {
     const { books } = state ?? {};
 
     const currentBook = getBookWithId(bookId, books ?? []);

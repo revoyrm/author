@@ -16,7 +16,7 @@ export function ChapterForm({
   onCancel,
   onSubmit,
 }: {
-  bookId: number;
+  bookId: string;
   chapterId?: number;
   initialValues?: Book;
   onCancel?: () => void;

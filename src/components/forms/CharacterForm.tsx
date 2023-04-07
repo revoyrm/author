@@ -16,7 +16,7 @@ export function CharacterForm({
   onCancel,
   onSubmit,
 }: {
-  bookId: number;
+  bookId: string;
   characterId?: number;
   initialValues?: Book;
   onCancel?: () => void;

@@ -16,7 +16,7 @@ export function SettingForm({
   onCancel,
   onSubmit,
 }: {
-  bookId: number;
+  bookId: string;
   settingId?: number;
   initialValues?: Book;
   onCancel?: () => void;

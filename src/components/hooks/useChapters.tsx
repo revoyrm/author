@@ -10,19 +10,19 @@ import { AppContext } from '../../context/appProvider';
 import type { Book, Chapter } from '../../types/services';
 
 type UseChaptersType = {
-  getChapters: (bookId: number) => Chapter[];
+  getChapters: (bookId: string) => Chapter[];
   updateChapter: (
-    bookkId: number,
+    bookId: string,
     oldChapter: Chapter,
     newChapter: Pick<Chapter, 'description' | 'name' | 'number'>
   ) => Promise<void>;
   createChapter: (
-    bookId: number,
+    bookId: string,
     name: string,
-    number: string,
+    string: string,
     description: string
   ) => Promise<void>;
-  deleteChapter: (bookId: number, id: number) => Promise<void>;
+  deleteChapter: (bookId: string, id: number) => Promise<void>;
 };
 
 const isChapter = (maybeChapter: unknown): maybeChapter is Chapter => {
@@ -48,7 +48,7 @@ export const useChapters = (): UseChaptersType => {
   }
 
   const getClonedChaptersFromBook = useCallback(
-    (bookId: number): Chapter[] => {
+    (bookId: string): Chapter[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -69,7 +69,7 @@ export const useChapters = (): UseChaptersType => {
   );
 
   const getBooksWithUpdatedChapters = useCallback(
-    (bookId: number, newChapters: Chapter[]): Book[] => {
+    (bookId: string, newChapters: Chapter[]): Book[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -92,7 +92,7 @@ export const useChapters = (): UseChaptersType => {
 
   const updateChapter = useCallback(
     async (
-      bookkId: number,
+      bookkId: string,
       oldChapter: Chapter,
       newChapter: Pick<Chapter, 'description' | 'name' | 'number'>
     ): Promise<void> => {
@@ -132,7 +132,7 @@ export const useChapters = (): UseChaptersType => {
 
   const createChapter = useCallback(
     async (
-      bookId: number,
+      bookId: string,
       name: string,
       number: string,
       description: string
@@ -161,7 +161,7 @@ export const useChapters = (): UseChaptersType => {
   );
 
   const deleteChapter = useCallback(
-    async (bookId: number, id: number): Promise<void> => {
+    async (bookId: string, id: number): Promise<void> => {
       try {
         const chapters = getClonedChaptersFromBook(bookId);
 
@@ -179,7 +179,7 @@ export const useChapters = (): UseChaptersType => {
     [dispatch, getBooksWithUpdatedChapters, getClonedChaptersFromBook]
   );
 
-  const getChapters = (bookId: number): Chapter[] => {
+  const getChapters = (bookId: string): Chapter[] => {
     const { books } = state ?? {};
 
     const currentBook = getBookWithId(bookId, books ?? []);

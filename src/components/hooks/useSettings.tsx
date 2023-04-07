@@ -10,18 +10,18 @@ import { AppContext } from '../../context/appProvider';
 import type { Book, Setting } from '../../types/services';
 
 type UseSettingsType = {
-  getSettings: (bookId: number) => Setting[];
+  getSettings: (bookId: string) => Setting[];
   updateSetting: (
-    bookkId: number,
+    bookId: string,
     oldSetting: Setting,
     newSetting: Pick<Setting, 'description' | 'name'>
   ) => Promise<void>;
   createSetting: (
-    bookId: number,
+    bookId: string,
     name: string,
     description: string
   ) => Promise<void>;
-  deleteSetting: (bookId: number, id: number) => Promise<void>;
+  deleteSetting: (bookId: string, id: number) => Promise<void>;
 };
 
 const isSetting = (maybeSetting: unknown): maybeSetting is Setting => {
@@ -46,7 +46,7 @@ export const useSettings = (): UseSettingsType => {
   }
 
   const getClonedSettingsFromBook = useCallback(
-    (bookId: number): Setting[] => {
+    (bookId: string): Setting[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -67,7 +67,7 @@ export const useSettings = (): UseSettingsType => {
   );
 
   const getBooksWithUpdatedSettings = useCallback(
-    (bookId: number, newSettings: Setting[]): Book[] => {
+    (bookId: string, newSettings: Setting[]): Book[] => {
       try {
         const { books } = state ?? {};
         if (!books) throw new Error('The current book does not exist');
@@ -90,7 +90,7 @@ export const useSettings = (): UseSettingsType => {
 
   const updateSetting = useCallback(
     async (
-      bookkId: number,
+      bookkId: string,
       oldSetting: Setting,
       newSetting: Pick<Setting, 'description' | 'name'>
     ): Promise<void> => {
@@ -127,7 +127,7 @@ export const useSettings = (): UseSettingsType => {
   );
 
   const createSetting = useCallback(
-    async (bookId: number, name: string, description: string) => {
+    async (bookId: string, name: string, description: string) => {
       try {
         const settings = getClonedSettingsFromBook(bookId);
 
@@ -151,7 +151,7 @@ export const useSettings = (): UseSettingsType => {
   );
 
   const deleteSetting = useCallback(
-    async (bookId: number, id: number): Promise<void> => {
+    async (bookId: string, id: number): Promise<void> => {
       try {
         const settings = getClonedSettingsFromBook(bookId);
 
@@ -169,7 +169,7 @@ export const useSettings = (): UseSettingsType => {
     [dispatch, getBooksWithUpdatedSettings, getClonedSettingsFromBook]
   );
 
-  const getSettings = (bookId: number): Setting[] => {
+  const getSettings = (bookId: string): Setting[] => {
     const { books } = state ?? {};
 
     const currentBook = getBookWithId(bookId, books ?? []);
