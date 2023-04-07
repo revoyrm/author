@@ -17,7 +17,7 @@ type CharactersProps = {
 export default function Characters({
   currentBookId,
 }: CharactersProps): ReactElement {
-  const { getCharacters } = useCharacters();
+  const { getCharacters, deleteCharacter } = useCharacters();
 
   const characters = getCharacters(currentBookId);
   const [isCreating, setIsCreating] = useState(false);
@@ -30,6 +30,7 @@ export default function Characters({
     setIsCreating(false);
   }, []);
 
+  console.log(JSON.stringify(characters, null, 2));
   return (
     <BookLayout
       activeNav={SidebarLabels.Characters}
@@ -52,8 +53,11 @@ export default function Characters({
             <BookItemCard
               key={`character_${character.id}`}
               body={character.description}
+              bookId={currentBookId}
               header={character.name}
+              id={character.id}
               onClick={(): void => {}}
+              onDelete={deleteCharacter}
             />
           ))}
         </Cards>

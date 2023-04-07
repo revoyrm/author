@@ -7,10 +7,7 @@ import { useBooks } from './hooks/useBooks';
 import { Card } from './layout/Card';
 
 export function NoteCard({ id, title, author, summary }: Book): ReactElement {
-  const { setSelectedBook } = useBooks();
-
   const handleSelectBook = (): void => {
-    setSelectedBook(id);
     Router.push(`./book/${id}`).catch(console.error);
   };
 

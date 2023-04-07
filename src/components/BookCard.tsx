@@ -8,10 +8,9 @@ import { useBooks } from './hooks/useBooks';
 import { Card } from './layout/Card';
 
 export function BookCard({ id, title, author, summary }: Book): ReactElement {
-  const { setSelectedBook, deleteBook } = useBooks();
+  const { deleteBook } = useBooks();
 
   const handleSelectBook = (): void => {
-    setSelectedBook(id);
     Router.push(`./book/${id}`).catch(console.error);
   };
 

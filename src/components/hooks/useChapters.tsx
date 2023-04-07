@@ -141,6 +141,7 @@ export const useChapters = (): UseChaptersType => {
         const chapters = getClonedChaptersFromBook(bookId);
 
         const response = await axios.post(ApiRoutes.CreateChapter, {
+          bookId,
           name,
           number,
           description,

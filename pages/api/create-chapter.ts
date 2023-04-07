@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { createChapter } from '../../src/services/createChapter';
 
 type CreateChapterBody = {
+  bookId: string;
   name: string;
   number: string;
   description: string;
@@ -15,6 +16,7 @@ const isCreateChapterBody = (
     maybeBody &&
     typeof maybeBody === 'object' &&
     !Array.isArray(maybeBody) &&
+    'bookId' in maybeBody &&
     'name' in maybeBody &&
     'number' in maybeBody &&
     'description' in maybeBody
@@ -29,9 +31,9 @@ export default async function handler(
   res: NextApiResponse<unknown>
 ): Promise<void> {
   if (isCreateChapterBody(req.body)) {
-    const { name, number, description } = req.body;
+    const { bookId, name, number, description } = req.body;
     try {
-      const response = await createChapter(name, number, description);
+      const response = await createChapter(bookId, name, number, description);
 
       res.status(200).json(response);
     } catch (e) {

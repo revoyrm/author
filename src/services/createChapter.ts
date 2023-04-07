@@ -35,11 +35,13 @@ type CreateChapterRequest = {
 };
 
 export async function createChapter(
+  bookId: string,
   name: string,
   number: string,
   description: string
 ): Promise<Chapter> {
   const { chapter } = await libraryClient.request<CreateChapterRequest>(query, {
+    bookId,
     name,
     number,
     description,

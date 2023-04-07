@@ -10,7 +10,7 @@ import { AppContext } from '../../context/appProvider';
 import type { Book, Character } from '../../types/services';
 
 type UseCharactersType = {
-  getCharacters: (bookId: string | string) => Character[];
+  getCharacters: (bookId: string) => Character[];
   updateCharacter: (
     bookId: string,
     oldCharacter: Character,
@@ -133,18 +133,14 @@ export const useCharacters = (): UseCharactersType => {
   );
 
   const createCharacter = useCallback(
-    async (
-      bookId: string,
-      name: string,
-      number: string,
-      description: string
-    ) => {
+    async (bookId: string, name: string, age: string, description: string) => {
       try {
         const characters = getClonedCharactersFromBook(bookId);
 
-        const response = await axios.post(ApiRoutes.CreateChapter, {
+        const response = await axios.post(ApiRoutes.CreateCharacter, {
+          bookId,
           name,
-          number,
+          age,
           description,
         });
 
@@ -189,7 +185,7 @@ export const useCharacters = (): UseCharactersType => {
     [dispatch, getBooksWithUpdatedCharacters, getClonedCharactersFromBook]
   );
 
-  const getCharacters = (bookId: number | string): Character[] => {
+  const getCharacters = (bookId: string): Character[] => {
     const { books } = state ?? {};
 
     const currentBook = getBookWithId(bookId, books ?? []);

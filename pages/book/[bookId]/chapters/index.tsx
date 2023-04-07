@@ -17,7 +17,7 @@ type ChaptersProps = {
 export default function Chapters({
   currentBookId,
 }: ChaptersProps): ReactElement {
-  const { getChapters } = useChapters();
+  const { getChapters, deleteChapter } = useChapters();
 
   const chapters = getChapters(currentBookId);
   const [isCreating, setIsCreating] = useState(false);
@@ -52,8 +52,11 @@ export default function Chapters({
             <BookItemCard
               key={`chapter_${chapter.id}`}
               body={chapter.description}
+              bookId={currentBookId}
               header={chapter.name}
+              id={chapter.id}
               onClick={(): void => {}}
+              onDelete={deleteChapter}
             />
           ))}
         </Cards>

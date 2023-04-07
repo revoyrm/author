@@ -28,10 +28,12 @@ type CreateSettingRequest = {
 };
 
 export async function createSetting(
+  bookId: string,
   name: string,
   description: string
 ): Promise<Setting> {
   const { setting } = await libraryClient.request<CreateSettingRequest>(query, {
+    bookId,
     name,
     description,
   });

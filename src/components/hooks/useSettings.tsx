@@ -132,6 +132,7 @@ export const useSettings = (): UseSettingsType => {
         const settings = getClonedSettingsFromBook(bookId);
 
         const response = await axios.post(ApiRoutes.CreateSetting, {
+          bookId,
           name,
           description,
         });

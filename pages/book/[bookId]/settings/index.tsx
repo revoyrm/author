@@ -17,7 +17,7 @@ type SettingsProps = {
 export default function Settings({
   currentBookId,
 }: SettingsProps): ReactElement {
-  const { getSettings } = useSettings();
+  const { getSettings, deleteSetting } = useSettings();
 
   const settings = getSettings(currentBookId);
   const [isCreating, setIsCreating] = useState(false);
@@ -52,8 +52,11 @@ export default function Settings({
             <BookItemCard
               key={`setting_${setting.id}`}
               body={setting.description}
+              bookId={currentBookId}
               header={setting.name}
+              id={setting.id}
               onClick={(): void => {}}
+              onDelete={deleteSetting}
             />
           ))}
         </Cards>
