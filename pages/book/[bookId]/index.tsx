@@ -1,8 +1,10 @@
 import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
-import { BookForm } from '../../../components/forms/BookForm';
-import { BookLayout } from '../../../components/layout/BookLayout';
+import { BookForm } from '../../../src/components/forms/BookForm';
+import { useBooks } from '../../../src/components/hooks/useBooks';
+import { BookLayout } from '../../../src/components/layout/BookLayout';
+import { getBookWithId } from '../../utilities/getBookWithId';
 import { SidebarLabels } from '../../utilities/sidebar-labels';
 
 type BookProps = {
@@ -10,6 +12,10 @@ type BookProps = {
 };
 
 export default function Book({ currentBookId }: BookProps): ReactElement {
+  const { books } = useBooks();
+  // console.log(JSON.stringify({ currentBookId, books }, null, 2));
+  const book = getBookWithId(currentBookId, books);
+
   return (
     <BookLayout
       activeNav={SidebarLabels.Book}
@@ -17,7 +23,11 @@ export default function Book({ currentBookId }: BookProps): ReactElement {
       heading="Book Name"
       searchType="book"
     >
-      <BookForm />
+      {book?.id ? (
+        <BookForm bookId={book.id} initialValues={book} />
+      ) : (
+        <div>No Book Found</div>
+      )}
     </BookLayout>
   );
 }

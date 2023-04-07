@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 
-import type { SideBarItemProps } from './SideBarItem';
-import { SideBarItem } from './SideBarItem';
+import type { SideBarItemProps } from './SidebarItem';
+import { SideBarItem } from './SidebarItem';
 
 type SideBarProps = {
   items: SideBarItemProps[];

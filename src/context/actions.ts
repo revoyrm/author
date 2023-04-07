@@ -1,4 +1,7 @@
 export enum Actions {
-  UpdateBooks = 'updateBooks',
+  AddBook = 'addBook',
+  DeleteBook = 'deleteBook',
+  SetBooks = 'setBooks',
   SelectBook = 'selectBook',
+  UpdateBooks = 'updateBooks',
 }

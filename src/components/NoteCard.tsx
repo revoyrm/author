@@ -2,20 +2,12 @@ import Router from 'next/router';
 import type { ReactElement } from 'react';
 import React from 'react';
 
-import type { Book } from '../types/library-types';
-import { Card } from './Card';
+import type { Book } from '../types/services';
 import { useBooks } from './hooks/useBooks';
+import { Card } from './layout/Card';
 
-export function NoteCard({
-  id,
-  title,
-  author,
-  description,
-}: Book): ReactElement {
-  const { setSelectedBook } = useBooks();
-
+export function NoteCard({ id, title, author, summary }: Book): ReactElement {
   const handleSelectBook = (): void => {
-    setSelectedBook(id);
     Router.push(`./book/${id}`).catch(console.error);
   };
 
@@ -23,7 +15,7 @@ export function NoteCard({
     <Card onClick={handleSelectBook} onKeyDown={handleSelectBook}>
       <h2 className="mb-1 font-bold">{`${title} - ${author}`}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
-      <p>{description}</p>
+      <p>{summary}</p>
     </Card>
   );
 }

@@ -1,13 +1,51 @@
+import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
-import { Header } from '../../../../components/Header';
-import { SideBar } from '../../../../components/navigation/SideBar';
+import { SettingForm } from '../../../../src/components/forms/SettingForm';
+import { useSettings } from '../../../../src/components/hooks/useSettings';
+import { BookLayout } from '../../../../src/components/layout/BookLayout';
+import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
-export default function Book(): ReactElement {
+type SettingProps = {
+  currentSettingId: string;
+  currentBookId: string;
+};
+
+export default function Setting({
+  currentSettingId,
+  currentBookId,
+}: SettingProps): ReactElement {
+  const { getSettings } = useSettings();
+  const settings = getSettings(currentBookId);
+  const setting = settings.find((s) => String(s.id) === currentSettingId);
+
   return (
-    <div className="h-full">
-      <Header searchType="notes" title="Book Name" />
-      <SideBar items={[]} />
-    </div>
+    <BookLayout
+      activeNav={SidebarLabels.Book}
+      bookId={currentBookId}
+      heading="Book Name"
+      searchType="book"
+    >
+      {setting?.id ? (
+        <SettingForm
+          bookId={currentBookId}
+          initialValues={setting}
+          settingId={currentSettingId}
+        />
+      ) : (
+        <div>No Setting Found</div>
+      )}
+    </BookLayout>
   );
+}
+
+export function getServerSideProps(context: NextPageContext): {
+  props: SettingProps;
+} {
+  return {
+    props: {
+      currentSettingId: context.query.settingId as string,
+      currentBookId: context.query.bookId as string,
+    }, // will be passed to the page component as props
+  };
 }

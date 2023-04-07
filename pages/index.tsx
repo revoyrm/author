@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { Landing } from '../components';
+import { Landing } from '../src/components';
 
 export default function Home(): ReactElement {
   return (

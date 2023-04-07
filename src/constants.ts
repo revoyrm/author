@@ -1,0 +1,1 @@
+export const LIBRARY_API = process.env.LIBRARY_API ?? '';

@@ -1,0 +1,15 @@
+export const ApiRoutes = {
+  CreateBook: '/api/create-book',
+  DeleteBook: '/api/delete-book',
+  GetBooks: '/api/get-books',
+  UpdateBook: '/api/update-book',
+  CreateChapter: '/api/create-chapter',
+  DeleteChapter: '/api/delete-chapter',
+  UpdateChapter: '/api/update-chapter',
+  CreateCharacter: '/api/create-character',
+  DeleteCharacter: '/api/delete-character',
+  UpdateCharacter: '/api/update-character',
+  CreateSetting: '/api/create-setting',
+  DeleteSetting: '/api/delete-setting',
+  UpdateSetting: '/api/update-setting',
+};

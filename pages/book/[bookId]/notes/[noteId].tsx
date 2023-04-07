@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 
-import { Header } from '../../../../components/Header';
-import { SideBar } from '../../../../components/navigation/SideBar';
+import { Header } from '../../../../src/components/Header';
+import { SideBar } from '../../../../src/components/navigation/Sidebar';
 
 export default function Book(): ReactElement {
   return (

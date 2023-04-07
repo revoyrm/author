@@ -1,24 +1,35 @@
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { BookItemCard } from '../../../../components/BookItemCard';
-import { BookLayout } from '../../../../components/layout/BookLayout';
-import { Cards } from '../../../../components/layout/Cards';
-import library from '../../../../mockLibrary/library.json';
-import type { Character } from '../../../../types/library-types';
-import { getBookWithId } from '../../../utilities/get-book-with-id';
+import { BookItemCard } from '../../../../src/components/BookItemCard';
+import { CharacterForm } from '../../../../src/components/forms/CharacterForm';
+import { useCharacters } from '../../../../src/components/hooks/useCharacters';
+import { BookLayout } from '../../../../src/components/layout/BookLayout';
+import { Cards } from '../../../../src/components/layout/Cards';
+import { NewCard } from '../../../../src/components/NewCard';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type CharactersProps = {
-  characters: Character[];
   currentBookId: string;
 };
 
 export default function Characters({
-  characters,
   currentBookId,
 }: CharactersProps): ReactElement {
+  const { getCharacters, deleteCharacter } = useCharacters();
+
+  const characters = getCharacters(currentBookId);
+  const [isCreating, setIsCreating] = useState(false);
+
+  const handleNewBook = useCallback(() => {
+    setIsCreating(true);
+  }, []);
+
+  const handleFinish = useCallback(() => {
+    setIsCreating(false);
+  }, []);
+
   return (
     <BookLayout
       activeNav={SidebarLabels.Characters}
@@ -26,16 +37,30 @@ export default function Characters({
       heading="Book Name"
       searchType="Characters"
     >
-      <Cards>
-        {characters.map((character) => (
-          <BookItemCard
-            key={`character_${character.id}`}
-            body={character.description}
-            header={character.name}
-            onClick={(): void => {}}
+      {isCreating || characters.length === 0 ? (
+        <div className="w-full p-8">
+          <CharacterForm
+            bookId={currentBookId}
+            onCancel={isCreating ? handleFinish : undefined}
+            onSubmit={handleFinish}
           />
-        ))}
-      </Cards>
+        </div>
+      ) : (
+        <Cards>
+          <NewCard label="New Character" onClick={handleNewBook} />
+          {characters.map((character) => (
+            <BookItemCard
+              key={`character_${character.id}`}
+              body={character.description}
+              bookId={currentBookId}
+              header={character.name}
+              id={character.id}
+              path="characters"
+              onDelete={deleteCharacter}
+            />
+          ))}
+        </Cards>
+      )}
     </BookLayout>
   );
 }
@@ -43,12 +68,8 @@ export default function Characters({
 export function getServerSideProps(context: NextPageContext): {
   props: CharactersProps;
 } {
-  const bookId = context.query.bookId as string;
-  const book = getBookWithId(bookId, library.books);
-
   return {
     props: {
-      characters: book?.characters ?? [],
       currentBookId: context.query.bookId as string,
     },
   };
