@@ -28,7 +28,6 @@ export async function updateSetting(
   description: string,
   labelId: number
 ): Promise<boolean> {
-  console.log({ updateSettingId: id, name, description, labelId });
   const { response } = await libraryClient.request<UpdateSettingRequest>(
     query,
     {

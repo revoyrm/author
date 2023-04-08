@@ -2,10 +2,10 @@ import axios from 'axios';
 import type { Dispatch, ReactElement, ReactNode } from 'react';
 import { createContext, useEffect, useMemo, useReducer } from 'react';
 
+import type { Book } from '../types/services';
 import { Actions } from './actions';
 import { reducer } from './reducer';
 import type { Action, State } from './types';
-import { Book } from '../types/services';
 
 export const AppContext = createContext<
   { state: State; dispatch: Dispatch<Action> } | undefined
