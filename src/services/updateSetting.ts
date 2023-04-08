@@ -6,14 +6,12 @@ const query = gql`
   mutation UpdateSetting(
     $updateSettingId: ID
     $name: String
-    $number: String
     $description: String
     $labelId: ID
   ) {
     response: updateSetting(
       id: $updateSettingId
       name: $name
-      number: $number
       description: $description
       labelId: $labelId
     )
@@ -30,6 +28,7 @@ export async function updateSetting(
   description: string,
   labelId: number
 ): Promise<boolean> {
+  console.log({ updateSettingId: id, name, description, labelId });
   const { response } = await libraryClient.request<UpdateSettingRequest>(
     query,
     {

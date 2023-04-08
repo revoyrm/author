@@ -6,7 +6,7 @@ const query = gql`
   mutation UpdateChapter(
     $updateChapterId: ID
     $name: String
-    $number: String
+    $number: Int
     $description: String
     $labelId: ID
   ) {

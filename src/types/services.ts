@@ -5,7 +5,7 @@ export type Label = {
 
 export type Note = {
   id: number;
-  labels: string[];
+  labels: Label[];
   note?: string;
   title: string;
 };

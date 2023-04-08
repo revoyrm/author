@@ -21,7 +21,7 @@ type GetNotesRequest = {
   notes: Note[];
 };
 
-export async function getNotesByLabelIds(labelIds: string[]): Promise<Note[]> {
+export async function getNotesByLabelIds(labelIds: number[]): Promise<Note[]> {
   const { notes } = await libraryClient.request<GetNotesRequest>(query, {
     labelIds,
   });
