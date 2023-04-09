@@ -1,24 +1,26 @@
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React from 'react';
 
-import library from '../../../../mockLibrary/library.json';
 import { BookItemCard } from '../../../../src/components/BookItemCard';
+import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
+import { getBookById } from '../../../../src/services/getBookById';
+import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { Note } from '../../../../src/types/services';
-import { getBookWithId } from '../../../utilities/getBookWithId';
+import { getAllLabelIdsFromBook } from '../../../utilities/getAllLabelIdsFromBook';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type NotesProps = {
-  notes: Note[];
+  initialNotes: Note[];
   currentBookId: string;
 };
 
 export default function Notes({
-  notes,
+  initialNotes = [],
   currentBookId,
 }: NotesProps): ReactElement {
+  const { notes, deleteNote } = useNotes(initialNotes);
   return (
     <BookLayout
       activeNav={SidebarLabels.AllNotes}
@@ -31,8 +33,11 @@ export default function Notes({
           <BookItemCard
             key={`note_${note.id}`}
             body={note.note}
+            bookId={currentBookId}
             header={note.title}
-            onClick={(): void => {}}
+            id={note.id}
+            path="notes"
+            onDelete={deleteNote}
           />
         ))}
       </Cards>
@@ -40,15 +45,30 @@ export default function Notes({
   );
 }
 
-export function getServerSideProps(context: NextPageContext): {
+export async function getServerSideProps(context: NextPageContext): Promise<{
   props: NotesProps;
-} {
+}> {
   const bookId = context.query.bookId as string;
-  const book = getBookWithId(bookId, library.books);
+  try {
+    const book = await getBookById(Number(bookId));
+
+    const labelIds = getAllLabelIdsFromBook(book);
+
+    const notes = await getNotesByLabelIds(labelIds);
+
+    return {
+      props: {
+        initialNotes: notes,
+        currentBookId: context.query.bookId as string,
+      },
+    };
+  } catch (e) {
+    console.error(e);
+  }
 
   return {
     props: {
-      notes: book?.notes ?? [],
+      initialNotes: [],
       currentBookId: context.query.bookId as string,
     },
   };

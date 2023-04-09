@@ -41,6 +41,5 @@ export type Book = {
   characters?: Character[];
   settings?: Setting[];
   chapters?: Chapter[];
-  notes?: Note[];
-  label?: Label;
+  label: Label;
 };
