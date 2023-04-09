@@ -1,14 +1,14 @@
 import '../styles/global.css';
 
+import axios from 'axios';
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
 import type { ReactElement } from 'react';
 
+import { ApiRoutes } from '../src/ApiRoutes';
 import { AppProvider } from '../src/context/appProvider';
 import { getAllBooks } from '../src/services/getBooks';
 import type { Book } from '../src/types/services';
-import { ApiRoutes } from '../src/ApiRoutes';
-import axios from 'axios';
 
 type AuthorAppProps = Pick<AppProps, 'Component' | 'pageProps'> & {
   books?: Book[];
