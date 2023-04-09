@@ -7,8 +7,8 @@ import { BookForm } from '../../../src/components/forms/BookForm';
 import { useBooks } from '../../../src/components/hooks/useBooks';
 import { BookLayout } from '../../../src/components/layout/BookLayout';
 import type { Book, Note } from '../../../src/types/services';
-import { getBookWithId } from '../../utilities/getBookWithId';
-import { SidebarLabels } from '../../utilities/sidebar-labels';
+import { getBookWithId } from '../../../src/utilities/getBookWithId';
+import { SidebarLabels } from '../../../src/utilities/sidebar-labels';
 import { getBookById } from '../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../src/services/getNotesByLabelIds';
 

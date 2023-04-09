@@ -7,7 +7,7 @@ import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { getChapterById } from '../../../../src/services/getChapterById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { Note } from '../../../../src/types/services';
-import { SidebarLabels } from '../../../utilities/sidebar-labels';
+import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type ChapterProps = {
   notes?: Note[];

@@ -87,6 +87,7 @@ export const isSettingFormData = (
 export type NoteFormData = {
   noteTitle: string;
   noteDescription: string;
+  noteLabels: string[];
 };
 
 export const isNoteFormData = (
@@ -97,7 +98,8 @@ export const isNoteFormData = (
     typeof maybeNoteFormData === 'object' &&
     !Array.isArray(maybeNoteFormData) &&
     'noteTitle' in maybeNoteFormData &&
-    'notegDescription' in maybeNoteFormData
+    'noteDescription' in maybeNoteFormData &&
+    'noteLabels' in maybeNoteFormData
   ) {
     return true;
   }

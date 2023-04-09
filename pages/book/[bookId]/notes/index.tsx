@@ -2,18 +2,20 @@ import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 
+import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { NoteForm } from '../../../../src/components/forms/NoteForm';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
-import { NoteCard } from '../../../../src/components/notes/NoteCard';
-import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { NoteFormData } from '../../../../src/types/forms';
 import type { Note } from '../../../../src/types/services';
-import { getAllLabelIdsFromBook } from '../../../utilities/getAllLabelIdsFromBook';
-import { SidebarLabels } from '../../../utilities/sidebar-labels';
+import { getAllLabelIdsFromBook } from '../../../../src/utilities/getAllLabelIdsFromBook';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
+import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
+import { getBookById } from '../../../../src/services/getBookById';
 
 type NotesProps = {
   initialNotes: Note[];
@@ -25,7 +27,11 @@ export default function Notes({
   currentBookId,
 }: NotesProps): ReactElement {
   const { notes, deleteNote, createNote } = useNotes(initialNotes);
+  const { books } = useBooks();
+  const curBook = getBookWithId(currentBookId, books);
   const [isCreating, setIsCreating] = useState(false);
+
+  console.log('Notes', JSON.stringify(notes, null, 2));
 
   const handleNewBook = useCallback(() => {
     setIsCreating(true);
@@ -37,9 +43,10 @@ export default function Notes({
 
   const handleSubmit = useCallback(
     async (data: NoteFormData): Promise<void> => {
-      const { noteTitle, noteDescription } = data;
+      console.log('handleSubmit index');
+      const { noteTitle, noteDescription, noteLabels } = data;
 
-      await createNote(noteTitle, noteDescription, []);
+      await createNote(noteTitle, noteDescription, noteLabels);
       setIsCreating(false);
     },
     [createNote]
@@ -55,6 +62,7 @@ export default function Notes({
       {isCreating || notes.length === 0 ? (
         <div className="w-full p-8">
           <NoteForm
+            book={curBook}
             onCancel={isCreating ? handleCancel : undefined}
             onSubmit={handleSubmit}
           />
@@ -62,17 +70,26 @@ export default function Notes({
       ) : (
         <Cards>
           <NewCard
-            label="New Setting"
+            label="New Note"
             onClick={handleNewBook}
             onEnter={handleNewBook}
           />
           {notes.map((note) => (
-            <NoteCard
+            <BookItemCard
               key={`note_${note.id}`}
+              body={note.note}
               bookId={currentBookId}
+              header={note.title}
+              id={note.id}
+              path="notes"
               onDelete={deleteNote}
-              {...note}
             />
+            // <NoteCard
+            //   key={`note_${note.id}`}
+            //   bookId={currentBookId}
+            //   onDelete={deleteNote}
+            //   {...note}
+            // />
           ))}
         </Cards>
       )}

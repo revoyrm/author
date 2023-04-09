@@ -20,7 +20,7 @@
     "**/*.ts",
     "**/*.tsx",
     "components/ItemRestsx",
-    "pages/utilities"
+    "src/utilities"
   ],
   "exclude": ["node_modules", "cypress", "./jest-global-setup.js"]
 }

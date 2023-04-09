@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import { useCallback, useState } from 'react';
 import type { FieldValues } from 'react-hook-form';
 
-import { getBookWithId } from '../../../pages/utilities/getBookWithId';
+import { getBookWithId } from '../../utilities/getBookWithId';
 import { isBookFormData } from '../../types/forms';
 import type { Book } from '../../types/services';
 import { Button, Text, TextArea } from '../formControls';

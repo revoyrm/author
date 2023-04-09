@@ -2,12 +2,12 @@ import axios from 'axios';
 import _cloneDeep from 'lodash/cloneDeep';
 import { useCallback, useContext } from 'react';
 
-import { getBookIdxWithId } from '../../../pages/utilities/getBookIdxWithId';
-import { getBookWithId } from '../../../pages/utilities/getBookWithId';
 import { ApiRoutes } from '../../ApiRoutes';
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
 import type { Book, Character } from '../../types/services';
+import { getBookIdxWithId } from '../../utilities/getBookIdxWithId';
+import { getBookWithId } from '../../utilities/getBookWithId';
 
 type UseCharactersType = {
   getCharacters: (bookId: string) => Character[];
@@ -22,7 +22,7 @@ type UseCharactersType = {
     age: string,
     description: string
   ) => Promise<void>;
-  deleteCharacter: (bookId: string, id: number) => Promise<void>;
+  deleteCharacter: (id: number, bookId?: string) => Promise<void>;
 };
 
 const isCharacter = (maybeCharacter: unknown): maybeCharacter is Character => {
@@ -171,7 +171,8 @@ export const useCharacters = (): UseCharactersType => {
   );
 
   const deleteCharacter = useCallback(
-    async (bookId: string, id: number): Promise<void> => {
+    async (id: number, bookId?: string): Promise<void> => {
+      if (!bookId) return;
       try {
         const characters = getClonedCharactersFromBook(bookId);
 

@@ -9,8 +9,10 @@ import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { NoteFormData } from '../../../../src/types/forms';
 import type { Note } from '../../../../src/types/services';
-import { getAllLabelIdsFromBook } from '../../../utilities/getAllLabelIdsFromBook';
-import { SidebarLabels } from '../../../utilities/sidebar-labels';
+import { getAllLabelIdsFromBook } from '../../../../src/utilities/getAllLabelIdsFromBook';
+import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 
 type NotePageProps = {
   initialNotes: Note[];
@@ -24,6 +26,8 @@ export default function NotePage({
   currentNoteId,
 }: NotePageProps): ReactElement {
   const { getCurrentNote, updateNote, createNote } = useNotes(initialNotes);
+  const { books } = useBooks();
+  const curBook = getBookWithId(currentBookId, books);
   const note = getCurrentNote(currentNoteId);
 
   const handleSubmit = useCallback(
@@ -50,7 +54,7 @@ export default function NotePage({
       searchType="book"
     >
       {note?.id ? (
-        <NoteForm note={note} onSubmit={handleSubmit} />
+        <NoteForm book={curBook} note={note} onSubmit={handleSubmit} />
       ) : (
         <div>No Note Found</div>
       )}

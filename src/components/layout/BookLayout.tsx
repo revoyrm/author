@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import getSidebarItems from '../../../pages/utilities/getSidebarItems';
+import getSidebarItems from '../../utilities/getSidebarItems';
 import { Header } from '../Header';
 import { SideBar } from '../navigation/Sidebar';
 

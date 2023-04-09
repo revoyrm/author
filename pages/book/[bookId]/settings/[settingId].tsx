@@ -8,7 +8,7 @@ import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import { getSettingById } from '../../../../src/services/getSettingById';
 import type { Note, Setting } from '../../../../src/types/services';
-import { SidebarLabels } from '../../../utilities/sidebar-labels';
+import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type SettingProps = {
   notes?: Note[];

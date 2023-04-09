@@ -16,7 +16,7 @@ type BookItemCardProps = {
   header: string;
   body?: string;
   path: string;
-  onDelete: (bookId: string, id: number) => Promise<void>;
+  onDelete: (id: number, bookId?: string) => Promise<void>;
 };
 
 export function BookItemCard({
@@ -28,7 +28,6 @@ export function BookItemCard({
   onDelete,
 }: BookItemCardProps): ReactElement {
   const Router = useRouter();
-  // todo fix event handler type
   const handleSelectBookItem = (): void => {
     Router.push(`/book/${bookId}/${path}/${id}`).catch(console.error);
   };
@@ -36,7 +35,7 @@ export function BookItemCard({
   const handleRemoveBookItem = useCallback(
     (e: MouseEvent<HTMLButtonElement>): void => {
       e.stopPropagation();
-      onDelete(bookId, id).catch(console.error);
+      onDelete(id, bookId).catch(console.error);
     },
     [bookId, id, onDelete]
   );

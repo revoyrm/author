@@ -8,7 +8,7 @@ import { useChapters } from '../../../../src/components/hooks/useChapters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
-import { SidebarLabels } from '../../../utilities/sidebar-labels';
+import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type ChaptersProps = {
   currentBookId: string;

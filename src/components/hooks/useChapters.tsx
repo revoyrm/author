@@ -2,12 +2,12 @@ import axios from 'axios';
 import _cloneDeep from 'lodash/cloneDeep';
 import { useCallback, useContext } from 'react';
 
-import { getBookIdxWithId } from '../../../pages/utilities/getBookIdxWithId';
-import { getBookWithId } from '../../../pages/utilities/getBookWithId';
 import { ApiRoutes } from '../../ApiRoutes';
 import { Actions } from '../../context/actions';
 import { AppContext } from '../../context/appProvider';
 import type { Book, Chapter } from '../../types/services';
+import { getBookIdxWithId } from '../../utilities/getBookIdxWithId';
+import { getBookWithId } from '../../utilities/getBookWithId';
 
 type UseChaptersType = {
   getChapters: (bookId: string) => Chapter[];
@@ -22,7 +22,7 @@ type UseChaptersType = {
     number: number,
     description: string
   ) => Promise<void>;
-  deleteChapter: (bookId: string, id: number) => Promise<void>;
+  deleteChapter: (id: number, bookId?: string) => Promise<void>;
 };
 
 const isChapter = (maybeChapter: unknown): maybeChapter is Chapter => {
@@ -162,7 +162,8 @@ export const useChapters = (): UseChaptersType => {
   );
 
   const deleteChapter = useCallback(
-    async (bookId: string, id: number): Promise<void> => {
+    async (id: number, bookId?: string): Promise<void> => {
+      if (!bookId) return;
       try {
         const chapters = getClonedChaptersFromBook(bookId);
 
