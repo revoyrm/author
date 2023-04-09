@@ -7,6 +7,8 @@ import type { ReactElement } from 'react';
 import { AppProvider } from '../src/context/appProvider';
 import { getAllBooks } from '../src/services/getBooks';
 import type { Book } from '../src/types/services';
+import { ApiRoutes } from '../src/ApiRoutes';
+import axios from 'axios';
 
 type AuthorAppProps = Pick<AppProps, 'Component' | 'pageProps'> & {
   books?: Book[];
@@ -29,16 +31,23 @@ export default function MyApp({
 MyApp.getInitialProps = async (
   context: AppContext
 ): Promise<AuthorAppProps> => {
+  const initialProps = await App.getInitialProps(context);
+
+  const isClientSide = typeof window !== 'undefined';
+
   try {
-    const initialProps = await App.getInitialProps(context);
-    const books = await getAllBooks();
+    let books: Book[] = [];
+    if (isClientSide) {
+      books = await axios.get(ApiRoutes.GetBooks);
+    } else {
+      books = await getAllBooks();
+    }
 
     // @ts-expect-error Component is passed down
     return { ...initialProps, books };
   } catch (e) {
-    console.error(e);
+    console.error(JSON.stringify(e, null, 2));
     // @ts-expect-error Component is passed down
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return { ...initialProps };
   }
 };

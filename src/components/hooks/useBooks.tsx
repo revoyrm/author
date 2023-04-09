@@ -41,7 +41,7 @@ export const useBooks = (): UseBooksType => {
   const updateBooks = useCallback(
     (newBooks: Book[]): void => {
       dispatch({
-        type: Actions.SetBooks,
+        type: Actions.UpdateBooks,
         payload: newBooks,
       });
     },
@@ -105,16 +105,20 @@ export const useBooks = (): UseBooksType => {
   const deleteBook = useCallback(
     async (id: string): Promise<void> => {
       try {
+        const { books } = state ?? {};
+        if (!books) return;
+
         const response = await axios.post(ApiRoutes.DeleteBook, { id });
 
         if (response.data) {
-          dispatch({ type: Actions.DeleteBook, payload: id });
+          const updatedBooks = books.filter((book) => String(book.id) !== id);
+          dispatch({ type: Actions.UpdateBooks, payload: updatedBooks });
         }
       } catch (e) {
         console.error(e);
       }
     },
-    [dispatch]
+    [dispatch, state]
   );
 
   const getBooks = (): Book[] => state?.books ?? [];

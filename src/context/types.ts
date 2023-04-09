@@ -11,16 +11,8 @@ export type Action =
       payload: Book;
     }
   | {
-      type: Actions.DeleteBook;
-      payload: string;
-    }
-  | {
       type: Actions.SelectBook;
       payload?: number;
-    }
-  | {
-      type: Actions.SetBooks;
-      payload: Book[];
     }
   | {
       type: Actions.UpdateBooks;
