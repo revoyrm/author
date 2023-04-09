@@ -18,9 +18,9 @@ const query = gql`
         label
       }
       chapters {
+        id
         name
         description
-        id
         number
         label {
           id
@@ -28,20 +28,21 @@ const query = gql`
         }
       }
       characters {
+        id
         name
+        age
+        description
         label {
           id
         }
-        id
-        description
       }
       settings {
+        id
         name
+        description
         label {
           id
         }
-        id
-        description
       }
     }
   }
