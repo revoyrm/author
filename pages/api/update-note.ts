@@ -14,6 +14,7 @@ const isUpdateNoteBody = (maybeBody: unknown): maybeBody is UpdateNoteBody => {
     maybeBody &&
     typeof maybeBody === 'object' &&
     !Array.isArray(maybeBody) &&
+    'id' in maybeBody &&
     'title' in maybeBody &&
     'note' in maybeBody &&
     'labelIds' in maybeBody &&

@@ -9,13 +9,13 @@ import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
+import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { NoteFormData } from '../../../../src/types/forms';
 import type { Note } from '../../../../src/types/services';
 import { getAllLabelIdsFromBook } from '../../../../src/utilities/getAllLabelIdsFromBook';
 import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
-import { getBookById } from '../../../../src/services/getBookById';
 
 type NotesProps = {
   initialNotes: Note[];
@@ -31,8 +31,6 @@ export default function Notes({
   const curBook = getBookWithId(currentBookId, books);
   const [isCreating, setIsCreating] = useState(false);
 
-  console.log('Notes', JSON.stringify(notes, null, 2));
-
   const handleNewBook = useCallback(() => {
     setIsCreating(true);
   }, []);
@@ -43,10 +41,9 @@ export default function Notes({
 
   const handleSubmit = useCallback(
     async (data: NoteFormData): Promise<void> => {
-      console.log('handleSubmit index');
       const { noteTitle, noteDescription, noteLabels } = data;
 
-      await createNote(noteTitle, noteDescription, noteLabels);
+      await createNote(noteTitle, noteDescription, noteLabels ?? []);
       setIsCreating(false);
     },
     [createNote]
@@ -84,12 +81,6 @@ export default function Notes({
               path="notes"
               onDelete={deleteNote}
             />
-            // <NoteCard
-            //   key={`note_${note.id}`}
-            //   bookId={currentBookId}
-            //   onDelete={deleteNote}
-            //   {...note}
-            // />
           ))}
         </Cards>
       )}

@@ -87,7 +87,7 @@ export const isSettingFormData = (
 export type NoteFormData = {
   noteTitle: string;
   noteDescription: string;
-  noteLabels: string[];
+  noteLabels?: string[];
 };
 
 export const isNoteFormData = (

@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { deleteNote } from '../../src/services/deleteNote';
 
 type DeleteNoteBody = {
-  id: string;
+  id: number;
 };
 
 const isDeleteNoteBody = (maybeBody: unknown): maybeBody is DeleteNoteBody => {
