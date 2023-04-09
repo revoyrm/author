@@ -36,8 +36,6 @@ export default async function handler(
     try {
       const response = await updateNote(id, title, note, labelIds);
 
-      console.log(response);
-
       res.status(200).json(response);
     } catch (e) {
       console.error(e);
