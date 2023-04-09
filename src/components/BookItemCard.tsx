@@ -42,7 +42,7 @@ export function BookItemCard({
   );
 
   return (
-    <Card onClick={handleSelectBookItem} onKeyDown={handleSelectBookItem}>
+    <Card onClick={handleSelectBookItem} onEnter={handleSelectBookItem}>
       <h2 className="mb-1 font-bold">{header}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
       <p className="flex-grow">{body}</p>

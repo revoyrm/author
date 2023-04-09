@@ -2,13 +2,13 @@ import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
 import React from 'react';
 
+import library from '../../../../mockLibrary/library.json';
 import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
-import library from '../../../../mockLibrary/library.json';
+import type { Note } from '../../../../src/types/services';
 import { getBookWithId } from '../../../utilities/getBookWithId';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
-import { Note } from '../../../../src/types/services';
 
 type NotesProps = {
   notes: Note[];

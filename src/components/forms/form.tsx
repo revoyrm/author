@@ -10,7 +10,7 @@ export function Form({
   children,
 }: {
   initialValues: FieldValues;
-  onSubmit: SubmitHandler<FieldValues>;
+  onSubmit: (data: FieldValues) => Promise<void>;
   formRef?: RefObject<HTMLFormElement> | null;
   children: ReactElement | ReactElement[];
 }): ReactElement {
@@ -19,9 +19,11 @@ export function Form({
   });
   const { handleSubmit } = methods;
 
-  const submitForm = useCallback(
-    async (data: FieldValues): Promise<void> => await onSubmit(data),
-    []
+  const submitForm = useCallback<SubmitHandler<FieldValues>>(
+    async (data: FieldValues): Promise<void> => {
+      await onSubmit(data);
+    },
+    [onSubmit]
   );
 
   return (

@@ -6,11 +6,11 @@ import type {
 } from 'react';
 
 export function Card({
-  onKeyDown,
+  onEnter,
   onClick,
   children,
 }: {
-  onKeyDown: KeyboardEventHandler;
+  onEnter: KeyboardEventHandler;
   onClick: MouseEventHandler;
   children: ReactNode;
 }): ReactElement {
@@ -35,7 +35,11 @@ export function Card({
       role="button"
       tabIndex={0}
       onClick={onClick}
-      onKeyDown={onKeyDown}
+      onKeyDown={(e): void => {
+        if (e.key === 'Enter') {
+          onEnter(e);
+        }
+      }}
     >
       {children}
     </div>

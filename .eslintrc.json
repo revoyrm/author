@@ -129,7 +129,13 @@
       "error",
       { "ignoreStringArrays": true }
     ],
-    "@typescript-eslint/sort-type-union-intersection-members": "error"
+    "@typescript-eslint/sort-type-union-intersection-members": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
   },
   "overrides": [
     {
