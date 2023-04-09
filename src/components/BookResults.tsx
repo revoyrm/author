@@ -30,7 +30,11 @@ export function BookResults(): ReactElement {
       )}
       {!isCreating && books.length > 0 && (
         <Cards>
-          <NewCard label="New Book" onClick={handleNewBook} />
+          <NewCard
+            label="New Book"
+            onClick={handleNewBook}
+            onEnter={handleNewBook}
+          />
           {books.map((book) => (
             <BookCard key={book.id} {...book} />
           ))}

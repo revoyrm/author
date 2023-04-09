@@ -33,7 +33,6 @@ export function BookForm({
           const bookToUpdate = getBookWithId(bookId, books);
           if (bookToUpdate) {
             await updateBook(bookToUpdate, {
-              id: bookId,
               title: bookTitle,
               author: bookAuthor,
               summary: bookSummary,

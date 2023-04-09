@@ -31,7 +31,7 @@ export default function Notes({
   const curBook = getBookWithId(currentBookId, books);
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleNewBook = useCallback(() => {
+  const handleNewNote = useCallback(() => {
     setIsCreating(true);
   }, []);
 
@@ -68,8 +68,8 @@ export default function Notes({
         <Cards>
           <NewCard
             label="New Note"
-            onClick={handleNewBook}
-            onEnter={handleNewBook}
+            onClick={handleNewNote}
+            onEnter={handleNewNote}
           />
           {notes.map((note) => (
             <BookItemCard

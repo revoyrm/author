@@ -5,7 +5,7 @@ import { createCharacter } from '../../src/services/createCharacter';
 type CreateCharacterBody = {
   bookId: string;
   name: string;
-  age: string;
+  age: number;
   description: string;
 };
 

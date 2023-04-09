@@ -10,7 +10,10 @@ import type { Book } from '../../types/services';
 type UseBooksType = {
   books: Book[];
   updateBooks: (newBooks: Book[]) => void;
-  updateBook: (oldBook: Book, newBook: Book) => Promise<void>;
+  updateBook: (
+    oldBook: Book,
+    newBook: Pick<Book, 'author' | 'summary' | 'title'>
+  ) => Promise<void>;
   createBook: (title: string, author: string, summary: string) => Promise<void>;
   deleteBook: (id: string) => Promise<void>;
   getBooks: () => Book[];
@@ -49,7 +52,10 @@ export const useBooks = (): UseBooksType => {
   );
 
   const updateBook = useCallback(
-    async (oldBook: Book, newBook: Book): Promise<void> => {
+    async (
+      oldBook: Book,
+      newBook: Pick<Book, 'author' | 'summary' | 'title'>
+    ): Promise<void> => {
       const { books } = state ?? {};
       if (books) {
         const updatedBooks = _cloneDeep(books);
@@ -70,7 +76,7 @@ export const useBooks = (): UseBooksType => {
               title: bookToUpdate.title,
               author: bookToUpdate.author,
               summary: bookToUpdate.summary,
-              labelId: bookToUpdate.label?.id,
+              labelId: bookToUpdate.label.id,
             });
           } catch (e) {
             console.error(e);

@@ -8,6 +8,9 @@ import { getCharacterById } from '../../../../src/services/getCharacterById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { Note } from '../../../../src/types/services';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
+import { Cards } from '../../../../src/components/layout/Cards';
+import { NewCard } from '../../../../src/components/NewCard';
+import { BookItemCard } from '../../../../src/components/BookItemCard';
 
 type CharacterProps = {
   notes?: Note[];
@@ -32,11 +35,33 @@ export default function CharacterPage({
       searchType="book"
     >
       {character?.id ? (
-        <CharacterForm
-          bookId={currentBookId}
-          characterId={currentCharacterId}
-          initialValues={character}
-        />
+        <>
+          <CharacterForm
+            bookId={currentBookId}
+            characterId={currentCharacterId}
+            initialValues={character}
+          />
+          {/* {!!notes && (
+            <Cards>
+              <NewCard
+                label="New Note"
+                onClick={handleNewNote}
+                onEnter={handleNewNote}
+              />
+              {notes.map((note) => (
+                <BookItemCard
+                  key={`note_${note.id}`}
+                  body={note.note}
+                  bookId={currentBookId}
+                  header={note.title}
+                  id={note.id}
+                  path="notes"
+                  onDelete={deleteNote}
+                />
+              ))}
+            </Cards>
+          )} */}
+        </>
       ) : (
         <div>No Character Found</div>
       )}

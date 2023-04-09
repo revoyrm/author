@@ -5,7 +5,7 @@ import { updateCharacter } from '../../src/services/updateCharacter';
 type UpdateCharacterBody = {
   id: number;
   name: string;
-  age: string;
+  age: number;
   description: string;
   labelId: number;
 };

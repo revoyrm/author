@@ -7,7 +7,7 @@ const query = gql`
   mutation Mutation(
     $bookId: String
     $name: String
-    $age: String
+    $age: Int
     $description: String
   ) {
     character: createCharacter(
@@ -38,7 +38,7 @@ type CreateCharacterRequest = {
 export async function createCharacter(
   bookId: string,
   name: string,
-  age: string,
+  age: number,
   description: string
 ): Promise<Character> {
   const { character } = await libraryClient.request<CreateCharacterRequest>(
@@ -46,7 +46,7 @@ export async function createCharacter(
     {
       bookId,
       name,
-      age,
+      age: Number(age),
       description,
     }
   );

@@ -6,7 +6,7 @@ const query = gql`
   mutation Mutation(
     $updateCharacterId: ID
     $name: String
-    $age: String
+    $age: Int
     $description: String
     $labelId: ID
   ) {
@@ -27,7 +27,7 @@ type UpdateCharacterRequest = {
 export async function updateCharacter(
   id: number,
   name: string,
-  age: string,
+  age: number,
   description: string,
   labelId: number
 ): Promise<boolean> {

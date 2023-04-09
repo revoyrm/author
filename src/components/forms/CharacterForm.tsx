@@ -39,7 +39,7 @@ export function CharacterForm({
           if (characterToUpdate) {
             await updateCharacter(bookId, characterToUpdate, {
               name: characterName,
-              age: characterAge,
+              age: Number(characterAge),
               description: characterDescription,
             });
           }

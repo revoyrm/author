@@ -28,7 +28,7 @@ export type Setting = {
 export type Character = {
   id: number;
   name: string;
-  age: number | string;
+  age: number;
   description: string;
   label: Label;
 };
