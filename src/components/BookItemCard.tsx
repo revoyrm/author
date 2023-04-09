@@ -1,10 +1,5 @@
 import { useRouter } from 'next/router';
-import type {
-  KeyboardEventHandler,
-  MouseEvent,
-  MouseEventHandler,
-  ReactElement,
-} from 'react';
+import type { MouseEvent, ReactElement } from 'react';
 import { useCallback } from 'react';
 
 import { ConfirmButton } from './ConfirmButton';

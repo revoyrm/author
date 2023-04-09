@@ -10,7 +10,7 @@ const query = gql`
     $note: String
     $labelIds: [String]
   ) {
-    updateNote(
+    updatedNote: updateNote(
       id: $updateNoteId
       title: $title
       note: $note
@@ -37,10 +37,11 @@ export async function updateNote(
   note: string,
   labelIds: string[]
 ): Promise<Note> {
+  console.log('ID', id);
   const { updatedNote } = await libraryClient.request<UpdateNoteRequest>(
     query,
     {
-      updateNoteId: id,
+      updateNoteId: Number(id),
       title,
       note,
       labelIds,

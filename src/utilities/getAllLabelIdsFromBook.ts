@@ -1,7 +1,7 @@
 import type { Book } from '../types/services';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getAllLabelIdsFromBook = (book: Book): Label[] => {
+export const getAllLabelIdsFromBook = (book: Book): number[] => {
   const labelIds = [book.label.id];
 
   book.chapters?.forEach((chapter): void => {

@@ -49,8 +49,11 @@ export const useNotes = (initialNotes: Note[]): UseNotesType => {
 
       const idx = notesCopy.findIndex((note) => note.id === oldNote.id);
 
+      console.log('idx', idx);
+
       if (idx > -1) {
         const noteToUpdate = notesCopy[idx];
+        console.log({ noteToUpdate });
 
         try {
           const { data } = await axios.post<Note>(ApiRoutes.UpdateNote, {
@@ -59,6 +62,9 @@ export const useNotes = (initialNotes: Note[]): UseNotesType => {
             note: newNote.note,
             labelIds: newNote.labelIds,
           });
+
+          console.log('DATA', { data });
+
           notesCopy[idx] = data;
           setNotes(notesCopy);
         } catch (e) {
