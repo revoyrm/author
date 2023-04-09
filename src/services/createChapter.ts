@@ -25,6 +25,7 @@ const query = gql`
       number
       label {
         id
+        label
       }
     }
   }
