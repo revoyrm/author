@@ -13,11 +13,13 @@ import { Form } from './Form';
 export function NoteForm({
   book,
   note,
+  initialLabels,
   onCancel,
   onSubmit,
 }: {
   book?: Book;
   note?: Note;
+  initialLabels?: string[];
   onCancel?: () => void;
   onSubmit: (data: NoteFormData) => Promise<void>;
 }): ReactElement {
@@ -46,7 +48,9 @@ export function NoteForm({
         noteDescription: note.note,
         noteLabels: note.labels.map(({ id }) => String(id)),
       }
-    : undefined;
+    : {
+        noteLabels: initialLabels ?? [],
+      };
 
   return (
     <Form initialValues={defaultValues as FieldValues} onSubmit={handleSubmit}>

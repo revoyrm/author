@@ -9,14 +9,11 @@ const query = gql`
       id
       author
       label {
-        label
         id
+        label
       }
       title
       summary
-      allLabels {
-        label
-      }
       chapters {
         id
         name
@@ -34,6 +31,7 @@ const query = gql`
         description
         label {
           id
+          label
         }
       }
       settings {
@@ -42,6 +40,7 @@ const query = gql`
         description
         label {
           id
+          label
         }
       }
     }

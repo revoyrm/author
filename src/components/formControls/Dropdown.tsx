@@ -22,7 +22,6 @@ const hoverColor = '#407c95';
 
 export function Dropdown({
   className,
-  initialValues,
   options,
   label,
   name,
@@ -43,8 +42,10 @@ export function Dropdown({
         name={name}
         render={({ field: { onChange, value, ref } }): ReactElement => (
           <Select
+            // @ts-expect-error inputRef is a custom prop to connect to react hook form
             inputRef={ref}
             options={options}
+            required={required}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,

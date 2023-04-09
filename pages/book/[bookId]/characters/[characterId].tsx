@@ -2,28 +2,32 @@ import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
 import { CharacterForm } from '../../../../src/components/forms/CharacterForm';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useCharacters } from '../../../../src/components/hooks/useCharacters';
+import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
+import { Notes } from '../../../../src/components/Notes';
 import { getCharacterById } from '../../../../src/services/getCharacterById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { Note } from '../../../../src/types/services';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
-import { Cards } from '../../../../src/components/layout/Cards';
-import { NewCard } from '../../../../src/components/NewCard';
-import { BookItemCard } from '../../../../src/components/BookItemCard';
 
 type CharacterProps = {
-  notes?: Note[];
+  initialNotes?: Note[];
   currentCharacterId: string;
   currentBookId: string;
 };
 
 export default function CharacterPage({
-  notes,
+  initialNotes,
   currentCharacterId,
   currentBookId,
 }: CharacterProps): ReactElement {
   const { getCharacters } = useCharacters();
+  const { books } = useBooks();
+  const { createNote, deleteNote, notes } = useNotes(initialNotes ?? []);
+  const book = getBookWithId(currentBookId, books);
   const characters = getCharacters(currentBookId);
   const character = characters.find((s) => String(s.id) === currentCharacterId);
 
@@ -41,26 +45,14 @@ export default function CharacterPage({
             characterId={currentCharacterId}
             initialValues={character}
           />
-          {/* {!!notes && (
-            <Cards>
-              <NewCard
-                label="New Note"
-                onClick={handleNewNote}
-                onEnter={handleNewNote}
-              />
-              {notes.map((note) => (
-                <BookItemCard
-                  key={`note_${note.id}`}
-                  body={note.note}
-                  bookId={currentBookId}
-                  header={note.title}
-                  id={note.id}
-                  path="notes"
-                  onDelete={deleteNote}
-                />
-              ))}
-            </Cards>
-          )} */}
+          <Notes
+            book={book}
+            bookId={currentBookId}
+            createNote={createNote}
+            deleteNote={deleteNote}
+            initialLabels={[String(character.label.id)]}
+            notes={notes}
+          />
         </>
       ) : (
         <div>No Character Found</div>
@@ -78,11 +70,11 @@ export async function getServerSideProps(context: NextPageContext): Promise<{
     const character = await getCharacterById(Number(characterId));
 
     const labelId = character.label.id;
-    const notes = labelId ? await getNotesByLabelIds([labelId]) : [];
+    const initialNotes = labelId ? await getNotesByLabelIds([labelId]) : [];
 
     return {
       props: {
-        notes,
+        initialNotes,
         currentCharacterId: characterId,
         currentBookId: bookId,
       },
