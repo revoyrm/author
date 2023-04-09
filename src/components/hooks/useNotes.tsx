@@ -1,28 +1,23 @@
 import axios from 'axios';
 import _cloneDeep from 'lodash/cloneDeep';
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { getBookIdxWithId } from '../../../pages/utilities/getBookIdxWithId';
-import { getBookWithId } from '../../../pages/utilities/getBookWithId';
 import { ApiRoutes } from '../../ApiRoutes';
-import { Actions } from '../../context/actions';
-import { AppContext } from '../../context/appProvider';
-import type { Book, Note } from '../../types/services';
+import type { Note } from '../../types/services';
 
 type UseNotesType = {
   notes: Note[];
+  getCurrentNote: (noteId: string) => Note | undefined;
   updateNote: (
-    bookId: string,
     oldNote: Note,
     newNote: Pick<Note, 'note' | 'title'> & { labelIds: string[] }
   ) => Promise<void>;
   createNote: (
-    bookId: string,
     title: string,
     note: string,
     labelIds: string[]
   ) => Promise<void>;
-  deleteNote: (bookId: string, id: number) => Promise<void>;
+  deleteNote: (id: number) => Promise<void>;
 };
 
 const isNote = (maybeNote: unknown): maybeNote is Note => {
@@ -42,9 +37,11 @@ const isNote = (maybeNote: unknown): maybeNote is Note => {
 export const useNotes = (initialNotes: Note[]): UseNotesType => {
   const [notes, setNotes] = useState(initialNotes);
 
+  const getCurrentNote = (noteId: string): Note | undefined =>
+    notes.find((note) => String(note.id) === noteId);
+
   const updateNote = useCallback(
     async (
-      bookkId: string,
       oldNote: Note,
       newNote: Pick<Note, 'note' | 'title'> & { labelIds: string[] }
     ): Promise<void> => {
@@ -73,12 +70,11 @@ export const useNotes = (initialNotes: Note[]): UseNotesType => {
   );
 
   const createNote = useCallback(
-    async (bookId: string, title: string, note: string, labelIds: string[]) => {
+    async (title: string, note: string, labelIds: string[]) => {
       try {
         const notesCopy = _cloneDeep(notes);
 
         const response = await axios.post(ApiRoutes.CreateNote, {
-          bookId,
           title,
           note,
           labelIds,
@@ -97,7 +93,7 @@ export const useNotes = (initialNotes: Note[]): UseNotesType => {
   );
 
   const deleteNote = useCallback(
-    async (bookId: string, id: number): Promise<void> => {
+    async (id: number): Promise<void> => {
       try {
         const notesCopy = _cloneDeep(notes);
 
@@ -117,6 +113,7 @@ export const useNotes = (initialNotes: Note[]): UseNotesType => {
 
   return {
     notes,
+    getCurrentNote,
     updateNote,
     createNote,
     deleteNote,

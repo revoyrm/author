@@ -2,11 +2,23 @@ import type { ReactElement } from 'react';
 
 import type { Note } from '../../types/services';
 
-export function NoteCard({ title, note, labels }: Note): ReactElement {
+type NoteCardProps = Note & {
+  bookId: string;
+  onDelete: (id: number) => Promise<void>;
+};
+
+export function NoteCard({
+  id,
+  bookId,
+  title,
+  note,
+  labels,
+  onDelete,
+}: NoteCardProps): ReactElement {
   return (
     <div>
-      <p>{title}</p>
-      <p>{note}</p>
+      <input value={title} />
+      <textarea>{note}</textarea>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
 
-import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
+import { NoteCard } from '../../../../src/components/notes/NoteCard';
 import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
 import type { Note } from '../../../../src/types/services';
@@ -30,14 +30,11 @@ export default function Notes({
     >
       <Cards>
         {notes.map((note) => (
-          <BookItemCard
+          <NoteCard
             key={`note_${note.id}`}
-            body={note.note}
             bookId={currentBookId}
-            header={note.title}
-            id={note.id}
-            path="notes"
             onDelete={deleteNote}
+            {...note}
           />
         ))}
       </Cards>
