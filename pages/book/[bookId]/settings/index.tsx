@@ -47,7 +47,11 @@ export default function Settings({
         </div>
       ) : (
         <Cards>
-          <NewCard label="New Setting" onClick={handleNewBook} />
+          <NewCard
+            label="New Setting"
+            onClick={handleNewBook}
+            onEnter={handleNewBook}
+          />
           {settings.map((setting) => (
             <BookItemCard
               key={`setting_${setting.id}`}

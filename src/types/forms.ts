@@ -83,3 +83,23 @@ export const isSettingFormData = (
   }
   return false;
 };
+
+export type NoteFormData = {
+  noteTitle: string;
+  noteDescription: string;
+};
+
+export const isNoteFormData = (
+  maybeNoteFormData: unknown
+): maybeNoteFormData is NoteFormData => {
+  if (
+    maybeNoteFormData &&
+    typeof maybeNoteFormData === 'object' &&
+    !Array.isArray(maybeNoteFormData) &&
+    'noteTitle' in maybeNoteFormData &&
+    'notegDescription' in maybeNoteFormData
+  ) {
+    return true;
+  }
+  return false;
+};

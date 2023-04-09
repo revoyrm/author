@@ -47,7 +47,11 @@ export default function Characters({
         </div>
       ) : (
         <Cards>
-          <NewCard label="New Character" onClick={handleNewBook} />
+          <NewCard
+            label="New Character"
+            onClick={handleNewBook}
+            onEnter={handleNewBook}
+          />
           {characters.map((character) => (
             <BookItemCard
               key={`character_${character.id}`}

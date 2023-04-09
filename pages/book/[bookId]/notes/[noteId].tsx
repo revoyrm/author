@@ -1,10 +1,13 @@
 import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
+import { useCallback } from 'react';
 
+import { NoteForm } from '../../../../src/components/forms/NoteForm';
 import { useNotes } from '../../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { getBookById } from '../../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
+import type { NoteFormData } from '../../../../src/types/forms';
 import type { Note } from '../../../../src/types/services';
 import { getAllLabelIdsFromBook } from '../../../utilities/getAllLabelIdsFromBook';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
@@ -20,8 +23,24 @@ export default function NotePage({
   currentBookId,
   currentNoteId,
 }: NotePageProps): ReactElement {
-  const { getCurrentNote } = useNotes(initialNotes);
+  const { getCurrentNote, updateNote, createNote } = useNotes(initialNotes);
   const note = getCurrentNote(currentNoteId);
+
+  const handleSubmit = useCallback(
+    async (data: NoteFormData): Promise<void> => {
+      const { noteTitle, noteDescription } = data;
+      if (note?.id) {
+        await updateNote(note, {
+          title: noteTitle,
+          note: noteDescription,
+          labelIds: [],
+        });
+      } else {
+        await createNote(noteTitle, noteDescription, []);
+      }
+    },
+    [createNote, note, updateNote]
+  );
 
   return (
     <BookLayout
@@ -30,7 +49,11 @@ export default function NotePage({
       heading="Book Name"
       searchType="book"
     >
-      <div>{note?.title}</div>
+      {note?.id ? (
+        <NoteForm note={note} onSubmit={handleSubmit} />
+      ) : (
+        <div>No Note Found</div>
+      )}
     </BookLayout>
   );
 }
