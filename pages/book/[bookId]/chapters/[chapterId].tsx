@@ -6,22 +6,24 @@ import { useChapters } from '../../../../src/components/hooks/useChapters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { getChapterById } from '../../../../src/services/getChapterById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
-import type { Chapter, Note } from '../../../../src/types/services';
+import type { Note } from '../../../../src/types/services';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type ChapterProps = {
   notes?: Note[];
-  chapter?: Chapter;
   currentChapterId: string;
   currentBookId: string;
 };
 
 export default function ChapterPage({
   notes,
-  chapter,
   currentChapterId,
   currentBookId,
 }: ChapterProps): ReactElement {
+  const { getChapters } = useChapters();
+  const chapters = getChapters(currentBookId);
+  const chapter = chapters.find((s) => String(s.id) === currentChapterId);
+
   return (
     <BookLayout
       activeNav={SidebarLabels.Book}
@@ -56,7 +58,6 @@ export async function getServerSideProps(context: NextPageContext): Promise<{
     return {
       props: {
         notes,
-        chapter,
         currentChapterId: chapterId,
         currentBookId: bookId,
       },

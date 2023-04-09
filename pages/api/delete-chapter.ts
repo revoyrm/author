@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { deleteChapter } from '../../src/services/deleteChapter';
 
 type DeleteChapterBody = {
-  id: number;
+  id: string;
 };
 
 const isDeleteChapterBody = (

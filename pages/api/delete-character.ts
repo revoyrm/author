@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { deleteCharacter } from '../../src/services/deleteCharacter';
 
 type DeleteCharacterBody = {
-  id: number;
+  id: string;
 };
 
 const isDeleteCharacterBody = (

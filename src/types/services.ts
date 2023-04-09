@@ -13,7 +13,7 @@ export type Note = {
 export type Chapter = {
   id: number;
   name: string;
-  number: number | string;
+  number: number;
   description: string;
   label: Label;
 };

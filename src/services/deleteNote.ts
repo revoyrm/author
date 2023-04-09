@@ -12,9 +12,9 @@ type DeleteNoteRequest = {
   response: boolean;
 };
 
-export async function deleteNote(id: number): Promise<boolean> {
+export async function deleteNote(id: string): Promise<boolean> {
   const { response } = await libraryClient.request<DeleteNoteRequest>(query, {
-    id,
+    deleteNoteId: id,
   });
 
   return response;

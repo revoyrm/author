@@ -22,7 +22,7 @@ export const isBookFormData = (
 
 export type ChapterFormData = {
   chapterName: string;
-  chapterNumber: number | string;
+  chapterNumber: number;
   chapterDescription: string;
 };
 

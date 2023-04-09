@@ -47,7 +47,7 @@ export function ChapterForm({
           await createChapter(
             bookId,
             chapterName,
-            chapterNumber as string,
+            chapterNumber,
             chapterDescription
           );
         }

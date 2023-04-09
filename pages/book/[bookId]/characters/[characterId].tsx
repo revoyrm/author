@@ -2,28 +2,27 @@ import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
 import { CharacterForm } from '../../../../src/components/forms/CharacterForm';
+import { useCharacters } from '../../../../src/components/hooks/useCharacters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { getCharacterById } from '../../../../src/services/getCharacterById';
 import { getNotesByLabelIds } from '../../../../src/services/getNotesByLabelIds';
-import type { Character, Note } from '../../../../src/types/services';
+import type { Note } from '../../../../src/types/services';
 import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type CharacterProps = {
   notes?: Note[];
-  character?: Character;
   currentCharacterId: string;
   currentBookId: string;
 };
 
 export default function CharacterPage({
   notes,
-  character,
   currentCharacterId,
   currentBookId,
 }: CharacterProps): ReactElement {
-  // const { getCharacters } = useCharacters();
-  // const characters = getCharacters(currentBookId);
-  // const character = characters.find((s) => String(s.id) === currentCharacterId);
+  const { getCharacters } = useCharacters();
+  const characters = getCharacters(currentBookId);
+  const character = characters.find((s) => String(s.id) === currentCharacterId);
 
   return (
     <BookLayout
@@ -59,7 +58,6 @@ export async function getServerSideProps(context: NextPageContext): Promise<{
     return {
       props: {
         notes,
-        character,
         currentCharacterId: characterId,
         currentBookId: bookId,
       },

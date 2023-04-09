@@ -5,7 +5,7 @@ import { updateChapter } from '../../src/services/updateChapter';
 type UpdateChapterBody = {
   id: number;
   name: string;
-  number: string;
+  number: number;
   description: string;
   labelId: number;
 };

@@ -12,11 +12,11 @@ type DeleteChapterRequest = {
   response: boolean;
 };
 
-export async function deleteChapter(id: number): Promise<boolean> {
+export async function deleteChapter(id: string): Promise<boolean> {
   const { response } = await libraryClient.request<DeleteChapterRequest>(
     query,
     {
-      id,
+      deleteChapterId: id,
     }
   );
 

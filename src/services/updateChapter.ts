@@ -27,7 +27,7 @@ type UpdateChapterRequest = {
 export async function updateChapter(
   id: number,
   name: string,
-  number: string,
+  number: number,
   description: string,
   labelId: number
 ): Promise<boolean> {
@@ -36,7 +36,7 @@ export async function updateChapter(
     {
       updateChapterId: id,
       name,
-      number,
+      number: Number(number),
       description,
       labelId,
     }

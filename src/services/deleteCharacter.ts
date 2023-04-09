@@ -12,11 +12,11 @@ type DeleteCharacterRequest = {
   response: boolean;
 };
 
-export async function deleteCharacter(id: number): Promise<boolean> {
+export async function deleteCharacter(id: string): Promise<boolean> {
   const { response } = await libraryClient.request<DeleteCharacterRequest>(
     query,
     {
-      id,
+      deleteCharacterId: id,
     }
   );
 

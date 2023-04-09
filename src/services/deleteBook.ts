@@ -12,9 +12,9 @@ type DeleteBookRequest = {
   response: boolean;
 };
 
-export async function deleteBook(id: number): Promise<boolean> {
+export async function deleteBook(id: string): Promise<boolean> {
   const { response } = await libraryClient.request<DeleteBookRequest>(query, {
-    id,
+    deleteBookId: id,
   });
 
   return response;

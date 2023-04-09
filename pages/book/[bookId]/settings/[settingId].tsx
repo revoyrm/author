@@ -12,17 +12,19 @@ import { SidebarLabels } from '../../../utilities/sidebar-labels';
 
 type SettingProps = {
   notes?: Note[];
-  setting?: Setting;
   currentSettingId: string;
   currentBookId: string;
 };
 
 export default function SettingPage({
   notes,
-  setting,
   currentSettingId,
   currentBookId,
 }: SettingProps): ReactElement {
+  const { getSettings } = useSettings();
+  const settings = getSettings(currentBookId);
+  const setting = settings.find((s) => String(s.id) === currentSettingId);
+
   return (
     <BookLayout
       activeNav={SidebarLabels.Book}
@@ -57,10 +59,9 @@ export async function getServerSideProps(context: NextPageContext): Promise<{
     return {
       props: {
         notes,
-        setting,
         currentSettingId: settingId,
         currentBookId: bookId,
-      }, // will be passed to the page component as props
+      },
     };
   } catch (e) {
     console.error(e);

@@ -19,7 +19,7 @@ type UseChaptersType = {
   createChapter: (
     bookId: string,
     name: string,
-    string: string,
+    number: number,
     description: string
   ) => Promise<void>;
   deleteChapter: (bookId: string, id: number) => Promise<void>;
@@ -134,7 +134,7 @@ export const useChapters = (): UseChaptersType => {
     async (
       bookId: string,
       name: string,
-      number: string,
+      number: number,
       description: string
     ) => {
       try {
