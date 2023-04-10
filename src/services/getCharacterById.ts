@@ -14,8 +14,8 @@ const query = gql`
       id
       name
       label {
-        label
         id
+        label
       }
     }
   }

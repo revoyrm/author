@@ -17,12 +17,12 @@ const query = gql`
       labelIds: $labelIds
     ) {
       id
+      title
+      note
       labels {
         id
         label
       }
-      title
-      note
     }
   }
 `;

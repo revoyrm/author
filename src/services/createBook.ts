@@ -7,13 +7,42 @@ const query = gql`
   mutation createBook($title: String, $author: String, $summary: String) {
     book: createBook(title: $title, author: $author, summary: $summary) {
       id
-      title
       author
       label {
         id
         label
       }
+      title
       summary
+      chapters {
+        id
+        name
+        description
+        number
+        label {
+          id
+          label
+        }
+      }
+      characters {
+        id
+        name
+        age
+        description
+        label {
+          id
+          label
+        }
+      }
+      settings {
+        id
+        name
+        description
+        label {
+          id
+          label
+        }
+      }
     }
   }
 `;

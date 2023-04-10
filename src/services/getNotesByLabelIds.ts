@@ -7,12 +7,12 @@ const query = gql`
   query GetNotesByLabelIds($labelIds: [ID]) {
     notes: getNotesByLabelIds(labelIds: $labelIds) {
       id
+      note
+      title
       labels {
         id
         label
       }
-      note
-      title
     }
   }
 `;

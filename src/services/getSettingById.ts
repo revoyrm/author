@@ -9,12 +9,13 @@ const query = gql`
       book {
         id
       }
-      description
       id
+      name
+      description
       label {
         id
+        label
       }
-      name
     }
   }
 `;
