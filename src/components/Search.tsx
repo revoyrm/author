@@ -51,18 +51,14 @@ SearchProps): ReactElement {
     []
   );
 
-  const searchVal = useCallback(
-    async (e: KeyboardEvent<HTMLDivElement>) => {
-      console.log(JSON.stringify(selectedOptions, null, 2));
-      await onSearch(selectedOptions);
-    },
-    [selectedOptions]
-  );
+  const handleSearch = useCallback(async () => {
+    await onSearch(selectedOptions);
+  }, [onSearch, selectedOptions]);
 
   return (
-    <div className="flex w-1/4 justify-between rounded-lg bg-[white] p-2 text-primary">
+    <div className="flex w-1/2 items-center justify-between rounded-lg bg-[white] p-2 text-primary">
       <Select
-        className="basic-single w-5/6"
+        className="basic-single flex-grow"
         classNamePrefix="select"
         name={searchType}
         options={options}
@@ -101,11 +97,16 @@ SearchProps): ReactElement {
         }}
         isMulti
         onChange={handleSelect}
-        onKeyDown={(e): void => {
-          searchVal(e);
+        onKeyDown={async (e: KeyboardEvent<HTMLDivElement>): Promise<void> => {
+          if (e.key === 'Enter') {
+            await handleSearch();
+          }
         }}
       />
-      <FaSearch className="mt-1 w-1/6" />
+      <FaSearch
+        className="m-1 w-fit hover:cursor-pointer hover:text-primary-light"
+        onClick={handleSearch}
+      />
     </div>
   );
 }

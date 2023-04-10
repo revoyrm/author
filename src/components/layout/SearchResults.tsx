@@ -8,6 +8,7 @@ export type SearchResult = {
   bookId: string;
   body: string;
   title: string;
+  route: 'book' | 'chapters' | 'characters' | 'notes' | 'settings';
 };
 
 export function SearchResults({
@@ -17,18 +18,17 @@ export function SearchResults({
 }): ReactElement {
   return (
     <Cards>
-      {results.map(({ id, bookId, title, body }) => (
+      {results.map(({ id, bookId, title, body, route }) => (
         <BookItemCard
           key={`search_${id}`}
           body={body}
           bookId={bookId}
           header={title}
           id={id}
-          path=""
+          path={route}
           onDelete={(): void => {}}
         />
       ))}
-      ;
     </Cards>
   );
 }

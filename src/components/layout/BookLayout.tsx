@@ -45,8 +45,6 @@ export function BookLayout({
         );
 
         setSearchResults(results.data);
-
-        console.log('results', JSON.stringify(results, null, 2));
       } catch (e) {
         console.error(e);
         setSearchResults(undefined);

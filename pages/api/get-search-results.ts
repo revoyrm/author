@@ -32,6 +32,7 @@ const isGetSearchResultsBody = (
 
 const convertToSearchResults = (
   bookId: string,
+  route: SearchResult['route'],
   items?: Chapter[] | Character[] | Setting[] | null
 ): SearchResult[] =>
   items
@@ -40,6 +41,7 @@ const convertToSearchResults = (
         body: description,
         title: name,
         bookId,
+        route,
       }))
     : [];
 
@@ -57,9 +59,13 @@ export default async function handler(
     const characters = await getCharactersByLabelIds(labelIds);
     const settings = await getSettingsByLabelIds(labelIds);
     const chapters = await getChaptersByLabelIds(labelIds);
-    const chapterResults = convertToSearchResults(bookId, chapters);
-    const characterResults = convertToSearchResults(bookId, characters);
-    const settingResults = convertToSearchResults(bookId, settings);
+    const chapterResults = convertToSearchResults(bookId, 'chapters', chapters);
+    const characterResults = convertToSearchResults(
+      bookId,
+      'characters',
+      characters
+    );
+    const settingResults = convertToSearchResults(bookId, 'settings', settings);
 
     const results: SearchResult[] = [
       ...characterResults,
@@ -75,6 +81,7 @@ export default async function handler(
           body: note ?? '',
           title,
           bookId,
+          route: 'notes',
         })
       );
     }
