@@ -24,7 +24,7 @@ export function BookLayout({
       <Header searchType={searchType} title={heading} />
       <div className="flex h-full w-full items-stretch">
         <SideBar activeLabel={activeNav} items={getSidebarItems(bookId)} />
-        <div className="inline-block h-full flex-grow rounded-xl">
+        <div className="h-[calc(100%-80px)] flex-grow overflow-y-auto overflow-x-hidden rounded-xl pb-8">
           {children}
         </div>
       </div>

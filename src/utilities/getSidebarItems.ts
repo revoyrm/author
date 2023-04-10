@@ -1,5 +1,6 @@
 import { SidebarLabels } from './sidebar-labels';
 
+// eslint-disable-next-line import/no-default-export
 export default function getSidebarItems(currentBookId: string): {
   label: string;
   route?: string;
