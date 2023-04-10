@@ -26,7 +26,6 @@ export function SearchResults({
           header={title}
           id={id}
           path={route}
-          onDelete={(): void => {}}
         />
       ))}
     </Cards>

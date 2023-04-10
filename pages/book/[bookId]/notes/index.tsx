@@ -18,15 +18,15 @@ import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type NotesProps = {
-  initialNotes: Note[];
+  initialNotes: Note[] | null;
   currentBookId: string;
 };
 
 export default function Notes({
-  initialNotes = [],
+  initialNotes,
   currentBookId,
 }: NotesProps): ReactElement {
-  const { notes, deleteNote, createNote } = useNotes(initialNotes);
+  const { notes, deleteNote, createNote } = useNotes(initialNotes ?? []);
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
   const [isCreating, setIsCreating] = useState(false);

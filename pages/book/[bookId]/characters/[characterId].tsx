@@ -14,7 +14,7 @@ import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type CharacterProps = {
-  initialNotes?: Note[];
+  initialNotes?: Note[] | null;
   currentCharacterId: string;
   currentBookId: string;
 };

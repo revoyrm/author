@@ -41,7 +41,6 @@ SearchProps): ReactElement {
 
   const handleSelect = useCallback(
     (newValue: MultiValue<{ value: number; label: string }>): void => {
-      console.log(JSON.stringify(newValue, null, 2));
       if (newValue.length === 0) {
         onClearSearch();
       } else {
@@ -60,6 +59,7 @@ SearchProps): ReactElement {
       <Select
         className="basic-single flex-grow"
         classNamePrefix="select"
+        instanceId={searchType}
         name={searchType}
         options={options}
         styles={{

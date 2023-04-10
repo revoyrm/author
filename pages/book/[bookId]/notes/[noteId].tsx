@@ -15,7 +15,7 @@ import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type NotePageProps = {
-  initialNotes: Note[];
+  initialNotes: Note[] | null;
   currentNoteId: string;
   currentBookId: string;
 };
@@ -25,7 +25,7 @@ export default function NotePage({
   currentBookId,
   currentNoteId,
 }: NotePageProps): ReactElement {
-  const { getCurrentNote, updateNote } = useNotes(initialNotes);
+  const { getCurrentNote, updateNote } = useNotes(initialNotes ?? []);
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
   const note = getCurrentNote(currentNoteId);

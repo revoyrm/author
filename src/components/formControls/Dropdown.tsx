@@ -44,6 +44,7 @@ export function Dropdown({
           <Select
             // @ts-expect-error inputRef is a custom prop to connect to react hook form
             inputRef={ref}
+            instanceId={name}
             options={options}
             required={required}
             styles={{

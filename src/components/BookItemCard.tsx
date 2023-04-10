@@ -11,7 +11,7 @@ type BookItemCardProps = {
   header: string;
   body?: string;
   path: string;
-  onDelete: (id: number, bookId?: string) => Promise<void>;
+  onDelete?: (id: number, bookId?: string) => Promise<void>;
 };
 
 export function BookItemCard({
@@ -30,7 +30,7 @@ export function BookItemCard({
   const handleRemoveBookItem = useCallback(
     (e: MouseEvent<HTMLButtonElement>): void => {
       e.stopPropagation();
-      onDelete(id, bookId).catch(console.error);
+      onDelete?.(id, bookId).catch(console.error);
     },
     [bookId, id, onDelete]
   );
@@ -40,11 +40,13 @@ export function BookItemCard({
       <h2 className="mb-1 font-bold">{header}</h2>
       <hr className="border-1 mb-1 border-primary-light bg-primary-light" />
       <p className="flex-grow">{body}</p>
-      <ConfirmButton
-        isSubmit={false}
-        label="remove"
-        onClick={handleRemoveBookItem}
-      />
+      {!!onDelete && (
+        <ConfirmButton
+          isSubmit={false}
+          label="remove"
+          onClick={handleRemoveBookItem}
+        />
+      )}
     </Card>
   );
 }

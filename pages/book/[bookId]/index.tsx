@@ -13,7 +13,7 @@ import { getBookWithId } from '../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../src/utilities/sidebar-labels';
 
 type BookProps = {
-  initialNotes?: Note[];
+  initialNotes?: Note[] | null;
   currentBookId: string;
 };
 

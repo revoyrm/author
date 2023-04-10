@@ -14,7 +14,7 @@ import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type SettingProps = {
-  initialNotes?: Note[];
+  initialNotes?: Note[] | null;
   currentSettingId: string;
   currentBookId: string;
 };
