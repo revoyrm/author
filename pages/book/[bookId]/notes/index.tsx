@@ -28,7 +28,7 @@ export default function Notes({
 }: NotesProps): ReactElement {
   const { notes, deleteNote, createNote } = useNotes(initialNotes);
   const { books } = useBooks();
-  const curBook = getBookWithId(currentBookId, books);
+  const book = getBookWithId(currentBookId, books);
   const [isCreating, setIsCreating] = useState(false);
 
   const handleNewNote = useCallback(() => {
@@ -51,15 +51,15 @@ export default function Notes({
 
   return (
     <BookLayout
-      activeNav={SidebarLabels.AllNotes}
+      activeNav={SidebarLabels.Notes}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="Characters"
     >
       {isCreating || notes.length === 0 ? (
         <div className="w-full p-8">
           <NoteForm
-            book={curBook}
+            book={book}
             onCancel={isCreating ? handleCancel : undefined}
             onSubmit={handleSubmit}
           />

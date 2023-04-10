@@ -33,9 +33,9 @@ export default function SettingPage({
 
   return (
     <BookLayout
-      activeNav={SidebarLabels.Book}
+      activeNav={SidebarLabels.Settings}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="book"
     >
       {setting?.id ? (

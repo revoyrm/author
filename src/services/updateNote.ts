@@ -37,7 +37,6 @@ export async function updateNote(
   note: string,
   labelIds: string[]
 ): Promise<Note> {
-  console.log('ID', id);
   const { updatedNote } = await libraryClient.request<UpdateNoteRequest>(
     query,
     {

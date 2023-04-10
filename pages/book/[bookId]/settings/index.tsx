@@ -4,10 +4,12 @@ import React, { useCallback, useState } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { SettingForm } from '../../../../src/components/forms/SettingForm';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useSettings } from '../../../../src/components/hooks/useSettings';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type SettingsProps = {
@@ -17,6 +19,8 @@ type SettingsProps = {
 export default function Settings({
   currentBookId,
 }: SettingsProps): ReactElement {
+  const { books } = useBooks();
+  const book = getBookWithId(currentBookId, books);
   const { getSettings, deleteSetting } = useSettings();
 
   const settings = getSettings(currentBookId);
@@ -34,7 +38,7 @@ export default function Settings({
     <BookLayout
       activeNav={SidebarLabels.Settings}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="Settings"
     >
       {isCreating || settings.length === 0 ? (

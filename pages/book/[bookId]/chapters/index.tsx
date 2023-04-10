@@ -4,10 +4,12 @@ import React, { useCallback, useState } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { ChapterForm } from '../../../../src/components/forms/ChapterForm';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useChapters } from '../../../../src/components/hooks/useChapters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type ChaptersProps = {
@@ -18,11 +20,13 @@ export default function Chapters({
   currentBookId,
 }: ChaptersProps): ReactElement {
   const { getChapters, deleteChapter } = useChapters();
+  const { books } = useBooks();
+  const book = getBookWithId(currentBookId, books);
 
   const chapters = getChapters(currentBookId);
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleNewBook = useCallback(() => {
+  const handleNewChapter = useCallback(() => {
     setIsCreating(true);
   }, []);
 
@@ -34,7 +38,7 @@ export default function Chapters({
     <BookLayout
       activeNav={SidebarLabels.Chapters}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="Chapters"
     >
       {isCreating || chapters.length === 0 ? (
@@ -47,7 +51,11 @@ export default function Chapters({
         </div>
       ) : (
         <Cards>
-          <NewCard label="New Chapter" onClick={handleNewBook} />
+          <NewCard
+            label="New Chapter"
+            onClick={handleNewChapter}
+            onEnter={handleNewChapter}
+          />
           {chapters.map((chapter) => (
             <BookItemCard
               key={`chapter_${chapter.id}`}

@@ -1,18 +1,16 @@
-import axios from 'axios';
 import type { NextPageContext } from 'next';
 import type { ReactElement } from 'react';
 
-import { ApiRoutes } from '../../../src/ApiRoutes';
 import { BookForm } from '../../../src/components/forms/BookForm';
 import { useBooks } from '../../../src/components/hooks/useBooks';
+import { useNotes } from '../../../src/components/hooks/useNotes';
 import { BookLayout } from '../../../src/components/layout/BookLayout';
-import type { Book, Note } from '../../../src/types/services';
-import { getBookWithId } from '../../../src/utilities/getBookWithId';
-import { SidebarLabels } from '../../../src/utilities/sidebar-labels';
+import { Notes } from '../../../src/components/Notes';
 import { getBookById } from '../../../src/services/getBookById';
 import { getNotesByLabelIds } from '../../../src/services/getNotesByLabelIds';
-import { Notes } from '../../../src/components/Notes';
-import { useNotes } from '../../../src/components/hooks/useNotes';
+import type { Note } from '../../../src/types/services';
+import { getBookWithId } from '../../../src/utilities/getBookWithId';
+import { SidebarLabels } from '../../../src/utilities/sidebar-labels';
 
 type BookProps = {
   initialNotes?: Note[];
@@ -23,9 +21,6 @@ export default function BookPage({
   initialNotes,
   currentBookId,
 }: BookProps): ReactElement {
-  // const { books } = useBooks();
-  // console.log(JSON.stringify({ currentBookId, books }, null, 2));
-  // const book = getBookWithId(currentBookId, books);
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
   const { createNote, deleteNote, notes } = useNotes(initialNotes ?? []);
@@ -34,7 +29,7 @@ export default function BookPage({
     <BookLayout
       activeNav={SidebarLabels.Book}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="book"
     >
       {book?.id ? (

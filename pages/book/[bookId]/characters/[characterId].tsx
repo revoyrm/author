@@ -33,9 +33,9 @@ export default function CharacterPage({
 
   return (
     <BookLayout
-      activeNav={SidebarLabels.Book}
+      activeNav={SidebarLabels.Characters}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="book"
     >
       {character?.id ? (

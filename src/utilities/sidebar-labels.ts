@@ -6,5 +6,5 @@ export const SidebarLabels = Object.freeze({
   Chapters: 'Chapters',
   Settings: 'Settings',
   Characters: 'Characters',
-  AllNotes: 'All Notes',
+  Notes: 'Notes',
 });

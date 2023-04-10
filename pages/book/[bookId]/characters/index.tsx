@@ -4,10 +4,12 @@ import React, { useCallback, useState } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { CharacterForm } from '../../../../src/components/forms/CharacterForm';
+import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useCharacters } from '../../../../src/components/hooks/useCharacters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { Cards } from '../../../../src/components/layout/Cards';
 import { NewCard } from '../../../../src/components/NewCard';
+import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
 type CharactersProps = {
@@ -17,12 +19,14 @@ type CharactersProps = {
 export default function Characters({
   currentBookId,
 }: CharactersProps): ReactElement {
+  const { books } = useBooks();
+  const book = getBookWithId(currentBookId, books);
   const { getCharacters, deleteCharacter } = useCharacters();
 
   const characters = getCharacters(currentBookId);
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleNewBook = useCallback(() => {
+  const handleNewCharacter = useCallback(() => {
     setIsCreating(true);
   }, []);
 
@@ -34,7 +38,7 @@ export default function Characters({
     <BookLayout
       activeNav={SidebarLabels.Characters}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="Characters"
     >
       {isCreating || characters.length === 0 ? (
@@ -49,8 +53,8 @@ export default function Characters({
         <Cards>
           <NewCard
             label="New Character"
-            onClick={handleNewBook}
-            onEnter={handleNewBook}
+            onClick={handleNewCharacter}
+            onEnter={handleNewCharacter}
           />
           {characters.map((character) => (
             <BookItemCard

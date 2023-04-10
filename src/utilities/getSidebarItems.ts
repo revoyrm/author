@@ -15,6 +15,6 @@ export default function getSidebarItems(currentBookId: string): {
     },
     { label: SidebarLabels.Settings, route: `/book/${currentBookId}/settings` },
     { label: SidebarLabels.Chapters, route: `/book/${currentBookId}/chapters` },
-    { label: SidebarLabels.AllNotes, route: `/book/${currentBookId}/notes` },
+    { label: SidebarLabels.Notes, route: `/book/${currentBookId}/notes` },
   ];
 }

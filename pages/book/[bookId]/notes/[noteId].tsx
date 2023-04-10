@@ -27,7 +27,7 @@ export default function NotePage({
 }: NotePageProps): ReactElement {
   const { getCurrentNote, updateNote } = useNotes(initialNotes);
   const { books } = useBooks();
-  const curBook = getBookWithId(currentBookId, books);
+  const book = getBookWithId(currentBookId, books);
   const note = getCurrentNote(currentNoteId);
 
   const handleSubmit = useCallback(
@@ -46,13 +46,13 @@ export default function NotePage({
 
   return (
     <BookLayout
-      activeNav={SidebarLabels.Book}
+      activeNav={SidebarLabels.Notes}
       bookId={currentBookId}
-      heading="Book Name"
+      heading={book?.title ?? 'Author'}
       searchType="book"
     >
       {note?.id ? (
-        <NoteForm book={curBook} note={note} onSubmit={handleSubmit} />
+        <NoteForm book={book} note={note} onSubmit={handleSubmit} />
       ) : (
         <div>No Note Found</div>
       )}
