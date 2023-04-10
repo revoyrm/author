@@ -35,9 +35,24 @@ export function BookLayout({
     async (
       values: MultiValue<{ value: number; label: string }>
     ): Promise<void> => {
-      const results = await axios.post(ApiRoutes.GetSearchResults, { values });
+      try {
+        const results = await axios.post<SearchResult[]>(
+          ApiRoutes.GetSearchResults,
+          {
+            labelIds: values.map((val) => val.value),
+            bookId,
+          }
+        );
+
+        setSearchResults(results.data);
+
+        console.log('results', JSON.stringify(results, null, 2));
+      } catch (e) {
+        console.error(e);
+        setSearchResults(undefined);
+      }
     },
-    []
+    [bookId]
   );
 
   const handleClearSearch = useCallback(() => {

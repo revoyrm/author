@@ -18,10 +18,12 @@ const query = gql`
 `;
 
 type GetNotesRequest = {
-  notes: Note[];
+  notes: Note[] | null;
 };
 
-export async function getNotesByLabelIds(labelIds: number[]): Promise<Note[]> {
+export async function getNotesByLabelIds(
+  labelIds: number[]
+): Promise<Note[] | null> {
   const { notes } = await libraryClient.request<GetNotesRequest>(query, {
     labelIds,
   });
