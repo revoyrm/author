@@ -1,19 +1,29 @@
 import { useRouter } from 'next/router';
-import { ReactElement, useCallback } from 'react';
-import React from 'react';
+import type { ReactElement } from 'react';
+import React, { useCallback } from 'react';
 import { FaBook } from 'react-icons/fa';
+import type { MultiValue } from 'react-select';
 
+import type { Book } from '../types/services';
 import { Search } from './Search';
 
 type HeaderProps = {
   title: string;
+  book?: Book;
   showIcon?: boolean;
+  onSearch: (
+    values: MultiValue<{ value: number; label: string }>
+  ) => Promise<void>;
+  onClearSearch: () => void;
   searchType: string; // todo update when you know
 };
 
 export function Header({
   title,
+  book,
   showIcon,
+  onSearch,
+  onClearSearch,
   searchType,
 }: HeaderProps): ReactElement {
   const Router = useRouter();
@@ -37,7 +47,12 @@ export function Header({
           {title}
         </h1>
       </div>
-      <Search searchType={searchType} />
+      <Search
+        book={book}
+        searchType={searchType}
+        onClearSearch={onClearSearch}
+        onSearch={onSearch}
+      />
     </div>
   );
 }

@@ -1,11 +1,19 @@
+import axios from 'axios';
 import type { ReactElement } from 'react';
+import { useCallback, useState } from 'react';
+import type { MultiValue } from 'react-select';
 
+import { ApiRoutes } from '../../ApiRoutes';
+import type { Book } from '../../types/services';
 import getSidebarItems from '../../utilities/getSidebarItems';
 import { Header } from '../Header';
 import { SideBar } from '../navigation/Sidebar';
+import type { SearchResult } from './SearchResults';
+import { SearchResults } from './SearchResults';
 
 type BookProps = {
   bookId: string;
+  book?: Book;
   searchType: string;
   heading: string;
   children?: ReactElement | ReactElement[];
@@ -14,18 +22,42 @@ type BookProps = {
 
 export function BookLayout({
   bookId,
+  book,
   searchType,
   heading,
   children,
   activeNav,
 }: BookProps): ReactElement {
+  const [searchResults, setSearchResults] = useState<
+    SearchResult[] | undefined
+  >();
+  const handleSearch = useCallback(
+    async (
+      values: MultiValue<{ value: number; label: string }>
+    ): Promise<void> => {
+      const results = await axios.post(ApiRoutes.GetSearchResults, { values });
+    },
+    []
+  );
+
+  const handleClearSearch = useCallback(() => {
+    setSearchResults(undefined);
+  }, []);
+
   return (
     <div className="h-full">
-      <Header searchType={searchType} title={heading} />
+      <Header
+        book={book}
+        searchType={searchType}
+        title={heading}
+        onClearSearch={handleClearSearch}
+        onSearch={handleSearch}
+      />
       <div className="flex h-full w-full items-stretch">
         <SideBar activeLabel={activeNav} items={getSidebarItems(bookId)} />
         <div className="h-[calc(100%-80px)] flex-grow overflow-y-auto overflow-x-hidden rounded-xl pb-8">
-          {children}
+          {!!searchResults && <SearchResults results={searchResults} />}
+          {!searchResults && children}
         </div>
       </div>
     </div>

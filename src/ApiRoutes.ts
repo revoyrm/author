@@ -3,6 +3,7 @@ export const ApiRoutes = {
   DeleteBook: '/api/delete-book',
   GetBooks: '/api/get-books',
   GetBookById: '/api/get-book-by-id',
+  GetSearchResults: '/api/get-search-results',
   UpdateBook: '/api/update-book',
   CreateChapter: '/api/create-chapter',
   DeleteChapter: '/api/delete-chapter',
