@@ -8,12 +8,12 @@ const query = gql`
     books: getBooks {
       id
       author
+      title
+      summary
       label {
         id
         label
       }
-      title
-      summary
       chapters {
         id
         name

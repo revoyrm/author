@@ -1,43 +1,32 @@
 import type { KeyboardEvent, ReactElement } from 'react';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import type { MultiValue } from 'react-select';
 import Select from 'react-select';
 
 import type { Book } from '../types/services';
-import { getLabelsFromBook } from '../utilities/getLabelsFromBook';
 import type { DropdownOption } from './formControls/Dropdown';
 
 type SearchProps = {
   searchType: string;
+  searchOptions: DropdownOption[];
   onSearch: (
     values: MultiValue<{ value: number; label: string }>
   ) => Promise<void>;
   onClearSearch: () => void;
-  book?: Book;
-  // options: DropdownOption[];
 };
 export function Search({
   searchType = 'book',
+  searchOptions,
   onSearch,
   onClearSearch,
-  book,
-}: // options,
-SearchProps): ReactElement {
+}: SearchProps): ReactElement {
   const [selectedOptions, setSelectedOptions] = useState<
     MultiValue<{ value: number; label: string }>
   >([]);
   const bgColor = '#e5edef';
   const textColor = '#00283c';
   const hoverColor = '#407c95';
-
-  const options = useMemo(
-    () =>
-      book
-        ? getLabelsFromBook(book).map(({ id, label }) => ({ value: id, label }))
-        : [],
-    [book]
-  );
 
   const handleSelect = useCallback(
     (newValue: MultiValue<{ value: number; label: string }>): void => {
@@ -47,7 +36,7 @@ SearchProps): ReactElement {
         setSelectedOptions(newValue);
       }
     },
-    []
+    [onClearSearch]
   );
 
   const handleSearch = useCallback(async () => {
@@ -61,7 +50,7 @@ SearchProps): ReactElement {
         classNamePrefix="select"
         instanceId={searchType}
         name={searchType}
-        options={options}
+        options={searchOptions}
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,

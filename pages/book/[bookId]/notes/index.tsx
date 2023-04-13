@@ -52,6 +52,7 @@ export default function Notes({
   return (
     <BookLayout
       activeNav={SidebarLabels.Notes}
+      book={book}
       bookId={currentBookId}
       heading={book?.title ?? 'Author'}
       searchType="Characters"

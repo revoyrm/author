@@ -15,9 +15,7 @@ const isCreateNoteBody = (maybeBody: unknown): maybeBody is CreateNoteBody => {
     !Array.isArray(maybeBody) &&
     'title' in maybeBody &&
     'note' in maybeBody &&
-    'labelIds' in maybeBody &&
-    typeof maybeBody.labelIds === 'object' &&
-    Array.isArray(maybeBody.labelIds)
+    'labelIds' in maybeBody
   ) {
     return true;
   }

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import type { SearchResult } from '../../src/components/layout/SearchResults';
-import { getAllBooks } from '../../src/services/getBooks';
+import { getBooksByLabelIds } from '../../src/services/getBooksByLabelIds';
 import { getChaptersByLabelIds } from '../../src/services/getChaptersByLabelIds';
 import { getCharactersByLabelIds } from '../../src/services/getCharactersByLabelIds';
 import { getNotesByLabelIds } from '../../src/services/getNotesByLabelIds';
@@ -9,7 +9,7 @@ import { getSettingsByLabelIds } from '../../src/services/getSettingsByLabelIds'
 import type { Chapter, Character, Setting } from '../../src/types/services';
 
 type GetSearchResultsBody = {
-  bookId: string;
+  bookId?: string;
   labelIds: number[];
 };
 
@@ -20,10 +20,7 @@ const isGetSearchResultsBody = (
     maybeBody &&
     typeof maybeBody === 'object' &&
     !Array.isArray(maybeBody) &&
-    'bookId' in maybeBody &&
-    'labelIds' in maybeBody &&
-    typeof maybeBody.labelIds === 'object' &&
-    Array.isArray(maybeBody.labelIds)
+    'labelIds' in maybeBody
   ) {
     return true;
   }
@@ -56,37 +53,63 @@ export default async function handler(
   try {
     const { labelIds, bookId } = req.body;
 
-    const characters = await getCharactersByLabelIds(labelIds);
-    const settings = await getSettingsByLabelIds(labelIds);
-    const chapters = await getChaptersByLabelIds(labelIds);
-    const chapterResults = convertToSearchResults(bookId, 'chapters', chapters);
-    const characterResults = convertToSearchResults(
-      bookId,
-      'characters',
-      characters
-    );
-    const settingResults = convertToSearchResults(bookId, 'settings', settings);
+    if (!bookId) {
+      const books = await getBooksByLabelIds(labelIds);
+      if (books) {
+        const results: SearchResult[] = [];
+        books.forEach(({ id, summary, title }) =>
+          results.push({
+            id,
+            body: summary,
+            title,
+            bookId: String(id),
+            route: 'book',
+          })
+        );
 
-    const results: SearchResult[] = [
-      ...characterResults,
-      ...chapterResults,
-      ...settingResults,
-    ];
-
-    const notes = await getNotesByLabelIds(labelIds);
-    if (notes) {
-      notes.forEach(({ id, note, title }) =>
-        results.push({
-          id,
-          body: note ?? '',
-          title,
-          bookId,
-          route: 'notes',
-        })
+        res.status(200).json(results);
+      }
+    } else {
+      const characters = await getCharactersByLabelIds(labelIds);
+      const settings = await getSettingsByLabelIds(labelIds);
+      const chapters = await getChaptersByLabelIds(labelIds);
+      const chapterResults = convertToSearchResults(
+        bookId,
+        'chapters',
+        chapters
       );
-    }
+      const characterResults = convertToSearchResults(
+        bookId,
+        'characters',
+        characters
+      );
+      const settingResults = convertToSearchResults(
+        bookId,
+        'settings',
+        settings
+      );
 
-    res.status(200).json(results);
+      const results: SearchResult[] = [
+        ...characterResults,
+        ...chapterResults,
+        ...settingResults,
+      ];
+
+      const notes = await getNotesByLabelIds(labelIds);
+      if (notes) {
+        notes.forEach(({ id, note, title }) =>
+          results.push({
+            id,
+            body: note ?? '',
+            title,
+            bookId,
+            route: 'notes',
+          })
+        );
+      }
+
+      res.status(200).json(results);
+    }
   } catch (e) {
     console.error(e);
     res.status(500).json(e);

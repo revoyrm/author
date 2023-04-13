@@ -37,6 +37,7 @@ export default function Chapters({
   return (
     <BookLayout
       activeNav={SidebarLabels.Chapters}
+      book={book}
       bookId={currentBookId}
       heading={book?.title ?? 'Author'}
       searchType="Chapters"

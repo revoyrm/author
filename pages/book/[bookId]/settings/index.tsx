@@ -37,6 +37,7 @@ export default function Settings({
   return (
     <BookLayout
       activeNav={SidebarLabels.Settings}
+      book={book}
       bookId={currentBookId}
       heading={book?.title ?? 'Author'}
       searchType="Settings"

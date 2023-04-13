@@ -4,12 +4,12 @@ import React, { useCallback } from 'react';
 import { FaBook } from 'react-icons/fa';
 import type { MultiValue } from 'react-select';
 
-import type { Book } from '../types/services';
+import type { DropdownOption } from './formControls/Dropdown';
 import { Search } from './Search';
 
 type HeaderProps = {
   title: string;
-  book?: Book;
+  searchOptions: DropdownOption[];
   showIcon?: boolean;
   onSearch: (
     values: MultiValue<{ value: number; label: string }>
@@ -20,7 +20,7 @@ type HeaderProps = {
 
 export function Header({
   title,
-  book,
+  searchOptions,
   showIcon,
   onSearch,
   onClearSearch,
@@ -48,7 +48,7 @@ export function Header({
         </h1>
       </div>
       <Search
-        book={book}
+        searchOptions={searchOptions}
         searchType={searchType}
         onClearSearch={onClearSearch}
         onSearch={onSearch}
