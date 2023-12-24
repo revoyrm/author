@@ -1,25 +1,21 @@
 import { useRouter } from 'next/router';
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
-import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { SettingForm } from '../../../../src/components/forms/SettingForm';
 import { useBooks } from '../../../../src/components/hooks/useBooks';
-import { useSettings } from '../../../../src/components/hooks/useSettings';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
-import { Cards } from '../../../../src/components/layout/Cards';
-import { NewCard } from '../../../../src/components/NewCard';
 import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
-type SettingsProps = {
+type NewSettingProps = {
   currentBookId: string;
 };
 
-export default function Settings({
+export default function NewSetting({
   currentBookId,
-}: SettingsProps): ReactElement {
+}: NewSettingProps): ReactElement {
   const Router = useRouter();
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
@@ -57,7 +53,7 @@ export default function Settings({
 }
 
 export function getServerSideProps(context: NextPageContext): {
-  props: SettingsProps;
+  props: NewSettingProps;
 } {
   return {
     props: {

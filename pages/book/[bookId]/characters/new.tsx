@@ -9,13 +9,13 @@ import { BookLayout } from '../../../../src/components/layout/BookLayout';
 import { getBookWithId } from '../../../../src/utilities/getBookWithId';
 import { SidebarLabels } from '../../../../src/utilities/sidebar-labels';
 
-type SettingsProps = {
+type NewCharacterProps = {
   currentBookId: string;
 };
 
-export default function Settings({
+export default function NewCharacter({
   currentBookId,
-}: SettingsProps): ReactElement {
+}: NewCharacterProps): ReactElement {
   const Router = useRouter();
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
@@ -33,7 +33,7 @@ export default function Settings({
 
   return (
     <BookLayout
-      activeNav={SidebarLabels.Settings}
+      activeNav={SidebarLabels.Characters}
       book={book}
       bookId={currentBookId}
       heading={book?.title ?? 'Author'}
@@ -55,7 +55,7 @@ export default function Settings({
 }
 
 export function getServerSideProps(context: NextPageContext): {
-  props: SettingsProps;
+  props: NewCharacterProps;
 } {
   return {
     props: {
