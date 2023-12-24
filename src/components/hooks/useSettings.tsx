@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import _cloneDeep from 'lodash/cloneDeep';
 import { useCallback, useContext } from 'react';
 
@@ -8,6 +8,19 @@ import { AppContext } from '../../context/appProvider';
 import type { Book, Setting } from '../../types/services';
 import { getBookIdxWithId } from '../../utilities/getBookIdxWithId';
 import { getBookWithId } from '../../utilities/getBookWithId';
+
+type CreateSettingResponse = {
+  book: {
+    id: string;
+  };
+  id: string;
+  name: string;
+  description: string;
+  label: {
+    id: string;
+    label: string;
+  };
+};
 
 type UseSettingsType = {
   getSettings: (bookId: string) => Setting[];
@@ -20,7 +33,7 @@ type UseSettingsType = {
     bookId: string,
     name: string,
     description: string
-  ) => Promise<void>;
+  ) => Promise<CreateSettingResponse>;
   deleteSetting: (id: number, bookId?: string) => Promise<void>;
 };
 
@@ -127,15 +140,23 @@ export const useSettings = (): UseSettingsType => {
   );
 
   const createSetting = useCallback(
-    async (bookId: string, name: string, description: string) => {
+    async (
+      bookId: string,
+      name: string,
+      description: string
+    ): Promise<CreateSettingResponse | undefined> => {
+      let response;
       try {
         const settings = getClonedSettingsFromBook(bookId);
 
-        const response = await axios.post(ApiRoutes.CreateSetting, {
-          bookId,
-          name,
-          description,
-        });
+        response = await axios.post<CreateSettingResponse>(
+          ApiRoutes.CreateSetting,
+          {
+            bookId,
+            name,
+            description,
+          }
+        );
 
         if (isSetting(response.data)) {
           settings.push(response.data);
@@ -147,6 +168,8 @@ export const useSettings = (): UseSettingsType => {
       } catch (e) {
         console.error(e);
       }
+
+      return response?.data;
     },
     [dispatch, getBooksWithUpdatedSettings, getClonedSettingsFromBook]
   );
