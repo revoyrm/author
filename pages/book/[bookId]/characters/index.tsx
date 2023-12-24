@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router';
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
-import { CharacterForm } from '../../../../src/components/forms/CharacterForm';
 import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useCharacters } from '../../../../src/components/hooks/useCharacters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
@@ -19,20 +19,16 @@ type CharactersProps = {
 export default function Characters({
   currentBookId,
 }: CharactersProps): ReactElement {
+  const Router = useRouter();
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
   const { getCharacters, deleteCharacter } = useCharacters();
 
   const characters = getCharacters(currentBookId);
-  const [isCreating, setIsCreating] = useState(false);
 
   const handleNewCharacter = useCallback(() => {
-    setIsCreating(true);
-  }, []);
-
-  const handleFinish = useCallback(() => {
-    setIsCreating(false);
-  }, []);
+    Router.push(`/book/${currentBookId}/characters/new`).catch(console.error);
+  }, [Router, currentBookId]);
 
   return (
     <BookLayout
@@ -42,34 +38,24 @@ export default function Characters({
       heading={book?.title ?? 'Author'}
       searchType="Characters"
     >
-      {isCreating || characters.length === 0 ? (
-        <div className="w-full p-8">
-          <CharacterForm
+      <Cards>
+        <NewCard
+          label="New Character"
+          onClick={handleNewCharacter}
+          onEnter={handleNewCharacter}
+        />
+        {characters.map((character) => (
+          <BookItemCard
+            key={`character_${character.id}`}
+            body={character.description}
             bookId={currentBookId}
-            onCancel={isCreating ? handleFinish : undefined}
-            onSubmit={handleFinish}
+            header={character.name}
+            id={character.id}
+            path="characters"
+            onDelete={deleteCharacter}
           />
-        </div>
-      ) : (
-        <Cards>
-          <NewCard
-            label="New Character"
-            onClick={handleNewCharacter}
-            onEnter={handleNewCharacter}
-          />
-          {characters.map((character) => (
-            <BookItemCard
-              key={`character_${character.id}`}
-              body={character.description}
-              bookId={currentBookId}
-              header={character.name}
-              id={character.id}
-              path="characters"
-              onDelete={deleteCharacter}
-            />
-          ))}
-        </Cards>
-      )}
+        ))}
+      </Cards>
     </BookLayout>
   );
 }

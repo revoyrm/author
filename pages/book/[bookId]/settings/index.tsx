@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
 import { useBooks } from '../../../../src/components/hooks/useBooks';

@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router';
 import type { NextPageContext } from 'next/types';
 import type { ReactElement } from 'react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import { BookItemCard } from '../../../../src/components/BookItemCard';
-import { ChapterForm } from '../../../../src/components/forms/ChapterForm';
 import { useBooks } from '../../../../src/components/hooks/useBooks';
 import { useChapters } from '../../../../src/components/hooks/useChapters';
 import { BookLayout } from '../../../../src/components/layout/BookLayout';
@@ -19,20 +19,16 @@ type ChaptersProps = {
 export default function Chapters({
   currentBookId,
 }: ChaptersProps): ReactElement {
+  const Router = useRouter();
   const { getChapters, deleteChapter } = useChapters();
   const { books } = useBooks();
   const book = getBookWithId(currentBookId, books);
 
   const chapters = getChapters(currentBookId);
-  const [isCreating, setIsCreating] = useState(false);
 
   const handleNewChapter = useCallback(() => {
-    setIsCreating(true);
-  }, []);
-
-  const handleFinish = useCallback(() => {
-    setIsCreating(false);
-  }, []);
+    Router.push(`/book/${currentBookId}/chapters/new`).catch(console.error);
+  }, [Router, currentBookId]);
 
   return (
     <BookLayout
@@ -42,34 +38,24 @@ export default function Chapters({
       heading={book?.title ?? 'Author'}
       searchType="Chapters"
     >
-      {isCreating || chapters.length === 0 ? (
-        <div className="w-full p-8">
-          <ChapterForm
+      <Cards>
+        <NewCard
+          label="New Chapter"
+          onClick={handleNewChapter}
+          onEnter={handleNewChapter}
+        />
+        {chapters.map((chapter) => (
+          <BookItemCard
+            key={`chapter_${chapter.id}`}
+            body={chapter.description}
             bookId={currentBookId}
-            onCancel={isCreating ? handleFinish : undefined}
-            onSubmit={handleFinish}
+            header={chapter.name}
+            id={chapter.id}
+            path="chapters"
+            onDelete={deleteChapter}
           />
-        </div>
-      ) : (
-        <Cards>
-          <NewCard
-            label="New Chapter"
-            onClick={handleNewChapter}
-            onEnter={handleNewChapter}
-          />
-          {chapters.map((chapter) => (
-            <BookItemCard
-              key={`chapter_${chapter.id}`}
-              body={chapter.description}
-              bookId={currentBookId}
-              header={chapter.name}
-              id={chapter.id}
-              path="chapters"
-              onDelete={deleteChapter}
-            />
-          ))}
-        </Cards>
-      )}
+        ))}
+      </Cards>
     </BookLayout>
   );
 }
