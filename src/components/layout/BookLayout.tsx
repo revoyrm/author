@@ -78,7 +78,7 @@ export function BookLayout({
       />
       <div className="flex h-full w-full items-stretch">
         <SideBar activeLabel={activeNav} items={getSidebarItems(bookId)} />
-        <div className="h-[calc(100%-80px)] flex-grow overflow-y-auto overflow-x-hidden rounded-lg bg-secondary-light pb-8">
+        <div className="h-[calc(100%-80px)] flex-grow overflow-y-auto overflow-x-hidden rounded-2xl bg-secondary-light pb-8">
           {!!searchResults && <SearchResults results={searchResults} />}
           {!searchResults && children}
         </div>

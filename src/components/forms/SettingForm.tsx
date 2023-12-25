@@ -20,7 +20,7 @@ export function SettingForm({
   settingId?: string;
   initialValues?: Setting;
   onCancel?: () => void;
-  onSubmit?: () => void;
+  onSubmit?: (id?: string) => void;
 }): ReactElement {
   const { getSettings, createSetting, updateSetting } = useSettings();
   const settings = getSettings(bookId);
@@ -29,6 +29,7 @@ export function SettingForm({
 
   const handleSubmit = useCallback(
     async (data: FieldValues) => {
+      let id;
       if (isSettingFormData(data)) {
         setIsSubmitting(true);
         const { settingName, settingDescription } = data;
@@ -43,10 +44,16 @@ export function SettingForm({
             });
           }
         } else {
-          await createSetting(bookId, settingName, settingDescription);
+          const resp = await createSetting(
+            bookId,
+            settingName,
+            settingDescription
+          );
+          console.log(resp);
+          id = resp.id;
         }
         setIsSubmitting(false);
-        onSubmit?.();
+        onSubmit?.(id);
       }
     },
     [settingId, onSubmit, settings, updateSetting, bookId, createSetting]

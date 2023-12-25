@@ -1,9 +1,11 @@
 import axios from 'axios';
 import _cloneDeep from 'lodash/cloneDeep';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 import { ApiRoutes } from '../../ApiRoutes';
+import { AppContext } from '../../context/appProvider';
 import type { Note } from '../../types/services';
+import { getBookWithId } from '../../utilities/getBookWithId';
 
 type UseNotesType = {
   notes: Note[];
@@ -35,10 +37,22 @@ const isNote = (maybeNote: unknown): maybeNote is Note => {
 };
 
 export const useNotes = (initialNotes: Note[]): UseNotesType => {
+  const { state, dispatch } = useContext(AppContext) ?? {};
   const [notes, setNotes] = useState(initialNotes);
 
   const getCurrentNote = (noteId: string): Note | undefined =>
     notes.find((note) => String(note.id) === noteId);
+
+  const getNotes = (bookId: string): Note[] => {
+    const { books } = state ?? {};
+    const currentBook = getBookWithId(bookId, books ?? []);
+
+    if (!currentBook) return [];
+
+    console.log(currentBook);
+
+    return [];
+  };
 
   const updateNote = useCallback(
     async (
